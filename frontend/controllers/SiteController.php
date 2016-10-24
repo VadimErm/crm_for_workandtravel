@@ -72,6 +72,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'gentelella';
+
         return $this->render('index');
     }
 

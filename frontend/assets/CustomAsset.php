@@ -1,7 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stanislav
- * Date: 24.10.16
- * Time: 10:37
- */
+
+namespace frontend\assets;
+
+use yii\web\AssetBundle;
+
+class CustomAsset extends AssetBundle
+{
+    public $css = [
+        'css/maps/jquery-jvectormap-2.0.3.css',
+        'css/custom.min.css'
+    ];
+    public $js = [
+        'js/flot/jquery.flot.orderBars.js',
+        'js/flot/date.js',
+        'js/flot/jquery.flot.spline.js',
+        'js/flot/curvedLines.js',
+        'js/maps/jquery-jvectormap-2.0.3.min.js',
+        'js/moment/moment.min.js',
+        'js/datepicker/daterangepicker.js',
+        'js/custom.min.js',
+        'js/maps/jquery-jvectormap-world-mill-en.js',
+        'js/maps/jquery-jvectormap-us-aea-en.js',
+        'js/maps/gdp-data.js'
+    ];
+
+    public $depends = [
+        AppAsset::class
+    ];
+}
