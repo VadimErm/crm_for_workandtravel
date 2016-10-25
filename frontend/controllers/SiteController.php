@@ -212,4 +212,23 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionAgreement()
+    {
+        return $this->renderAjax('agreement_modal');
+    }
+
+    public function actionQuestionary()
+    {
+        $this->layout = 'gentelella';
+
+        return $this->render('questionary');
+    }
+
+    public function actionDocuments()
+    {
+        $this->layout = 'gentelella';
+
+        return $this->render('documents');
+    }
 }

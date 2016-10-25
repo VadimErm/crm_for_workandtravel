@@ -21,7 +21,8 @@ class CustomAsset extends AssetBundle
         'js/custom.min.js',
         'js/maps/jquery-jvectormap-world-mill-en.js',
         'js/maps/jquery-jvectormap-us-aea-en.js',
-        'js/maps/gdp-data.js'
+        'js/maps/gdp-data.js',
+        'js/stan.custom.js'
     ];
 
     public $depends = [
