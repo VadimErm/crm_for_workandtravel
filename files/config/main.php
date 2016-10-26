@@ -17,6 +17,9 @@ return [
         'request' => [
             'csrfParam' => '_csrf-files',
         ],
+        'fileLoader' => [
+            'class' => \files\components\FileLoader::className()
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
