@@ -210,9 +210,4 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-
-    public function actionAgreement()
-    {
-        return $this->renderAjax('agreement_modal');
-    }
 }
