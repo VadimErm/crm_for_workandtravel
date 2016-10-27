@@ -35,7 +35,7 @@ use yii\helpers\Html;
                     <!-- menu profile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="/admin/images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -47,51 +47,11 @@ use yii\helpers\Html;
                     <br/>
 
                     <!-- sidebar menu -->
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
-                            <h3>
-                                <span class="label label-warning">В ожидании</span>
-                            </h3>
-                            <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="index.html">Dashboard1</a></li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-user"></i> Профиль <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?= \yii\helpers\Url::to(['site/questionary']) ?>">Анкета</a></li>
-                                        <li><a href="<?= \yii\helpers\Url::to(['site/documents']) ?>">Документы</a></li>
-                                        <li><a href="index2.html">Настройки</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
+                    <?= \common\widgets\navwidget\NavWidget::widget(); ?>
                     <!-- /sidebar menu -->
 
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
                 </div>
             </div>
-
             <!-- top navigation -->
             <div class="top_nav">
                 <div class="nav_menu">
@@ -104,19 +64,17 @@ use yii\helpers\Html;
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">Student 1
+                                    <img src="/admin/images/img.jpg" alt="">Student 1
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;"> Profile</a></li>
                                     <li>
                                         <a href="javascript:;">
-                                            <span class="badge bg-red pull-right">50%</span>
-                                            <span>Settings</span>
+                                            <span>Настройки</span>
                                         </a>
                                     </li>
-                                    <li><a href="javascript:;">Help</a></li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="<?= \yii\helpers\Url::to(['site/logout']) ?>"><i
+                                                class="fa fa-sign-out pull-right"></i> Выход</a></li>
                                 </ul>
                             </li>
 
@@ -129,43 +87,8 @@ use yii\helpers\Html;
                                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                     <li>
                                         <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                            <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                            <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                            <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                            <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                            <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                            <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
+                                            <span class="image"><img src="/admin/images/img.jpg"
+                                                                     alt="Profile Image"/></span>
                                             <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -200,7 +123,7 @@ use yii\helpers\Html;
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                    КСЕТ
                 </div>
                 <div class="clearfix"></div>
             </footer>

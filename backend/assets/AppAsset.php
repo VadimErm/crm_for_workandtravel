@@ -2,6 +2,7 @@
 
 namespace backend\assets;
 
+use yii\helpers\Url;
 use yii\web\AssetBundle;
 
 /**
@@ -9,6 +10,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+    const STUDENT_INDEX = '/admin/student/index';
     public $sourcePath = '@bower';
     public $css = [
         'bootstrap/dist/css/bootstrap.min.css',
@@ -37,9 +39,14 @@ class AppAsset extends AssetBundle
         'Flot/jquery.flot.stack.js',
         'Flot/jquery.flot.resize.js'
     ];
-    public $depends = [
-//        'yii\web\YiiAsset',
-//        'frontend\assets\CustomAsset'
-//        'yii\bootstrap\BootstrapAsset',
-    ];
+
+    public function init()
+    {
+        parent::init();
+
+        // include only on student all page
+        if (Url::current() == self::STUDENT_INDEX) {
+
+        }
+    }
 }

@@ -27,10 +27,10 @@ class m130524_201442_init extends Migration
 
         // test user
         $this->insert('{{%user}}', [
-            'username' => 'admin',
+            'username' => 'student',
             'password_hash' => '$2y$13$lp4CYZELKF6W5vqwKHDvXuBzWf4akaPHfZDWhWcsBbisNu/a7KwlK', //admin999
             'status' => \common\models\User::STATUS_ACTIVE,
-            'email' => 'admin@mail.ru',
+            'email' => 'student@mail.ru',
             'created_at' => 1476192012,
             'updated_at' => 1476192012
         ]);
