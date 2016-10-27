@@ -48,6 +48,8 @@ class SiteController extends Controller
     {
         $this->layout = 'login';
 
-        return $this->render('login');
+        $model = new LoginForm();
+
+        return $this->render('login', ['model' => $model]);
     }
 }

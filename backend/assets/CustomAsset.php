@@ -6,6 +6,7 @@ use yii\web\AssetBundle;
 
 class CustomAsset extends AssetBundle
 {
+    public $baseUrl = '@web';
     public $css = [
         'css/maps/jquery-jvectormap-2.0.3.css',
         'css/custom.min.css'

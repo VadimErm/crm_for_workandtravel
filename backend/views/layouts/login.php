@@ -32,31 +32,7 @@ use yii\helpers\Html;
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form>
-                    <h1>Вход</h1>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
-                    </div>
-                    <div>
-                        <a class="btn btn-default submit" href="index.html">Ввойти</a>
-                        <a class="reset_pass" href="#">Забыли пароль?</a>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="separator">
-                        <div class="clearfix"></div>
-                        <br />
-
-                        <div>
-                            <h1>KCET</h1>
-                            <p>©2016 Все права защищены. KCET</p>
-                        </div>
-                    </div>
-                </form>
+                <?= $content ?>
             </section>
         </div>
     </div>
