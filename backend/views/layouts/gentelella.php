@@ -47,30 +47,7 @@ use yii\helpers\Html;
                     <br/>
 
                     <!-- sidebar menu -->
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
-                            <h3>
-                                <span class="label label-warning">В ожидании</span>
-                            </h3>
-                            <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="index.html">Dashboard1</a></li>
-                                        <li><a href="index2.html">Dashboard2</a></li>
-                                        <li><a href="index3.html">Dashboard3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-user"></i> Профиль <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?= \yii\helpers\Url::to(['site/questionary']) ?>">Анкета</a></li>
-                                        <li><a href="<?= \yii\helpers\Url::to(['site/documents']) ?>">Документы</a></li>
-                                        <li><a href="index2.html">Настройки</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
+                    <?= \common\widgets\navwidget\NavWidget::widget(); ?>
                     <!-- /sidebar menu -->
 
                     <!-- /menu footer buttons -->
@@ -91,7 +68,6 @@ use yii\helpers\Html;
                     <!-- /menu footer buttons -->
                 </div>
             </div>
-
             <!-- top navigation -->
             <div class="top_nav">
                 <div class="nav_menu">
@@ -108,15 +84,15 @@ use yii\helpers\Html;
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li><a href="javascript:;"> Анкета</a></li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="badge bg-red pull-right">50%</span>
-                                            <span>Settings</span>
+                                            <span>Настройки</span>
                                         </a>
                                     </li>
-                                    <li><a href="javascript:;">Help</a></li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="javascript:;">Справка</a></li>
+                                    <li><a href="<?= \yii\helpers\Url::to(['site/logout']) ?>"><i class="fa fa-sign-out pull-right"></i> Выход</a></li>
                                 </ul>
                             </li>
 

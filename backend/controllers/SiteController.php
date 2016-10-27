@@ -2,27 +2,22 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use yii\web\Controller;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BackendController
 {
     public function actionIndex()
     {
         $this->layout = 'gentelella';
+        $authManager = Yii::$app->authManager;
 
-        return $this->render('index');
+        $role = $authManager->getRolesByUser(Yii::$app->user->getId());
+
+        return $this->render('index', ['role' => $role]);
     }
 
     public function actionAgreement()
@@ -48,8 +43,24 @@ class SiteController extends Controller
     {
         $this->layout = 'login';
 
-        $model = new LoginForm();
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
-        return $this->render('login', ['model' => $model]);
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }
