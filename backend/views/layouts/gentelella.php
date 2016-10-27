@@ -3,7 +3,7 @@
 
 use yii\helpers\Html;
 
-\frontend\assets\CustomAsset::register($this);
+\backend\assets\CustomAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>

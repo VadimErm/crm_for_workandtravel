@@ -14,6 +14,7 @@ class FileLoader extends Component
         $this->_fileModel = $file;
 
         parent::__construct($config);
+
     }
 
     public $bla;

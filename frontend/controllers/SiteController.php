@@ -72,8 +72,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'gentelella';
-
         return $this->render('index');
     }
 
@@ -216,19 +214,5 @@ class SiteController extends Controller
     public function actionAgreement()
     {
         return $this->renderAjax('agreement_modal');
-    }
-
-    public function actionQuestionary()
-    {
-        $this->layout = 'gentelella';
-
-        return $this->render('questionary');
-    }
-
-    public function actionDocuments()
-    {
-        $this->layout = 'gentelella';
-
-        return $this->render('documents');
     }
 }
