@@ -23,7 +23,8 @@ class CustomAsset extends AssetBundle
         'js/maps/jquery-jvectormap-world-mill-en.js',
         'js/maps/jquery-jvectormap-us-aea-en.js',
         'js/maps/gdp-data.js',
-        'js/stan.custom.js'
+        'js/stan.custom.js',
+//        'js/dataTables.js'
     ];
 
     public $depends = [

@@ -10,8 +10,8 @@ abstract class BackendController extends Controller
 {
     public function __construct($id, Module $module, array $config = [])
     {
-        $this->setLayout();
         parent::__construct($id, $module, $config);
+        $this->setLayout();
     }
 
     public function behaviors()
@@ -57,6 +57,6 @@ abstract class BackendController extends Controller
 
     protected function setLayout()
     {
-
+        $this->layout = \Yii::$app->user->isGuest ? 'login' : 'gentelella';
     }
 }
