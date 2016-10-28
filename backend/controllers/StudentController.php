@@ -15,6 +15,11 @@ class StudentController extends BackendController
                     [
                         'allow' => true,
                         'roles' => ['manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['director']
                     ]
                 ]
             ]
@@ -23,7 +28,11 @@ class StudentController extends BackendController
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $role = \Yii::$app->user->getIdentity()->getRole();
+
+        $view = $role == 'director' ? 'index_for_manager' : 'index';
+
+        return $this->render($view);
     }
 
     public function actionAdd()

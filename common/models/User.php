@@ -64,6 +64,17 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
+    public function getRole()
+    {
+        $authManager = Yii::$app->authManager;
+
+        $userRole = $authManager->getRolesByUser($this->getId());
+
+        $userRole = current($userRole);
+
+        return isset($userRole->name) ? $userRole->name : null;
+    }
+
     /**
      * @inheritdoc
      */
