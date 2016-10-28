@@ -2,6 +2,7 @@
 
 namespace backend\assets;
 
+use yii\helpers\Url;
 use yii\web\AssetBundle;
 
 class CustomAsset extends AssetBundle
@@ -30,4 +31,11 @@ class CustomAsset extends AssetBundle
     public $depends = [
         AppAsset::class
     ];
+
+    public function init()
+    {
+        if (Url::current() == AppAsset::STUDENT_INDEX) {
+            $this->js[] = 'js/dataTables.js';
+        }
+    }
 }

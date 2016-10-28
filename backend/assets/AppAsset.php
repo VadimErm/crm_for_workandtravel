@@ -46,7 +46,17 @@ class AppAsset extends AssetBundle
 
         // include only on student all page
         if (Url::current() == self::STUDENT_INDEX) {
+            $this->css[] = 'datatables.net-bs/css/dataTables.bootstrap.min.css';
+            $this->js[] = 'datatables.net/js/jquery.dataTables.min.js';
+            $this->js[] = 'datatables.net-bs/js/dataTables.bootstrap.min.js';
+            $this->js[] = 'datatables.net-buttons/js/dataTables.buttons.min.js';
+            $this->css[] = 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css';
+            $this->js[] = 'datatables.net-buttons-bs/js/buttons.bootstrap.min.js';
 
+            $this->js[] = 'datatables.net-responsive/js/dataTables.responsive.min.js';
+
+            $this->css[] = 'datatables.net-responsive-bs/css/responsive.bootstrap.min.css';
+            $this->js[] = 'datatables.net-responsive-bs/js/responsive.bootstrap.js';
         }
     }
 }

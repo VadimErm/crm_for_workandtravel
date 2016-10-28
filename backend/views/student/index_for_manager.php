@@ -14,32 +14,12 @@
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Добавить</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Экспорт в Excel (По ВУЗу)</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Экспорт в Excel (Посольство)</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Оповестить всех</a>
-                            </li>
-                        </ul>
-                    </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                 </ul>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <p class="text-muted font-13 m-b-30">
-
-                </p>
                 <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                     <div class="row">
                     </div>
@@ -61,27 +41,27 @@
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 162px;"
-                                        aria-label="Position: activate to sort column ascending">Год программы
+                                        aria-label="Position: activate to sort column ascending">Номер договора
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 71px;"
-                                        aria-label="Office: activate to sort column ascending">Статус
+                                        aria-label="Office: activate to sort column ascending">Дата заключения
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 30px;"
-                                        aria-label="Age: activate to sort column ascending">Создан
+                                        aria-label="Age: activate to sort column ascending">Полная сумма по договору
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 69px;"
-                                        aria-label="Start date: activate to sort column ascending">Последнее обновление
+                                        aria-label="Start date: activate to sort column ascending">Оплаченная сумма
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
+                                        colspan="1" style="width: 0px; display: none;"
+                                        aria-label="E-mail: activate to sort column ascending">Остаток
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 69px;"
                                         aria-label="">Действия
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 0px; display: none;"
-                                        aria-label="E-mail: activate to sort column ascending">E-mail
                                     </th>
                                 </tr>
                                 </thead>
@@ -90,34 +70,27 @@
                                 <tr role="row" class="odd">
                                     <td tabindex="0">Иванов Иван Иванович</td>
                                     <td>Work and Travel USA</td>
-                                    <td>2016</td>
-                                    <td><span class="label label-success">Одобрено</span></td>
+                                    <td>11111111</td>
                                     <td>2008/11/28</td>
-                                    <td>3/11/2016 11:18 AM</td>
+                                    <td>3232323</td>
+                                    <td>12123123</td>
+                                    <td>3023</td>
                                     <td>
-                                        <i class="fa fa-eye" aria-hidden="true" title="Просмотр"></i>
-                                        <i class="fa fa-pencil" aria-hidden="true" title="Редактировать"></i>
-                                        <i class="fa fa-file-image-o" title="Загрузить документы" ></i>
-                                        <i class="fa fa-bell" aria-hidden="true" title="Оповестить"></i>
                                         <i class="fa fa-money" aria-hidden="true" title="Оплата"></i>
                                     </td>
-                                    <td style="display: none;">ivanov@gmail.com</td>
                                 </tr>
                                 <tr role="row" class="even">
                                     <td tabindex="0">Иванов Иван Иванович</td>
-                                    <td>Work and Travel USA</td>
-                                    <td>2016</td>
-                                    <td><span class="label label-warning">В ожидании</span></td>
+                                    <td>Work 2213213and Travel USA</td>
+                                    <td>111111111</td>
                                     <td>2008/11/28</td>
-                                    <td>3/11/2016 11:18 AM</td>
+                                    <td>120000</td>
+                                    <td>120000</td>
+                                    <td>3023</td>
                                     <td>
-                                        <i class="fa fa-eye" aria-hidden="true" title="Просмотр"></i>
-                                        <i class="fa fa-pencil" aria-hidden="true" title="Редактировать"></i>
-                                        <i class="fa fa-file-image-o" title="Загрузить документы" ></i>
-                                        <i class="fa fa-bell" aria-hidden="true" title="Оповестить"></i>
                                         <i class="fa fa-money" aria-hidden="true" title="Оплата"></i>
+                                        <i class="fa fa-times" aria-hidden="true" title="Отказ от программы"></i>
                                     </td>
-                                    <td style="display: none;">ivanov@gmail.com</td>
                                 </tr>
                                 </tbody>
                             </table>
