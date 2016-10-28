@@ -5,19 +5,21 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "adresses".
+ * This is the model class for table "files".
  *
  * @property integer $id
- * @property integer $fullname
+ * @property string $path
+ * @property integer $user_id
+ * @property integer $type
  */
-class Adress extends \yii\db\ActiveRecord
+class File extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'adresses';
+        return 'files';
     }
 
     /**
@@ -26,7 +28,8 @@ class Adress extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fullname'], 'integer'],
+            [['user_id', 'type'], 'integer'],
+            [['path'], 'string', 'max' => 100],
         ];
     }
 
@@ -37,7 +40,9 @@ class Adress extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fullname' => 'Fullname',
+            'path' => 'Path',
+            'user_id' => 'User ID',
+            'type' => 'Type',
         ];
     }
 }

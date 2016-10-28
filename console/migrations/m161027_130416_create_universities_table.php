@@ -19,6 +19,7 @@ class m161027_130416_create_universities_table extends Migration
             'group' => $this->string(10),
             'course' => $this->integer(1),
             'dean_fullname' => $this->string(30),
+            'dean_type' => $this->integer(1)
         ]);
     }
 

@@ -30,7 +30,10 @@ use Yii;
  * @property string $travel_with_whom
  * @property string $created_at
  * @property string $updated_at
- * @property integer $status_id
+ * @property integer $status
+ * @property integer $contract_id
+ * @property integer $work_search
+ * @property string $social_security_number
  */
 class Contact extends \yii\db\ActiveRecord
 {
@@ -49,9 +52,9 @@ class Contact extends \yii\db\ActiveRecord
     {
         return [
             [['birth_date', 'departure_date', 'arrival_date', 'created_at', 'updated_at'], 'safe'],
-            [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'status_id'], 'integer'],
+            [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'status', 'contract_id', 'work_search'], 'integer'],
             [['fullname'], 'string', 'max' => 25],
-            [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom'], 'string', 'max' => 20],
+            [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number'], 'string', 'max' => 20],
         ];
     }
 
@@ -84,7 +87,10 @@ class Contact extends \yii\db\ActiveRecord
             'travel_with_whom' => 'Travel With Whom',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'status_id' => 'Status ID',
+            'status' => 'Status',
+            'contract_id' => 'Contract ID',
+            'work_search' => 'Work Search',
+            'social_security_number' => 'Social Security Number',
         ];
     }
 }

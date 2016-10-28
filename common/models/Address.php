@@ -5,19 +5,20 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "adress_types".
+ * This is the model class for table "addresses".
  *
  * @property integer $id
- * @property string $name
+ * @property integer $fullname
+ * @property string $address
  */
-class AdressType extends \yii\db\ActiveRecord
+class Address extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'adress_types';
+        return 'addresses';
     }
 
     /**
@@ -26,7 +27,8 @@ class AdressType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'string', 'max' => 20],
+            [['fullname'], 'integer'],
+            [['address'], 'string', 'max' => 100],
         ];
     }
 
@@ -37,7 +39,8 @@ class AdressType extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'fullname' => 'Fullname',
+            'address' => 'Address',
         ];
     }
 }
