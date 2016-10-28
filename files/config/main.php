@@ -14,6 +14,7 @@ return [
     'defaultRoute' => 'file',
     'modules' => [],
     'components' => [
+        'fileLoader' => 'files\components\FileLoader',
         'request' => [
             'csrfParam' => '_csrf-files',
         ],

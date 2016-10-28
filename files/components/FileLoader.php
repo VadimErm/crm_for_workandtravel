@@ -2,26 +2,42 @@
 
 namespace files\components;
 
-use files\models\File;
+use common\models\File;
 use yii\base\Component;
+use yii\filters\auth\AuthInterface;
+use yii\rbac\DbManager;
+use common\models\User;
 
 class FileLoader extends Component
 {
+    /**
+     * @var $_fileModel File
+     */
     private $_fileModel;
 
-    public function __construct(array $config = [], File $file)
+    /**
+     * @var $_authManager AuthInterface
+     */
+    private $_authManager;
+
+    /**
+     * @var $_user User
+     */
+    private $_user;
+
+    public function __construct(array $config = [], File $file, DbManager $authManager)
     {
         $this->_fileModel = $file;
+        $this->_authManager = $authManager;
+        $this->_user = \Yii::$app->user;
 
         parent::__construct($config);
 
     }
 
-    public $bla;
-
     public function getById($id)
     {
-
+        $files = $this->_fileModel->findOne($id);
     }
     public function bla()
     {
