@@ -5,14 +5,14 @@ use yii\db\Migration;
 /**
  * Handles the creation for table `parents`.
  */
-class m161027_113739_create_parents_table extends Migration
+class m161027_113739_create_client_parents_table extends Migration
 {
     /**
      * @inheritdoc
      */
     public function up()
     {
-        $this->createTable('parents', [
+        $this->createTable('client_parents', [
             'id' => $this->primaryKey(),
             'type' => $this->integer(1),
             'birth' => $this->dateTime(),
