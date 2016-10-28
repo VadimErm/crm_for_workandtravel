@@ -15,7 +15,8 @@ class m161028_092006_create_files_table extends Migration
         $this->createTable('files', [
             'id' => $this->primaryKey(),
             'path' => $this->string(100),
-            'user_id' => $this->integer()
+            'user_id' => $this->integer(),
+            'type' => $this->integer(1)
         ]);
     }
 

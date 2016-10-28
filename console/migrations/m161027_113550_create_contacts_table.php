@@ -36,7 +36,10 @@ class m161027_113550_create_contacts_table extends Migration
             'travel_with_whom' => $this->string(20),
             'created_at' => $this->dateTime(),
             'updated_at'=> $this->dateTime(),
-            'status_id' => $this->integer(1)
+            'status' => $this->integer(1),
+            'contract_id' => $this->integer(),
+            'work_search' => $this->integer(),
+            'social_security_number' => $this->string(20)
         ]);
     }
 

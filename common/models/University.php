@@ -13,6 +13,7 @@ use Yii;
  * @property string $group
  * @property integer $course
  * @property string $dean_fullname
+ * @property integer $dean_type
  */
 class University extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class University extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course'], 'integer'],
+            [['course', 'dean_type'], 'integer'],
             [['name'], 'string', 'max' => 40],
             [['department', 'dean_fullname'], 'string', 'max' => 30],
             [['group'], 'string', 'max' => 10],
@@ -49,6 +50,7 @@ class University extends \yii\db\ActiveRecord
             'group' => 'Group',
             'course' => 'Course',
             'dean_fullname' => 'Dean Fullname',
+            'dean_type' => 'Dean Type',
         ];
     }
 }
