@@ -8,6 +8,7 @@ use yii\rbac\DbManager;
 
 class NavWidget extends Widget
 {
+    const MENUS_VIEW_PATH = '@widgets/navwidget/views/menus/';
     /**
      * @var $_user User
      */
