@@ -24,6 +24,7 @@ class m161027_113550_create_contacts_table extends Migration
             'married' => $this->integer(1),
             'card_id' => $this->integer(),
             'ipassport_id' => $this->integer(),
+            'language_id' => $this->integer(),
             'school_id' => $this->integer(),
             'college_id' =>  $this->integer(),
             'departure_date' => $this->dateTime(),
