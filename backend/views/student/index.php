@@ -14,6 +14,23 @@
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Добавить</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Экспорт в Excel (По ВУЗу)</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Экспорт в Excel (Посольство)</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Оповестить всех</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                 </ul>
@@ -36,35 +53,31 @@
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive"
                                         rowspan="1" colspan="1" style="width: 75px;" aria-sort="ascending"
-                                        aria-label="First name: activate to sort column descending">First name
+                                        aria-label="Ф.И.О.: activate to sort column descending">Ф.И.О.
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 74px;"
-                                        aria-label="Last name: activate to sort column ascending">Last name
+                                        aria-label="Last name: activate to sort column ascending">Программа
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 162px;"
-                                        aria-label="Position: activate to sort column ascending">Position
+                                        aria-label="Position: activate to sort column ascending">Год программы
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 71px;"
-                                        aria-label="Office: activate to sort column ascending">Office
+                                        aria-label="Office: activate to sort column ascending">Статус
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 30px;"
-                                        aria-label="Age: activate to sort column ascending">Age
+                                        aria-label="Age: activate to sort column ascending">Создан
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 69px;"
-                                        aria-label="Start date: activate to sort column ascending">Start date
+                                        aria-label="Start date: activate to sort column ascending">Последнее обновление
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 52px;"
-                                        aria-label="Salary: activate to sort column ascending">Salary
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
-                                        colspan="1" style="width: 39px;"
-                                        aria-label="Extn.: activate to sort column ascending">Extn.
+                                        colspan="1" style="width: 69px;"
+                                        aria-label="">Действия
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1"
                                         colspan="1" style="width: 0px; display: none;"
@@ -74,83 +87,37 @@
                                 </thead>
                                 <tbody>
 
-
                                 <tr role="row" class="odd">
-                                    <td tabindex="0" class="sorting_1">Airi</td>
-                                    <td>Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
+                                    <td tabindex="0">Иванов Иван Иванович</td>
+                                    <td>Work and Travel USA</td>
+                                    <td>2016</td>
+                                    <td><span class="label label-success">Одобрено</span></td>
                                     <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                    <td>5407</td>
-                                    <td style="display: none;">a.satou@datatables.net</td>
+                                    <td>3/11/2016 11:18 AM</td>
+                                    <td>
+                                        <i class="fa fa-eye" aria-hidden="true" title="Просмотр"></i>
+                                        <i class="fa fa-pencil" aria-hidden="true" title="Редактировать"></i>
+                                        <i class="fa fa-file-image-o" title="Загрузить документы" ></i>
+                                        <i class="fa fa-bell" aria-hidden="true" title="Оповестить"></i>
+                                        <i class="fa fa-money" aria-hidden="true" title="Оплата"></i>
+                                    </td>
+                                    <td style="display: none;">ivanov@gmail.com</td>
                                 </tr>
                                 <tr role="row" class="even">
-                                    <td class="sorting_1" tabindex="0">Angelica</td>
-                                    <td>Ramos</td>
-                                    <td>Chief Executive Officer (CEO)</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2009/10/09</td>
-                                    <td>$1,200,000</td>
-                                    <td>5797</td>
-                                    <td style="display: none;">a.ramos@datatables.net</td>
-                                </tr>
-                                <tr role="row" class="odd">
-                                    <td tabindex="0" class="sorting_1">Ashton</td>
-                                    <td>Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>San Francisco</td>
-                                    <td>66</td>
-                                    <td>2009/01/12</td>
-                                    <td>$86,000</td>
-                                    <td>1562</td>
-                                    <td style="display: none;">a.cox@datatables.net</td>
-                                </tr>
-                                <tr role="row" class="even">
-                                    <td class="sorting_1" tabindex="0">Bradley</td>
-                                    <td>Greer</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>41</td>
-                                    <td>2012/10/13</td>
-                                    <td>$132,000</td>
-                                    <td>2558</td>
-                                    <td style="display: none;">b.greer@datatables.net</td>
-                                </tr>
-                                <tr role="row" class="odd">
-                                    <td class="sorting_1" tabindex="0">Brenden</td>
-                                    <td>Wagner</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>28</td>
-                                    <td>2011/06/07</td>
-                                    <td>$206,850</td>
-                                    <td>1314</td>
-                                    <td style="display: none;">b.wagner@datatables.net</td>
-                                </tr>
-                                <tr role="row" class="even">
-                                    <td tabindex="0" class="sorting_1">Brielle</td>
-                                    <td>Williamson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>New York</td>
-                                    <td>61</td>
-                                    <td>2012/12/02</td>
-                                    <td>$372,000</td>
-                                    <td>4804</td>
-                                    <td style="display: none;">b.williamson@datatables.net</td>
-                                </tr>
-                                <tr role="row" class="odd">
-                                    <td class="sorting_1" tabindex="0">Bruno</td>
-                                    <td>Nash</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>38</td>
-                                    <td>2011/05/03</td>
-                                    <td>$163,500</td>
-                                    <td>6222</td>
-                                    <td style="display: none;">b.nash@datatables.net</td>
+                                    <td tabindex="0">Иванов Иван Иванович</td>
+                                    <td>Work and Travel USA</td>
+                                    <td>2016</td>
+                                    <td><span class="label label-warning">В ожидании</span></td>
+                                    <td>2008/11/28</td>
+                                    <td>3/11/2016 11:18 AM</td>
+                                    <td>
+                                        <i class="fa fa-eye" aria-hidden="true" title="Просмотр"></i>
+                                        <i class="fa fa-pencil" aria-hidden="true" title="Редактировать"></i>
+                                        <i class="fa fa-file-image-o" title="Загрузить документы" ></i>
+                                        <i class="fa fa-bell" aria-hidden="true" title="Оповестить"></i>
+                                        <i class="fa fa-money" aria-hidden="true" title="Оплата"></i>
+                                    </td>
+                                    <td style="display: none;">ivanov@gmail.com</td>
                                 </tr>
                                 </tbody>
                             </table>
