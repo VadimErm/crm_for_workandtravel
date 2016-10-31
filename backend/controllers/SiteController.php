@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\LoginForm;
 use yii\web\Controller;
@@ -12,7 +13,6 @@ class SiteController extends BackendController
 {
     public function actionIndex()
     {
-        $this->layout = 'gentelella';
         $authManager = Yii::$app->authManager;
 
         $role = $authManager->getRolesByUser(Yii::$app->user->getId());
@@ -27,15 +27,11 @@ class SiteController extends BackendController
 
     public function actionQuestionary()
     {
-        $this->layout = 'gentelella';
-
         return $this->render('questionary');
     }
 
     public function actionDocuments()
     {
-        $this->layout = 'gentelella';
-
         return $this->render('documents');
     }
 

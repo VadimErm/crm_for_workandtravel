@@ -2,6 +2,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Event;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -25,7 +26,6 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
 
     /**
      * @inheritdoc
@@ -80,7 +80,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -190,11 +190,37 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
+    public function getAccessToken()
+    {
+        return $this->access_token;
+    }
+
     /**
      * Removes password reset token
      */
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * User events
+     * @param $event Event
+     */
+    public static function beforeLogout($event)
+    {
+        // Generate user access token
+        $event->identity->access_token = null;
+        $event->identity->update();
+    }
+
+    /**
+     * @param $event Event
+     */
+    public static function afterLogin($event)
+    {
+        // Remove access token
+        $event->identity->access_token = Yii::$app->security->generateRandomString();
+        $event->identity->update();
     }
 }
