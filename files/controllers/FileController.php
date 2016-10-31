@@ -20,7 +20,6 @@ class FileController extends Controller
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className(),
         ];
-
         return $behaviors;
     }
 
@@ -32,15 +31,14 @@ class FileController extends Controller
         \Yii::$app->user->enableSession = false;
     }
 
-    public function actionIndex()
+    public function actionIndex($id, $type = 1)
     {
-        $this->_fileLoader->getById(1);
-
-        return $this->_fileLoader;
+        $this->actionGet($id, $type);
     }
 
-    public function actionGet($id)
+    public function actionGet($id, $type = 1)
     {
-
+        // Start download file
+        $this->_fileLoader->getById($id, $type);
     }
 }

@@ -1,2 +1,2 @@
 <?php
-Yii::setAlias('@data', dirname(dirname(__DIR__)) . '/data');
+Yii::setAlias('@data', dirname(__DIR__) . '/data');
