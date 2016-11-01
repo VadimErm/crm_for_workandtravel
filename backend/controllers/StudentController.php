@@ -14,7 +14,7 @@ class StudentController extends BackendController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['manager'],
+                        'roles' => ['main_manager', 'manager'],
                     ],
                     [
                         'allow' => true,
