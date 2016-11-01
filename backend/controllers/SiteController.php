@@ -27,11 +27,32 @@ class SiteController extends BackendController
 
     public function actionQuestionary()
     {
-        return $this->render('questionary');
+        $authManager = Yii::$app->authManager;
+
+        $role = \Yii::$app->user->getIdentity()->getRole();
+        $model = User::findOne(Yii::$app->user->getId());
+        $contact = $model
+            ->getContact()
+            ->select('id')
+            ->asArray()
+            ->one();
+
+        if ($role == 'student') {
+            $view  = 'questionary';
+            if(!empty($contact)) {
+                $view = 'index';
+            }
+        } else {
+            $view  = 'index';
+        }
+        
+        return $this->render($view);
+        
     }
 
     public function actionDocuments()
     {
+        
         return $this->render('documents');
     }
 

@@ -75,6 +75,12 @@ class User extends ActiveRecord implements IdentityInterface
         return isset($userRole->name) ? $userRole->name : null;
     }
 
+     public function getContact()
+    {
+        return $this->hasMany(Contact::className(), ['id' => 'contact_id'])
+            ->viaTable('contact_user', ['user_id' => 'id']);
+    }
+
     /**
      * @inheritdoc
      */
