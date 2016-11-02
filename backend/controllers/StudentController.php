@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use yii\filters\AccessControl;
+use backend\models\ContactForm;
 
 class StudentController extends BackendController
 {
@@ -37,6 +38,20 @@ class StudentController extends BackendController
 
     public function actionAdd()
     {
-        return $this->render('new');
+        //$model = new ContactForm();
+         //echo Yii::$app->request->post();
+         //exit;
+         //if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            //Yii::$app->session->setFlash('contactFormSubmitted');
+            //echo "hello";
+            //exit;
+          //  return $this->refresh();
+        //}
+
+
+
+        //return $this->render('new', [
+        //    'model' => $model,
+        //]);
     }
 }
