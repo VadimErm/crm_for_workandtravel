@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 ?>
 
-<h1>New user register</h1>
+<h1>Добавление нового студентав базу</h1>
 <div class="col-sm-6">
 	<div class="contact-form">
 
