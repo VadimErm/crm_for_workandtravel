@@ -43,4 +43,22 @@ class Phone extends \yii\db\ActiveRecord
             'number' => 'Number',
         ];
     }
+
+    public function getParents()
+    {
+        return $this->hasMany(Parent::className(), ['id' => 'parent_id'])
+            ->viaTable('parent_job', ['phone_id' => 'id']);
+    }
+
+    public function getPersons()
+    {
+        return $this->hasMany(Person::className(), ['id' => 'person_id'])
+            ->viaTable('person_job', ['phone_id' => 'id']);
+    }
+
+    public function getUniversities()
+    {
+        return $this->hasMany(University::className(), ['id' => 'university_id'])
+            ->viaTable('university_job', ['phone_id' => 'id']);
+    }
 }
