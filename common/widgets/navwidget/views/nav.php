@@ -8,9 +8,9 @@
     <div class="menu_section">
         <h3>
             <?php if ($role == 'student') : ?>
-                <span class="label label-warning">В ожидании</span>
+                <span class="label label-warning">In process</span>
             <?php else : ?>
-                <span class="label label-warning" style="visibility: hidden;">Менеджер</span>
+                <span class="label label-warning" style="visibility: hidden;">Manager</span>
             <?php endif; ?>
         </h3>
         <?= $this->render('menus/' . $role) ?>

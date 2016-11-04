@@ -2,10 +2,35 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+use yii\bootstrap\Alert;
+use yii\helpers\Url;
 ?>
 
-<h1>Добавление нового студентав базу</h1>
-<div class="col-sm-6">
+<h3>Добавление нового студента в базу</h3>
+<?php $messageError = Yii::$app->session->getFlash('error'); ?>
+<?php $messageSuccess = Yii::$app->session->getFlash('success'); ?>
+<div class="row-fluid">
+    <?php if (!empty($messageSuccess)) : ?>
+        <?= Alert::widget([
+            'options' => [
+                'class' => 'alert-success',
+            ],
+            'body' => $messageSuccess,
+        ]);
+        ?>
+    <?php endif; ?>
+    <?php if (!empty($messageError)) : ?>
+        <?= Alert::widget([
+            'options' => [
+                'class' => 'alert-error',
+            ],
+            'body' => $messageError,
+        ]);
+        ?>
+    <?php endif; ?>
+</div>
+<div class="row-fluid">
+<div class="col-sm-4">
 	<div class="contact-form">
 
 		<?php $form = ActiveForm::begin(['fieldConfig' => [
@@ -17,10 +42,11 @@ use yii\captcha\Captcha;
 				<?= $form->field($model, 'email')->label('Email'); ?>
 			</div>
 			<div class="btn">
-				<?= Html::submitButton('Submit', [ 'name' => 'contact-button']) ?>
+				<?= Html::submitButton('Submit', [ 'name' => 'contact-button', 'class' => 'btn btn-default submit']) ?>
 			</div>
 
 		<?php ActiveForm::end(); ?>
 
 	</div>
+</div>
 </div>

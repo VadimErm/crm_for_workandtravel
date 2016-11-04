@@ -47,7 +47,9 @@ class StudentController extends BackendController
     public function actionAdd()
     {
         $model = new ContactForm();
+
         if ($model->load(\Yii::$app->request->post()) ) {
+
             $password = \Yii::$app->security->generateRandomString(5);
             $auth = \Yii::$app -> authManager;
             $user = new User;
@@ -55,36 +57,35 @@ class StudentController extends BackendController
             $user->email = $model->email;
             $user->setPassword($password);
             $user->generateAuthKey();
-            $user->save(false);
-            $auth = \Yii::$app->authManager;
-            $studentRole = $auth->getRole('student');
-            
-            
+            if ($user->save()) {
 
+                $auth = \Yii::$app->authManager;
+                $studentRole = $auth->getRole('student');
+                $auth->assign($studentRole, $user->getId()); 
 
-            if ($auth->assign($studentRole, $user->getId())) {
                 $passwordResetModel = new PasswordResetRequestForm();
 
-                
                 if ($passwordResetModel->sendEmail($user)) {
-                    \Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 
-                    return $this->goHome();
-                } else {
-                    \Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+                    \Yii::$app->session->setFlash('success', 'The passwordreset was successfully send to new student mail.');
+                    return $this->redirect(['student/add']);
+                    //return $this->refresh();
                 }
-                
+            } else {
 
+                    \Yii::$app->session->setFlash('error', 'Sorry, this mail are allready exists.');
+                    return $this->redirect(['student/add']);
+                    //return $this->refresh();
+                //}
 
-                \Yii::$app->session->setFlash('contactFormSubmitted');
+                //\Yii::$app->session->setFlash('contactFormSubmitted');
             }
-
-            return $this->refresh();
+            //echo 
+            //exit; 
+            //return $this->refresh();
+       
         }
     
-
-
-
         return $this->render('new', [
             'model' => $model,
         ]);
