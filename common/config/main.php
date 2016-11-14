@@ -4,9 +4,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=hnzstdhf_kcet',
-            'username' => 'hnzstdhf_kcet',
-            'password' => '1n9kLLvfWOMs',
+            'dsn' => 'mysql:host=localhost;dbname=yii2advancedbonus',
+            'username' => 'root',
+            'password' => '68719101',
             'charset' => 'utf8',
         ],
         'authManager' => [

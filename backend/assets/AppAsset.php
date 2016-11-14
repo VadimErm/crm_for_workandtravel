@@ -40,6 +40,11 @@ class AppAsset extends AssetBundle
         'Flot/jquery.flot.resize.js'
     ];
 
+     public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+    ];
+
     public function init()
     {
         parent::init();

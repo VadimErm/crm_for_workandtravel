@@ -1,3 +1,12 @@
+<?php
+
+use yii\helpers\Html;
+use backend\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
+use yii\bootstrap\Alert;
+use yii\helpers\Url;
+
+?>
 <div class="row">
     <div class="col-md-12 col-xs-12">
         <div class="x_panel">
@@ -22,6 +31,46 @@
             </div>
             <div class="x_content">
                 <br>
+                <?php $form = ActiveForm::begin(
+                    [ 
+                        'options' => [ 
+                        'class' => 'form-horizontal form-label-left input_mask', ]
+                    ]
+                    ); 
+                ?>
+
+                
+                
+                    <div class="form-group">
+
+                        <?= $form->field($model, 'fullname','short')->textInput(['autofocus' => true])->label('Full name'); ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'email' )->textInput(['maxlength' => 255, 'class' => 'form-control'])->label('Email'); ?>
+                    </div>
+                    <div class="grp">
+                        <?= $form->field($model, 'skype')->textArea(['rows' => 6]) ?>
+                    </div>
+                    <div class="form-group">
+                        <fieldset id="brothers-and-sisters">
+                            <legend>Братья и сестры</legend>
+                            <button id="add-relatives" type="button" class="btn btn-round btn-success">+</button>
+                            <div class="form-group">
+                                <?= $form->field($model, 'sibling[]' )->textInput(['maxlength' => 255, 'class' => 'form-control'])->label('Ф.И.О'); ?>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    
+                    <div class="btn">
+                        <?= Html::submitButton('Сохранить', [ 'name' => 'contact-button' ,'class' => 'btn btn-success' ]) ?>
+                    </div>
+
+                    
+
+                <?php ActiveForm::end(); ?>
+
+            
                 <form class="form-horizontal form-label-left input_mask">
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О./номер договора с КСЕТ и дата заключения договора</label>

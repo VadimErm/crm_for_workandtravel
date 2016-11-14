@@ -76,14 +76,8 @@ class StudentController extends BackendController
                     \Yii::$app->session->setFlash('error', 'Sorry, this mail are allready exists.');
                     return $this->redirect(['student/add']);
                     //return $this->refresh();
-                //}
-
-                //\Yii::$app->session->setFlash('contactFormSubmitted');
             }
-            //echo 
-            //exit; 
-            //return $this->refresh();
-       
+     
         }
     
         return $this->render('new', [

@@ -25,11 +25,15 @@ class CustomAsset extends AssetBundle
         'js/maps/jquery-jvectormap-us-aea-en.js',
         'js/maps/gdp-data.js',
         'js/stan.custom.js',
+        'js/yii.activeForm.js',
 //        'js/dataTables.js'
     ];
 
-    public $depends = [
-        AppAsset::class
+     public $depends = [
+        'yii\web\YiiAsset',
+         AppAsset::class,
+        
+        
     ];
 
     public function init()

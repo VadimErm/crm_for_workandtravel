@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use common\models\User;
+use common\models\Summary;
 use Yii;
 use common\models\LoginForm;
 use yii\web\Controller;
@@ -30,23 +31,27 @@ class SiteController extends BackendController
         $authManager = Yii::$app->authManager;
 
         $role = \Yii::$app->user->getIdentity()->getRole();
-        $model = User::findOne(Yii::$app->user->getId());
-        $contact = $model
+        $modelUser = User::findOne(Yii::$app->user->getId());
+        $contact = $modelUser
             ->getContact()
             ->select('id')
             ->asArray()
             ->one();
 
-        if ($role == 'student') {
-            $view  = 'questionary';
-            if(!empty($contact)) {
-                $view = 'index';
+            if ($role == 'student') {
+                if(!empty($contact)) {
+                    $view = 'index';
+                } else {
+                   $view  = 'questionary';
+                   $model = new Summary; 
+                }
+            } else {
+                $view  = 'index';
             }
-        } else {
-            $view  = 'index';
-        }
         
-        return $this->render($view);
+        return $this->render($view , [
+                'model' => $model,
+            ]);
         
     }
 
