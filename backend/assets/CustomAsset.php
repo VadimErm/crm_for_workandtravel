@@ -38,7 +38,7 @@ class CustomAsset extends AssetBundle
 
     public function init()
     {
-        if (Url::current() == AppAsset::STUDENT_INDEX) {
+        if (Url::current() == AppAsset::STUDENT_APPLICANTS || Url::current() == AppAsset::STUDENT_PARTICIPANTS) {
             $this->js[] = 'js/dataTables.js';
         }
     }

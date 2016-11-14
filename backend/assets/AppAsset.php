@@ -10,7 +10,8 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    const STUDENT_INDEX = '/admin/student/index';
+    const STUDENT_APPLICANTS = '/admin/student/applicants';
+    const STUDENT_PARTICIPANTS = '/admin/student/participants';
     public $sourcePath = '@bower';
     public $css = [
         'bootstrap/dist/css/bootstrap.min.css',
@@ -50,7 +51,7 @@ class AppAsset extends AssetBundle
         parent::init();
 
         // include only on student all page
-        if (Url::current() == self::STUDENT_INDEX) {
+        if (Url::current() == self::STUDENT_APPLICANTS || Url::current() == self::STUDENT_PARTICIPANTS) {
             $this->css[] = 'datatables.net-bs/css/dataTables.bootstrap.min.css';
             $this->js[] = 'datatables.net/js/jquery.dataTables.min.js';
             $this->js[] = 'datatables.net-bs/js/dataTables.bootstrap.min.js';

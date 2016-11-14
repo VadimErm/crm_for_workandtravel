@@ -6,7 +6,7 @@ use yii\bootstrap\Alert;
 use yii\helpers\Url;
 ?>
 
-<h3>Добавление нового студента в базу</h3>
+<h3>Invite student</h3>
 <?php $messageError = Yii::$app->session->getFlash('error'); ?>
 <?php $messageSuccess = Yii::$app->session->getFlash('success'); ?>
 <div class="row-fluid">

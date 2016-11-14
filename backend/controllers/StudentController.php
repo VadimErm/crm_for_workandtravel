@@ -2,11 +2,13 @@
 
 namespace backend\controllers;
 
+use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use backend\models\ContactForm;
 use common\models\User;
 use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
+use yii\web\BadRequestHttpException;
 
 class StudentController extends BackendController
 {
@@ -28,7 +30,6 @@ class StudentController extends BackendController
                     [
                         'allow' => true,
                         'actions' => ['reset-password'],
-                        
                     ]
                 ]
             ]
@@ -109,5 +110,15 @@ class StudentController extends BackendController
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionApplicants()
+    {
+        return $this->render('students', ['title' => 'Applicants']);
+    }
+
+    public function actionParticipants()
+    {
+        return $this->render('students', ['title' => 'Participants']);
     }
 }

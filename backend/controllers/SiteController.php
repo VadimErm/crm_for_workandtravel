@@ -30,6 +30,13 @@ class SiteController extends BackendController
     {
         $authManager = Yii::$app->authManager;
 
+        $model = new Summary();
+
+        if ($model->load(Yii::$app->request->post())) {
+            var_dump($model);
+            exit;
+        }
+
         $role = \Yii::$app->user->getIdentity()->getRole();
         $modelUser = User::findOne(Yii::$app->user->getId());
         $contact = $modelUser

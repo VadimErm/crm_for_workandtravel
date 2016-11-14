@@ -8,9 +8,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Список студентов
-                    <small>Студенты</small>
-                </h2>
+                <h2><?= $title ?></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -103,22 +101,6 @@
                                     </td>
                                     <td style="display: none;">ivanov@gmail.com</td>
                                 </tr>
-                                <tr role="row" class="even">
-                                    <td tabindex="0">Иванов Иван Иванович</td>
-                                    <td>Work and Travel USA</td>
-                                    <td>2016</td>
-                                    <td><span class="label label-warning">В ожидании</span></td>
-                                    <td>2008/11/28</td>
-                                    <td>3/11/2016 11:18 AM</td>
-                                    <td>
-                                        <i class="fa fa-eye" aria-hidden="true" title="Просмотр"></i>
-                                        <i class="fa fa-pencil" aria-hidden="true" title="Редактировать"></i>
-                                        <i class="fa fa-file-image-o" title="Загрузить документы" ></i>
-                                        <i class="fa fa-bell" aria-hidden="true" title="Оповестить"></i>
-                                        <i class="fa fa-money" aria-hidden="true" title="Оплата"></i>
-                                    </td>
-                                    <td style="display: none;">ivanov@gmail.com</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -126,7 +108,6 @@
                     <div class="row">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

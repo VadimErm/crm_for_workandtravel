@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Model;
 
 /**
  * This is the model class for table "contacts".
@@ -36,40 +37,91 @@ use Yii;
  * @property integer $work_search
  * @property string $social_security_number
  */
-class Summary extends \yii\db\ActiveRecord
+class Summary extends Model
 {
     
     //contact attributes
     public $fullname;
-    public $firstnameIpass;
-    public $lastnameIpass;
-    public $birthDate;
-    public $birthCountry;
-    public $birthCity;
-    public $birthRegion;
-    public $married;
-    public $cardId;
-    public $ipassportId;
-    public $schoolId;
-    public $universityId;
-    public $collegeId;
-    public $departureDate;
-    public $arrivalDate;
+    public $kcet_number;
+    public $kcet_date;
+    public $another_fullname;
+    public $first_name;
+    public $last_name;
+    public $birthday;
+    public $country;
+    public $city;
+    public $region;
+    public $marital_status;
+    public $passport_address;
+    public $real_address;
+    public $home_phone;
+    public $mobile_phone;
+    public $another_phone;
+
+    // Удостоверение паспорт
+    public $passport_number;
+    public $issued_by;
+    public $issued_date;
+
+    // Загран паспорт
+    public $inter_passport_number; // Номер загран паспорта
+    public $inter_issued_by;
+    public $inter_issued_country;
+    public $inter_issued_region;
+    public $inter_issued_city;
+    public $inter_exp; // Период действия
+
+    // Отец
+    public $father_fullname;
+    public $father_home_address;
+    public $father_home_phone;
+    public $father_work_phone;
+    public $father_birthday;
+
+    // Мать
+    public $mother_fullname;
+    public $mother_home_address;
+    public $mother_home_phone;
+    public $mother_work_phone;
+    public $mother_birthday;
+
+    // Братья и сестры
+    public $bro_and_sis_fullname = [];
+
+    // Контактные лица
+    public $contact_fullname;
+    public $contact_address;
+    public $contact_city_phone;
+    public $contact_mobile_phone;
+
+    public $departure_arrival_date;
     public $email;
     public $skype;
-    public $preferredJob;
-    public $preferredState;
-    public $travelWithWhom;
-    public $status;
-    public $createdAt;
-    public $updatedAt;
-    public $socialSecurityNumber;
-    
-    //client_parents attributes
-    public $parents = array();
-    public $parentsType;
-    public $parentBirth;
-    public $parentFullname;
+
+    // ВУЗ university
+    public $un_name;
+    public $un_address;
+    public $un_tel;
+    public $un_fax;
+    public $un_course;
+    public $un_faculty;
+    public $un_group;
+    public $un_isdean;
+    public $un_dean_fullname;
+
+    // Средняя школа
+    public $school_number;
+    public $school_address;
+    public $school_from;
+    public $school_to;
+
+    // Коледж
+    public $college_number;
+    public $college_address;
+    public $college_from;
+    public $college_to;
+
+    public $search_work;
 
     //cards attributes
     //ipassports attributes
@@ -81,20 +133,6 @@ class Summary extends \yii\db\ActiveRecord
     //phones attributes
     //addresses attributes
 
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['birthDate', 'departureDate', 'arrivalDate', 'createdAt', 'updatedAt'], 'safe'],
-            [['parents'], 'safe'],
-            [['married', 'cardId', 'ipassportId', 'languageId', 'schoolId', 'collegeId', 'universityId', 'status', 'contractId', 'workSearch'], 'integer'],
-            [['fullname'], 'string', 'max' => 25],
-            [['firstnameIpass', 'lastnameIpass', 'birthCountry', 'birthCity', 'birthRegion', 'email', 'skype', 'preferredJob', 'preferredState', 'travelWithWhom', 'socialSecurityNumber'], 'string', 'max' => 20],
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -133,78 +171,19 @@ class Summary extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getAddresses()
+    public function load($data, $formName = null)
     {
-        return $this->hasMany(Address::className(), ['id' => 'address_id'])
-            ->viaTable('contact_adress', ['contact_id' => 'id']);
-    }
+        $scope = $formName === null ? $this->formName() : $formName;
+        if ($scope === '' && !empty($data)) {
+            $this->setAttributes($data, false);
 
-    public function getPhones()
-    {
-        return $this->hasMany(Phone::className(), ['id' => 'phone_id'])
-            ->viaTable('contact_phone', ['contact_id' => 'id']);
-    }
+            return true;
+        } elseif (isset($data[$scope])) {
+            $this->setAttributes($data[$scope], false);
 
-    public function getPersons()
-    {
-        return $this->hasMany(Person::className(), ['id' => 'person_id'])
-            ->viaTable('contact_person', ['contact_id' => 'id']);
+            return true;
+        } else {
+            return false;
+        }
     }
-
-    public function getUsers()
-    {
-        return $this->hasMany(User::className(), ['id' => 'person_id'])
-            ->viaTable('contact_user', ['contact_id' => 'id']);
-    }
-
-    public function getAbroadTravels()
-    {
-        return $this->hasMany(AbroadTravel::className(), ['id' => 'abroad_travel_id'])
-            ->viaTable('contact_abroad_travels', ['contact_id' => 'id']);
-    }
-
-    public function getSiblings()
-    {
-        return $this->hasMany(Sibling::className(), ['id' => 'sibling_id'])
-            ->viaTable('contact_sibling', ['contact_id' => 'id']);
-    }
-
-    public function getJobs()
-    {
-        return $this->hasMany(Job::className(), ['id' => 'job_id'])
-            ->viaTable('contact_job', ['contact_id' => 'id']);
-    }
-
-    public function getParents()
-    {
-        return $this->hasMany(Person::className(), ['id' => 'parent_id'])
-            ->viaTable('contact_parent', ['contact_id' => 'id']);
-    }
-
-
-    public function getIPassport()
-    {
-        return $this->hasOne(Ipassport::className(), ['id' => 'ipassport_id']);
-    }
-    
-    public function getSchool()
-    {
-        return $this->hasOne(School::className(), ['id' => 'school_id']);
-    }
-
-    public function getUniversity()
-    {
-        return $this->hasOne(University::className(), ['id' => 'university_id']);
-    }
-
-    public function getCollege()
-    {
-        return $this->hasOne(College::className(), ['id' => 'college_id']);
-    }
-
-    public function getCard()
-    {
-        return $this->hasOne(Card::className(), ['id' => 'card_id']);
-    }
-
 }
