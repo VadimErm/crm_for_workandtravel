@@ -21,7 +21,9 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content" style="display: none;">
-            <form action="/index.php" class="dropzone"></form>
+            <form action="<?= \common\helpers\Url::filePush() ?>" class="dropzone">
+                <input type="hidden" name="birth_certificate">
+            </form>
             <br/>
             <br/>
             <br/>
