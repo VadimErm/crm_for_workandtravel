@@ -6,6 +6,9 @@ use files\components\FileLoader;
 use yii\base\Module;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\Controller;
+use yii\web\ForbiddenHttpException;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 class FileController extends Controller
 {
@@ -36,9 +39,34 @@ class FileController extends Controller
         $this->actionGet($id, $type);
     }
 
-    public function actionGet($id, $type = 1)
+    public function actionGet($user_id, $type)
     {
         // Start download file
-        $this->_fileLoader->getById($id, $type);
+        $role = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->getId());
+        $role = reset($role)->name;
+
+        $own = ($role === 'manager' || $role === 'main_manager') ? false : true;
+
+        $this->_fileLoader->getFile($user_id, $type, $own);
+    }
+
+    public function actionPush()
+    {
+        $type = key(\Yii::$app->request->post());
+
+        if ($id = $this->_fileLoader->pushFile($type)) {
+            return ['status' => 'success', 'id' => $id];
+        }
+
+        return ['status' => 'fail'];
+    }
+
+    public function actionRemove($id)
+    {
+        if ($this->_fileLoader->removeFile($id)) {
+            return ['status' => 'success'];
+        } else {
+            return ['status' => 'fail'];
+        }
     }
 }

@@ -10,7 +10,8 @@ class CustomAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/maps/jquery-jvectormap-2.0.3.css',
-        'css/custom.min.css'
+        'css/custom.min.css',
+        'css/dropzone.css'
     ];
     public $js = [
         'js/flot/jquery.flot.orderBars.js',
@@ -25,6 +26,7 @@ class CustomAsset extends AssetBundle
         'js/maps/jquery-jvectormap-us-aea-en.js',
         'js/maps/gdp-data.js',
         'js/stan.custom.js',
+        'js/dropzone.js',
         'js/yii.activeForm.js',
 //        'js/dataTables.js'
     ];
@@ -32,8 +34,6 @@ class CustomAsset extends AssetBundle
      public $depends = [
         'yii\web\YiiAsset',
          AppAsset::class,
-        
-        
     ];
 
     public function init()

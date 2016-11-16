@@ -18,9 +18,6 @@ return [
         'request' => [
             'csrfParam' => '_csrf-files',
         ],
-        'fileLoader' => [
-            'class' => \files\components\FileLoader::className()
-        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -42,14 +39,11 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => []
         ],
-        */
     ],
     'params' => $params,
 ];

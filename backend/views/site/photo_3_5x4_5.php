@@ -21,7 +21,9 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content" style="display: none;">
-            <form action="/index.php" class="dropzone"></form>
+            <form action="<?= \common\helpers\Url::filePush() ?>" class="dropzone">
+                <input type="hidden" name="photo_3_5x4_5">
+            </form>
             <br/>
             <br/>
             <br/>
