@@ -11,6 +11,7 @@ use Yii;
  * @property string $fullname
  * @property string $firstname_ipass
  * @property string $lastname_ipass
+ * @property string $another_fullname
  * @property string $birth_date
  * @property string $birth_country
  * @property string $birth_city
@@ -54,7 +55,7 @@ class Contact extends \yii\db\ActiveRecord
         return [
             [['birth_date', 'departure_date', 'arrival_date', 'created_at', 'updated_at'], 'safe'],
             [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status', 'contract_id', 'work_search'], 'integer'],
-            [['fullname'], 'string', 'max' => 25],
+            [['fullname', 'another_fullname'], 'string', 'max' => 25],
             [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number'], 'string', 'max' => 20],
         ];
     }
