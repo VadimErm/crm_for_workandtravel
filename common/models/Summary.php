@@ -45,13 +45,14 @@ class Summary extends Model
     public $kcet_number;
     public $kcet_date;
     public $another_fullname;
-    public $first_name;
-    public $last_name;
-    public $birthday;
-    public $country;
-    public $city;
-    public $region;
-    public $marital_status;
+    public $firstname_ipass;
+    public $lastname_ipass;
+    public $birth_date;
+    public $birth_country;
+    public $birth_city;
+    public $birth_region;
+    public $married;
+
     public $passport_address;
     public $real_address;
     public $home_phone;
@@ -86,7 +87,7 @@ class Summary extends Model
     public $mother_birthday;
 
     // Братья и сестры
-    public $bro_and_sis_fullname = [];
+    public $bro_and_sis_fullname;
 
     // Контактные лица
     public $contact_fullname;
@@ -94,7 +95,8 @@ class Summary extends Model
     public $contact_city_phone;
     public $contact_mobile_phone;
 
-    public $departure_arrival_date;
+    public $departure_date;
+    public $arrival_date;
     public $email;
     public $skype;
 
@@ -123,53 +125,20 @@ class Summary extends Model
 
     public $search_work;
 
-    //cards attributes
-    //ipassports attributes
-    //jobs attributes
-    //abroad_travels attributes
-    //colleges attributes
-    //universities attributes
-    //siblings attributes
-    //phones attributes
-    //addresses attributes
+    // Опыт работы
+    public $company_name;
+    public $position;
+    public $exp_from;
+    public $exp_to;
 
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'fullname' => 'Fullname',
-            'firstname_ipass' => 'Firstname Ipass',
-            'lastname_ipass' => 'Lastname Ipass',
-            'birth_date' => 'Birth Date',
-            'birth_country' => 'Birth Country',
-            'birth_city' => 'Birth City',
-            'birth_region' => 'Birth Region',
-            'married' => 'Married',
-            'card_id' => 'Card ID',
-            'ipassport_id' => 'Ipassport ID',
-            'language_id' => 'Language ID',
-            'school_id' => 'School ID',
-            'university_id' => 'University ID',
-            'college_id' => 'College ID',
-            'departure_date' => 'Departure Date',
-            'arrival_date' => 'Arrival Date',
-            'email' => 'Email',
-            'skype' => 'Skype',
-            'preferred_job' => 'Preferred Job',
-            'preferred_state' => 'Preferred State',
-            'travel_with_whom' => 'Travel With Whom',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'status' => 'Status',
-            'contract_id' => 'Contract ID',
-            'work_search' => 'Work Search',
-            'social_security_number' => 'Social Security Number',
-        ];
-    }
+    public $wish_position; // Предпочитаемая вакансия
+    public $wish_state;
+
+    public $abroad_country;
+    public $abroad_visa_type;
+    public $social_security_num;
+    public $with_go;
 
     public function load($data, $formName = null)
     {
@@ -185,5 +154,34 @@ class Summary extends Model
         } else {
             return false;
         }
+    }
+
+    public function save($runValidation = true, $attributes = null)
+    {
+        if ($runValidation && !$this->validate($attributes)) {
+            Yii::info('Model not inserted due to validation error.', __METHOD__);
+            return false;
+        }
+
+        $contact = new Contact();
+
+        $contact->load(['Contact' => (array)$this]);
+        // TODO contact save
+
+        $realAddress = new Address();
+        $passportAddress = new Address();
+
+        $realAddress->type = Address::TYPE_REAL;
+        $realAddress->address = $this->real_address;
+        $passportAddress->type = Address::TYPE_PASSPORT;
+        $passportAddress->address = $this->passport_address;
+
+        // TODO addresses save
+
+//        var_dump($passportAddress);
+//
+//        var_dump($contact);
+        var_dump($this);
+        return true;
     }
 }

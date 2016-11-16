@@ -8,11 +8,13 @@ use Yii;
  * This is the model class for table "addresses".
  *
  * @property integer $id
- * @property integer $fullname
+ * @property integer $type
  * @property string $address
  */
 class Address extends \yii\db\ActiveRecord
 {
+    const TYPE_REAL = 1;
+    const TYPE_PASSPORT = 2; // По прописке
     /**
      * @inheritdoc
      */
@@ -27,7 +29,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fullname'], 'integer'],
+            [['type'], 'integer'],
             [['address'], 'string', 'max' => 100],
         ];
     }
@@ -39,7 +41,7 @@ class Address extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fullname' => 'Fullname',
+            'type' => 'Type',
             'address' => 'Address',
         ];
     }

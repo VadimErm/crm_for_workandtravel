@@ -29,12 +29,14 @@ class SiteController extends BackendController
     public function actionQuestionary()
     {
         $authManager = Yii::$app->authManager;
+//        var_dump(Yii::$app->request->post());exit;
 
         $model = new Summary();
 
-        if ($model->load(Yii::$app->request->post())) {
-            var_dump($model);
-            exit;
+//        var_dump(Yii::$app->request->post());exit;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            var_dump($model);exit;
         }
 
         $role = \Yii::$app->user->getIdentity()->getRole();

@@ -72,19 +72,19 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">First name ( имя как в загранпаспорте)</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= $form->field($model, 'first_name')->textInput()->label(false) ?>
+                            <?= $form->field($model, 'firstname_ipass')->textInput()->label(false) ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Last name ( фамилия как в загранпаспорте)</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= $form->field($model, 'last_name')->textInput()->label(false) ?>
+                            <?= $form->field($model, 'lastname_ipass')->textInput()->label(false) ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= $form->field($model, 'birthday')
+                            <?= $form->field($model, 'birth_date')
                                 ->textInput(['data-inputmask' => "'mask': '99/99/9999'"])
                                 ->label(false)
                             ?>
@@ -97,14 +97,14 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Страна</label>
                                     <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <?= $form->field($model, 'country')
+                                        <?= $form->field($model, 'birth_country')
                                             ->textInput()
                                             ->label(false);
                                         ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Область</label>
                                     <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <?= $form->field($model, 'region')
+                                        <?= $form->field($model, 'birth_region')
                                             ->textInput()
                                             ->label(false)
                                         ?>
@@ -113,7 +113,7 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-3">Город</label>
                                     <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <?= $form->field($model, 'city')
+                                        <?= $form->field($model, 'birth_city')
                                             ->textInput()
                                             ->label(false)
                                         ?>
@@ -126,7 +126,7 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Семейное положение</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'marital_status') ?>
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'married') ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -357,21 +357,25 @@ use yii\helpers\Url;
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Желаемая дата вылета из/в США</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Желаемая дата вылета из США</label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="text" class="form-control">
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'departure_date') ?>
+                        </div>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Желаемая дата вылета в США</label>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'arrival_date') ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Электронный адрес</label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="text" class="form-control">
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'email') ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Skype</label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="text" class="form-control">
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'skype') ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -380,48 +384,48 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Название</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_name') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_address') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_tel') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Факс</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_fax') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Курс</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_course') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Факультет</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_faculty') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Группа</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_group') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И. декана
-                                    <input type="checkbox" class="js-switch" data-switchery="true"> заместителя</label>
+                                    <input type="checkbox" name="Summary[un_isdean]" class="js-switch" data-switchery="true"> заместителя</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_dean_fullname') ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -432,13 +436,13 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_number') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_address') ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -446,11 +450,11 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">C</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <input type="text" class="form-control">
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_from') ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">По</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <input type="text" class="form-control">
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_to') ?>
                                     </div>
                                 </div>
                             </fieldset>
@@ -462,13 +466,13 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_number') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_address') ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -476,11 +480,11 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">C</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <input type="text" class="form-control">
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_from') ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">По</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <input type="text" class="form-control">
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_to') ?>
                                     </div>
                                 </div>
                             </fieldset>
@@ -490,7 +494,7 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Поиск работы</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            с помощью КСЕТ<input type="checkbox" class="js-switch" data-switchery="true">самостоятельно
+                            с помощью КСЕТ<input type="checkbox" name="Summary[search_work]" class="js-switch" data-switchery="true">самостоятельно
                         </div>
                     </div>
                     <div class="form-group">
@@ -500,23 +504,23 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Название компании</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'company_name') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Должность</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'position') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Период с (мм/гггг)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'exp_from') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Период по (мм/гггг)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'exp_to') ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -525,13 +529,13 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые вакансии (Кем бы хотели работать в США)</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control">
+                            <?=  ActiveFormHelper::textWithoutLabel($form, $model, 'wish_position') ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые штат</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control">
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'wish_state') ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -541,17 +545,17 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_country') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_visa_type') ?>
                                 </div>
                             </div>
                             <div id="social-number" class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Social Security number</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'social_security_num') ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -560,7 +564,7 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">С кем хотите поехать (ФИО)</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control">
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'with_go') ?>
                         </div>
                     </div>
                     <div class="form-group">
