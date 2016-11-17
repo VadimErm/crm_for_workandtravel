@@ -99,7 +99,7 @@ class FileLoader extends Component
             return false;
         }
 
-        unlink($file->path);
+        unlink(\Yii::getAlias($file->path));
         return $file->delete();
     }
 
