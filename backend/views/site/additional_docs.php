@@ -35,10 +35,6 @@ use common\helpers\Url;
                     <input type="hidden" name="additional_docs">
                 </form>
             <?php endif; ?>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
         </div>
     </div>
 </div>
