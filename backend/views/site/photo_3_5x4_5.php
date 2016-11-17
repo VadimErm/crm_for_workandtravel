@@ -30,7 +30,7 @@ use common\helpers\Url;
             <?php if ($loaded) : ?>
                 <img src="<?= Url::fileGet('photo_3_5x4_5') ?>" alt="Photo 3.4x4.5" width="500" height="300">
             <?php else : ?>
-                <form action="<?= Url::filePush() ?>" class="dropzone">
+                <form action="<?= Url::filePush() ?>" id="photo_3_5x4_5" class="dropzone">
                     <input type="hidden" name="photo_3_5x4_5">
                 </form>
             <?php endif; ?>
