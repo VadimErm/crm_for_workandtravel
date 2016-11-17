@@ -425,6 +425,23 @@
         function Dropzone(element, options) {
             var elementOptions, fallback, _ref;
             this.element = element;
+            options = options == null ? {} : options;
+
+            var length = element.attributes.length;
+            var attrName = null;
+            var attrValue = null;
+
+            for (var i = 0; i < length; i++) {
+                attrName = element.attributes[i].nodeName;
+                attrValue = element.getAttribute(attrName);
+
+                if (this.defaultOptions[camelize(attrName)] != undefined) {
+                    options[camelize(attrName)] = attrValue;
+                }
+            }
+
+            console.log(options);
+
             this.version = Dropzone.version;
             this.defaultOptions.previewTemplate = this.defaultOptions.previewTemplate.replace(/\n*/g, "");
             this.clickableElements = [];
@@ -442,8 +459,8 @@
             Dropzone.instances.push(this);
             this.element.dropzone = this;
             elementOptions = (_ref = Dropzone.optionsForElement(this.element)) != null ? _ref : {};
-            this.options = extend({}, this.defaultOptions, elementOptions, options != null ? options : {});
-            console.log(this.options);
+            this.options = extend({}, this.defaultOptions, elementOptions, options);
+
             if (this.options.forceFallback || !Dropzone.isBrowserSupported()) {
                 return this.options.fallback.call(this);
             }
@@ -1016,7 +1033,6 @@
                     confirmButtonText: "Yes",
                     closeOnConfirm: false
                 }, function () {
-                    console.log(fileId);
                     $.ajax({
                         url: '/files/file/remove?id='+  fileId +'&access-token=' + document.getElementById('access-token').value,
                         dataType: 'json',
