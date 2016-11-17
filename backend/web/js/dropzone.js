@@ -440,7 +440,7 @@
                 }
             }
 
-            console.log(options);
+            // console.log(options);
 
             this.version = Dropzone.version;
             this.defaultOptions.previewTemplate = this.defaultOptions.previewTemplate.replace(/\n*/g, "");
