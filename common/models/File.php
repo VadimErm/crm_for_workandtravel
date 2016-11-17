@@ -65,4 +65,15 @@ class File extends \yii\db\ActiveRecord
             throw new InvalidParamException("Unknown file type");
         }
     }
+
+    /**
+     * @param $type string
+     * @return string | boolean
+     */
+    public static function getType($type)
+    {
+        if (isset(self::$_types[$type])) {
+            return self::$_types[$type];
+        }
+    }
 }

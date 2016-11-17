@@ -102,4 +102,19 @@ class FileLoader extends Component
         unlink($file->path);
         return $file->delete();
     }
+
+    /**
+     * @param $user_id integer
+     * @param $type string
+     */
+    public static function isExists($user_id, $type)
+    {
+        $file = new File();
+
+        $file = $file->find(['user_id' => $user_id])
+            ->where(['type' => $file::getType($type)])
+            ->one();
+
+        return !empty($file);
+    }
 }
