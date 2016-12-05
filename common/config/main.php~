@@ -6,7 +6,7 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=kset',
             'username' => 'root',
-            'password' => '12345',
+            'password' => 'root',
             'charset' => 'utf8',
         ],
         'authManager' => [
@@ -19,12 +19,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'content-api'],
             ],
-
-
-        ],
-
-
+        ]
     ],
 ];
