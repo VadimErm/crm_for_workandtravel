@@ -72,6 +72,9 @@ class Summary extends Model
     public $inter_issued_city;
     public $inter_exp; // Период действия
 
+    
+    public $parents;
+
     // Отец
     public $father_fullname;
     public $father_home_address;
@@ -87,9 +90,12 @@ class Summary extends Model
     public $mother_birthday;
 
     // Братья и сестры
+    public $siblines = array();
     public $bro_and_sis_fullname;
 
     // Контактные лица
+    public $persons;
+    public $person;
     public $contact_fullname;
     public $contact_address;
     public $contact_city_phone;
@@ -126,19 +132,46 @@ class Summary extends Model
     public $search_work;
 
     // Опыт работы
+    public $jobs;
     public $company_name;
     public $position;
     public $exp_from;
     public $exp_to;
 
 
-    public $wish_position; // Предпочитаемая вакансия
-    public $wish_state;
+    public $preferred_job; // Предпочитаемая вакансия
+    public $preferred_state;
+
+    public $abroad_countries;
 
     public $abroad_country;
     public $abroad_visa_type;
     public $social_security_num;
-    public $with_go;
+    public $travel_with_whom;
+
+    public $phones;
+    public $card;
+    public $ipassport;
+    public $university;
+    public $school;
+    public $college;
+    public $social_security_number; 
+
+    //public $sibling;
+
+    public function rules()
+    {
+        return [
+        
+           [['fullname'], 'required'],
+           //['siblines', 'string', 'max' => 5],
+           //[['siblines'], 'each', 'rule' => ['fullname', 'each', 'rule' => ['string', 'max' => 5]]],
+          // ['siblines', 'each', 'rule' =>  ['string', 'max' => 5]],
+           //[['siblines'], 'safe'],
+           [['fullname'], 'string', 'max' => 5],
+
+        ];
+    }
 
     public function load($data, $formName = null)
     {
@@ -170,18 +203,66 @@ class Summary extends Model
 
         $realAddress = new Address();
         $passportAddress = new Address();
+        
+        foreach ($this->bro_and_sis_fullname as $key => $sibling) {
+            $siblingModel = new Sibling();
+            $siblingModel->load(['Sibling' => (array)$sibling]);
+            $siblingModel->save();
+        }
+        foreach ($this->parents as $key => $parent) {
+            
+            $parentModel = new Parent();
+            $parentModel->load(['Parent' => (array)$parent]);
+
+            foreach ($parent['phones'] as $phoneKey => $phone) {
+                $phoneModel = new Phone();
+                if ($phoneKey == 'home') {
+                    
+                    //echo "<pre>";
+                    //var_dump($parent['phones']);
+                    //var_dump($parent['address']);
+                    //echo "</pre>";
+                    //exit;
+
+                    $phoneModel->load(['Phone' => array('number' => $parent['phones']['home'], 'type' => Phone::TYPE_HOME)]);
+                    $phoneModel->save();
+                }
+                if ($phoneKey == 'work') {
+                    $phoneModel->load(['Phone' => array('number' => $parent['phones']['work'], 'type' => Phone::TYPE_WORK)]);  
+                    $phoneModel->save();
+                }
+            }
+            
+            foreach ($parent['address'] as $addressKey => $address) {
+                $addressModel = new Address();
+                if ($addressKey == 'home') {
+                    $addressModel->load(['Address' => array('address' => $parent['address']['home'], 'type' => Address::TYPE_HOME)]); 
+                    $addressModel->save();
+
+                }             
+            }
+
+            //$parentModel->save();
+
+        }
+
+        
+        //echo "<pre>";
+        //var_dump($this->bro_and_sis_fullname);
+        //echo "</pre>";
 
         $realAddress->type = Address::TYPE_REAL;
         $realAddress->address = $this->real_address;
         $passportAddress->type = Address::TYPE_PASSPORT;
         $passportAddress->address = $this->passport_address;
 
+
         // TODO addresses save
 
 //        var_dump($passportAddress);
 //
 //        var_dump($contact);
-        var_dump($this);
+        //var_dump($this);
         return true;
     }
 }

@@ -15,6 +15,10 @@ use Yii;
  */
 class ClientParent extends \yii\db\ActiveRecord
 {
+    
+    const TYPE_FATHER = 1;
+    const TYPE_MOTHER = 2;
+    
     /**
      * @inheritdoc
      */

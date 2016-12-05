@@ -36,7 +36,9 @@ class SiteController extends BackendController
 //        var_dump(Yii::$app->request->post());exit;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            echo "<pre>";
             var_dump($model);exit;
+            echo "</pre>";
         }
 
         $role = \Yii::$app->user->getIdentity()->getRole();

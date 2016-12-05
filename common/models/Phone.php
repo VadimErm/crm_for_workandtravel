@@ -13,6 +13,10 @@ use Yii;
  */
 class Phone extends \yii\db\ActiveRecord
 {
+    
+    const TYPE_HOME = 1;
+    const TYPE_WORK = 2;
+
     /**
      * @inheritdoc
      */
@@ -28,7 +32,7 @@ class Phone extends \yii\db\ActiveRecord
     {
         return [
             [['type'], 'integer'],
-            [['number'], 'string', 'max' => 10],
+            [['number'], 'string', 'max' => 14],
         ];
     }
 

@@ -27,7 +27,7 @@ class AbroadTravel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['visa_type'], 'integer'],
+            [['visa_type'], 'string', 'max' => 40],
             [['country'], 'string', 'max' => 20],
         ];
     }

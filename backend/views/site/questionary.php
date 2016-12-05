@@ -6,6 +6,7 @@ use backend\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
+use yii\helpers\Json;
 
 ?>
 <div class="row">
@@ -32,16 +33,14 @@ use yii\helpers\Url;
             </div>
             <div class="x_content">
                 <br>
+                
+
+
                 <?php $form = \yii\widgets\ActiveForm::begin(
                     [ 
                         'options' => [
                             'class' => 'form-horizontal form-label-left input_mask'
                         ],
-                        'fieldConfig' => [
-                            'options' => [
-                                'tag' => false
-                            ],
-                        ]
                     ]
                     ); 
                 ?>
@@ -152,17 +151,17 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Домашний</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'home_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Мобильный</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'mobile_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Другой</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'another_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[other]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -173,17 +172,17 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Номер</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'passport_number') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'card[name]') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Кем выдано</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'issued_by') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'card[issued_by]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Когда выдано</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'issued_date', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'card[issued_date]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -195,33 +194,33 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'inter_passport_number') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[name]') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Кем выдан</label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'inter_issued_by') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_by]') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Период действия</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'inter_exp') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[date]') ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Где выдан, страна</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'inter_issued_country') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_country') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Область</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'inter_issued_region') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_region]') ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Город</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'inter_issued_city') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_city]') ?>
                                     </div>
                                 </div>
                             </div>
@@ -233,57 +232,57 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О. папы (даже если умер или не живёт с вами)</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'father_fullname') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][fullname]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дом. адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'father_home_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][address][home]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Домашний телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'father_home_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Рабочий телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'father_work_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][work]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'father_birthday', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][birthday]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О. мамы (даже если умерла или не живёт с вами)</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'mother_fullname') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][fullname]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дом. адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'mother_home_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][address][home]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Домашний телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'mother_home_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Рабочий телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'mother_home_phone', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][work]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'mother_birthday', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][birthday]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -293,7 +292,9 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'bro_and_sis_fullname[]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'siblines[0][fullname]') ?>
+            
+                                 
                                 </div>
                             </div>
                         </fieldset>
@@ -307,23 +308,23 @@ use yii\helpers\Url;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_fullname[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][person][fullname]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_address[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][address][home]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_city_phone[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][city]') ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_mobile_phone[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][mobile]') ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -332,23 +333,23 @@ use yii\helpers\Url;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_fullname[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'person[second][fullname]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_address[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][address][home]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_city_phone[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][home]') ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'contact_mobile_phone[]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][mobile]') ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -384,48 +385,48 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Название</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_name') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[name]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[address][official]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_tel') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phone][work]') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Факс</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_fax') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phone][fax]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Курс</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_course') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[course]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Факультет</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_faculty') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[department]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Группа</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_group') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[group]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И. декана
-                                    <input type="checkbox" name="Summary[un_isdean]" class="js-switch" data-switchery="true"> заместителя</label>
+                                    <input type="checkbox" name="Summary[university][depdean_fullname]" class="js-switch" data-switchery="true"> заместителя</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'un_dean_fullname') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[dean_fullname]') ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -436,13 +437,13 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_number') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[number]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[address][official]') ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -450,11 +451,11 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">C</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_from') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_start]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">По</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school_to') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_finish]', ['data-inputmask' => "'mask' : '99/99/9999'"] ) ?>
                                     </div>
                                 </div>
                             </fieldset>
@@ -466,13 +467,13 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_number') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[number]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[address][official]') ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -480,11 +481,11 @@ use yii\helpers\Url;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">C</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_from') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[educ_start]') ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">По</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college_to') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[educ_finish]') ?>
                                     </div>
                                 </div>
                             </fieldset>
@@ -504,23 +505,23 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Название компании</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'company_name') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'jobs[0][company_name]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Должность</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'position') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'jobs[0][position]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Период с (мм/гггг)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'exp_from') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'jobs[0][start_working]', ['data-inputmask' => "'mask' : '99/9999'"]) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Период по (мм/гггг)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'exp_to') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'jobs[0][finish_working]' , ['data-inputmask' => "'mask' : '99/9999'"]) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -529,13 +530,13 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые вакансии (Кем бы хотели работать в США)</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?=  ActiveFormHelper::textWithoutLabel($form, $model, 'wish_position') ?>
+                            <?=  ActiveFormHelper::textWithoutLabel($form, $model, 'preferred_job') ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые штат</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'wish_state') ?>
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'preferred_state') ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -545,17 +546,17 @@ use yii\helpers\Url;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_country') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_countries[0][country]') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_visa_type') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_countries[0][visa_type]') ?>
                                 </div>
                             </div>
                             <div id="social-number" class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Social Security number</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'social_security_num') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'social_security_number') ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -564,7 +565,7 @@ use yii\helpers\Url;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">С кем хотите поехать (ФИО)</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'with_go') ?>
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'travel_with_whom') ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -572,6 +573,8 @@ use yii\helpers\Url;
                     </div>
 
                 <?php \yii\widgets\ActiveForm::end(); ?>
+      
+
             </div>
         </div>
     </div>
