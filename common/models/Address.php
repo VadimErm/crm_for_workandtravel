@@ -13,8 +13,12 @@ use Yii;
  */
 class Address extends \yii\db\ActiveRecord
 {
-    const TYPE_REAL = 1;
-    const TYPE_PASSPORT = 2; // По прописке
+    const TYPE_HOME = 1;
+    const TYPE_WORK = 2; 
+    const TYPE_REAL = 3;
+    const TYPE_PASSPORT = 4;// По прописке
+
+    
     /**
      * @inheritdoc
      */
