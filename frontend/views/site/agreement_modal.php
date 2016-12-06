@@ -1,3 +1,9 @@
+<!--<script>
+    $('#check').on('change', function (event) {
+        console.log('check');
+    });
+
+</script>-->
 <div class="modal fade" id="agreementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -51,8 +57,19 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary confirm">Принимаю</button>
+                <div class="row  agree">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="check"> Мною внимательно прочитаны все пункты,
+                               я принимаю и соглашаюсь со всеми условиями
+                               программы, готов соблюдать данное соглашение
+                        </label>
+                    </div>
+
+                </div>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary confirm" disabled="disabled">Принимаю</button>
             </div>
         </div>
     </div>

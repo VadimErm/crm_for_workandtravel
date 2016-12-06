@@ -30,6 +30,7 @@ class CustomAsset extends AssetBundle
         'js/dropzone.js',
         'js/yii.activeForm.js',
 
+
       //'js/dataTables.js'
     ];
 
