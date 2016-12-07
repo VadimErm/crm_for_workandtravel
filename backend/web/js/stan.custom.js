@@ -25,17 +25,17 @@
         Stan.Travel.addField();
     });
 
-    $('#reset-password-form button').on('click',function (event){
-        event.preventDefault();
-        loadAgreement('#reset-password-form');
-    });
+
 
 
 
 
 })(jQuery);
 
-
+$('#reset-password-form button').on('click',function (event){
+    event.preventDefault();
+    loadAgreement('#reset-password-form');
+});
 
 $(document).on('click', '#check', function(event){
     if ($(event.currentTarget).is(':checked')) {

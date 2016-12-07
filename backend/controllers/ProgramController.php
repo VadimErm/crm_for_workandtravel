@@ -3,18 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Content;
-//use yii\web\Controller;
+use common\models\Program;
+use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\data\ActiveDataProvider;
-
 
 /**
- * ContentController implements the CRUD actions for Content model.
+ * ProgramController implements the CRUD actions for Program model.
  */
-class ContentController extends BackendController
+class ProgramController extends BackendController
 {
     /**
      * @inheritdoc
@@ -28,7 +27,6 @@ class ContentController extends BackendController
                     'delete' => ['POST'],
                 ],
             ],
-
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -43,17 +41,13 @@ class ContentController extends BackendController
     }
 
     /**
-     * Lists all Content models.
+     * Lists all Program models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Content::find(),
-            'pagination' => [
-                'pageSize' => 10
-            ]
-
+            'query' => Program::find(),
         ]);
 
         return $this->render('index', [
@@ -62,7 +56,7 @@ class ContentController extends BackendController
     }
 
     /**
-     * Displays a single Content model.
+     * Displays a single Program model.
      * @param integer $id
      * @return mixed
      */
@@ -74,13 +68,13 @@ class ContentController extends BackendController
     }
 
     /**
-     * Creates a new Content model.
+     * Creates a new Program model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionAdd()
     {
-        $model = new Content();
+        $model = new Program();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,7 +86,7 @@ class ContentController extends BackendController
     }
 
     /**
-     * Updates an existing Content model.
+     * Updates an existing Program model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +105,7 @@ class ContentController extends BackendController
     }
 
     /**
-     * Deletes an existing Content model.
+     * Deletes an existing Program model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +118,15 @@ class ContentController extends BackendController
     }
 
     /**
-     * Finds the Content model based on its primary key value.
+     * Finds the Program model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Content the loaded model
+     * @return Program the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Content::findOne($id)) !== null) {
+        if (($model = Program::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

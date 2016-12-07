@@ -3,18 +3,20 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Content;
-//use yii\web\Controller;
+use common\models\Agreement;
+use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\data\ActiveDataProvider;
+use common\models\Program;
+use yii\helpers\ArrayHelper;
 
 
 /**
- * ContentController implements the CRUD actions for Content model.
+ * AgreementController implements the CRUD actions for Agreement model.
  */
-class ContentController extends BackendController
+class AgreementController extends BackendController
 {
     /**
      * @inheritdoc
@@ -28,7 +30,6 @@ class ContentController extends BackendController
                     'delete' => ['POST'],
                 ],
             ],
-
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -43,18 +44,15 @@ class ContentController extends BackendController
     }
 
     /**
-     * Lists all Content models.
+     * Lists all Agreement models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Content::find(),
-            'pagination' => [
-                'pageSize' => 10
-            ]
-
+            'query' => Agreement::find(),
         ]);
+
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -62,7 +60,7 @@ class ContentController extends BackendController
     }
 
     /**
-     * Displays a single Content model.
+     * Displays a single Agreement model.
      * @param integer $id
      * @return mixed
      */
@@ -74,25 +72,31 @@ class ContentController extends BackendController
     }
 
     /**
-     * Creates a new Content model.
+     * Creates a new Agreement model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Content();
+        $model = new Agreement();
+        $programs = Program::find()->asArray()->all();
+        $data = ArrayHelper::map($programs,'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //var_dump($model);
+            //exit;
             return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'programs' => $data,
             ]);
         }
     }
 
     /**
-     * Updates an existing Content model.
+     * Updates an existing Agreement model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +115,7 @@ class ContentController extends BackendController
     }
 
     /**
-     * Deletes an existing Content model.
+     * Deletes an existing Agreement model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +128,15 @@ class ContentController extends BackendController
     }
 
     /**
-     * Finds the Content model based on its primary key value.
+     * Finds the Agreement model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Content the loaded model
+     * @return Agreement the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Content::findOne($id)) !== null) {
+        if (($model = Agreement::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -63,10 +63,10 @@ class ResetPasswordForm extends Model
         $user->removePasswordResetToken();
 
 
-        $contact = new Contact();
-        $contact->approved = true;
+        /*$contact = new Contact();
+
         $contact->save(false);
-        $contact->link('users', $user);
+        $contact->link('users', $user);*/
 
         return $user->save(false);
     }

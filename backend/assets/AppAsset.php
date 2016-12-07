@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
         'switchery/dist/switchery.min.css',
     ];
     public $js = [
-        'jquery/dist/jquery.min.js',
+        //'jquery/dist/jquery.min.js',
         'jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js',
         'bootstrap/dist/js/bootstrap.min.js',
         'switchery/dist/switchery.min.js',
