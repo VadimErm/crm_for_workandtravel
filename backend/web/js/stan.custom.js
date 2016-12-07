@@ -3,7 +3,7 @@
     
     $(document).ready(function() {
         $(":input").inputmask();
-         
+
     });
 
     $('#add-relatives').on('click', function () {
@@ -65,6 +65,451 @@ $(document).ready(function() {
 
     validation_fields = { 
 
+        "Summary[card][name]":{
+            validator:{
+                required :true,
+                string:{
+                    max: 30
+                },
+                regular :{
+                    reg: /^[A-Z0-9]{1,30}$/,
+                    message: "В поле должны быть токо большие латинские буквы и арабские цифры!"
+                }
+            }
+        },
+
+        "Summary[card][issued_date]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
+                }
+            }
+        },
+
+        "Summary[card][issued_by]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\0-9]{1,60}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
+                }
+            }
+        },
+
+        "Summary[ipassport][name]":{
+            validator:{
+                required :true,
+                string:{
+                    max: 30
+                },
+                regular :{
+                    reg: /^[A-Z0-9]{1,30}$/,
+                    message: "В поле должны быть токо большие латинские буквы и арабские цифры!"
+                }
+            }
+        },
+
+        "Summary[ipassport][issued_by]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[ipassport][date]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[ipassport][issued_region]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[ipassport][issued_country]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[ipassport][issued_city]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        
+        "Summary[parents][father]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[parents][father][address][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[parents][father][phones][work]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[parents][father][phones][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[parents][father][phones][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
+                }
+            }
+        },
+
+        "Summary[parents][mother]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[parents][mother][address][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[parents][mother][phones][work]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[parents][mother][phones][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[parents][mother][phones][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
+                }
+            }
+        },
+
+
+
+        "Summary[persons][first][person][fullname]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[persons][first][address][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[persons][first][phone][city]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+
+
+        "Summary[persons][first][phone][mobile]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[persons][first][person][fullname]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[university][name]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        
+
+        "Summary[university][address][official]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[university][phone][work]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[university][phone][fax]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[university][course]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[0-6]$/,
+                    message: "Только латинские цыфры 1-6!"
+                }
+            }
+        },
+
+        "Summary[university][department]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[university][group]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[university][dean_fullname]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[school][number]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[0-9]{1,3}$/,
+                    message: "Только латинские цыфры 0-9!"
+                }
+            }
+        },
+
+        "Summary[school][address][official]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[school][educ_start]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^\d{4}$/,
+                    message: "Поле должно быть в формате 9999"
+                }
+            }
+        },
+
+        "Summary[school][educ_finish]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^\d{4}$/,
+                    message: "Поле должно быть в формате 9999"
+                }
+            }
+        },
+
+        "Summary[college][number]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[0-9]{1,3}$/,
+                    message: "Только латинские цыфры 0-9!"
+                }
+            }
+        },
+
+        "Summary[college][address][official]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[college][educ_start]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
+                }
+            }
+        },
+
+        "Summary[college][educ_finish]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
+                }
+            }
+        },
+        
+        "Summary[abroad_countries][0][country]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[abroad_countries][0][visa_type]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+
+        "Summary[phones][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+
         "Summary[siblines][0][fullname]":{
             validator:{
                 required :true,
@@ -82,7 +527,7 @@ $(document).ready(function() {
                 },
                 regular :{
                     reg: /^[a-zA-Z\-\s\_0-9]{1,30}$/,
-                
+                    message: "Только латинские буквы, цифры, пробел, дефис и точка!"
                 }
             }
         },
@@ -95,7 +540,7 @@ $(document).ready(function() {
                 },
                 regular :{
                     reg: /^[a-zA-Z\-\s\_.0-9]{1,30}$/,
-
+                    message: "Только латинские буквы, цифры, пробел, дефис и точка!"
                 }
             }
         },
@@ -134,7 +579,6 @@ $(document).ready(function() {
             validator:{
                 required :true,
                 regular :{
-                    //reg: /^[0-2][1-9]|3[01][\/](0[1-9]|1[012])[\/]\d{4}$/,
                     reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
@@ -145,7 +589,6 @@ $(document).ready(function() {
             validator:{
                 required :true,
                 regular :{
-                    //reg: /^[0-2][1-9]|3[01][\/](0[1-9]|1[012])[\/]\d{4}$/,
                     reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
@@ -154,20 +597,22 @@ $(document).ready(function() {
 
     };
 
-
-
-$.each(validation_fields, function( index, value ) {
-    $('[name = "'+index+'"]').on("click", function () {
-      fieldValidation(index, value.validator);
-    });
-});
-
-$('#w0').on("submit", function () {
     $.each(validation_fields, function( index, value ) {
-        fieldValidation(index, value.validator);
+        $('[name = "'+index+'"]').on("click", function () {
+          fieldValidation(index, value.validator);
+      });
     });
+
+
+    $('#w0').on("submit", function () {
+        $.each(validation_fields, function( index, value ) {
+            fieldValidation(index, value.validator);
+        });
+    });
+
 });
    // agreement = null;
+
 
 
 
@@ -213,9 +658,6 @@ function fieldValidation(name, validator) {
     }); 
 }
 
-   
-});
-
 var experienceIndex = 0;
 var abroadCountryIndex = 0;
 var relativeIndex = 0;
@@ -242,17 +684,88 @@ var Stan = {
         },
         addField: function () {
             abroadCountryIndex++;
-            $('#social-number').prepend('<div class="form-group"> ' +
+
+            $('#abroad-travels').append('<div class="form-group"> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label> ' +
                 '<div class="col-md-3 col-sm-3 col-xs-12"> ' +
-                '<input type="text" class="form-control" name="Summary[abroad_countries]['+abroadCountryIndex+'][country]">'+
+                '<div class="form-group field-summary-abroad_countries-'+abroadCountryIndex+'-country" >'+
+                '<input type="text" class="form-control"  id="summary-abroad_countries-'+abroadCountryIndex+'-country"  name="Summary[abroad_countries]['+abroadCountryIndex+'][country]">'+
+                '<div class="help-block"></div>'+
+                '</div>' +
                 '</div> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label> ' +
                 '<div class="col-md-3 col-sm-3 col-xs-12"> ' +
-                '<input type="text" class="form-control" name="Summary[abroad_countries]['+abroadCountryIndex+'][visa_type]"> ' +
-                '</div> ' +
-                '<button type="button" class="btn btn-round delete-travel"><i class="fa fa-times"></i></button></div>');
+                '<div class="form-group field-summary-abroad_countries-'+abroadCountryIndex+'-visa_type" >'+
+                '<input type="text" class="form-control" id="summary-abroad_countries-'+abroadCountryIndex+'-visa_type" name="Summary[abroad_countries]['+abroadCountryIndex+'][visa_type]"> ' +
+                '<div class="help-block"></div>'+
+                '</div>' +
+                '</div>' +
+                '</div>' + 
+                '<button type="button" class="btn btn-round delete-travel"><i class="fa fa-times"></i></button>');
+            
+            /*$('#w0').yiiActiveForm('add', {
+                'id': 'summary-abroad_countries-'+abroadCountryIndex+'-visa_type',
+                'name': 'Summary[abroad_countries]['+abroadCountryIndex+'][visa_type]',
+                'container': '.field-summary-abroad_countries-'+abroadCountryIndex+"-visa_type",
+                'input': '#summary-abroad_countries-'+abroadCountryIndex+"-visa_type",
+                'error': '.help-block',
+                'validate' :  function (attribute, value, messages, deferred, $form) {
+                   yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                   //yii.validation.string(value, messages, {max: "30", tooLong: "Fullname should contain at most 5 characters."});
+                   reg = /^[a-zA-Z\-\s]{1,60}$/;
+                   message = "Только латинские буквы, пробел и дефис!";
+                   yii.validation.regularExpression(value, messages, {pattern: new RegExp(reg), message: message});
 
+               }
+            });*/
+
+            /*$('#w0').yiiActiveForm('add', {
+                'id': 'summary-abroad_countries-'+abroadCountryIndex+'-country',
+                'name': 'Summary[abroad_countries]['+abroadCountryIndex+'][country]',
+                'container': '.field-summary-abroad_countries-'+abroadCountryIndex+"-country",
+                'input': '#summary-abroad_countries-'+abroadCountryIndex+"-country",
+                'error': '.help-block',
+                'validate' :  function (attribute, value, messages, deferred, $form) {
+                   yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                   //yii.validation.string(value, messages, {max: "30", tooLong: "Fullname should contain at most 5 characters."});
+                   reg = /^[a-zA-Z\-\s]{1,60}$/;
+                   message = "Только латинские буквы, пробел и дефис!";
+                   yii.validation.regularExpression(value, messages, {pattern: new RegExp(reg), message: message});
+
+               }
+            });*/
+
+            validations = { 
+
+                ["Summary[abroad_countries]["+abroadCountryIndex+"][visa_type]"]:{
+                    validator:{
+                        required :true,
+                        regular :{
+                            reg:  /^[a-zA-Z\-\s]{1,60}$/,
+                            message: "Только латинские буквы, пробел и дефис!"
+                        }
+                    }
+                },
+
+                ["Summary[abroad_countries]["+abroadCountryIndex+"][country]"]:{
+                    validator:{
+                        required :true,
+                        regular :{
+                            reg:  /^[a-zA-Z\-\s]{1,60}$/,
+                            message: "Только латинские буквы, пробел и дефис!"
+                        }
+                    }
+                }
+            };
+
+            $.each(validations, function( index, value ) {
+                $('[name = "'+index+'"]').on("click", function () {
+                  window.fieldValidation(index, value.validator);
+              });
+            });
+
+            
+            
             $('.delete-travel').on('click', function () {
                 Stan.Travel.deleteField(this);
             });
@@ -268,29 +781,164 @@ var Stan = {
             experienceIndex++;
 
             $('#experience').append('<hr>' +
-                '<div class="form-group"> ' +
+                '<div class="form-group "> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Название компании</label> ' +
                 '<div class="col-md-9 col-sm-9 col-xs-12"> ' +
-                '<input type="text" class="form-control" name="Summary[jobs]['+experienceIndex+'][company_name]">'+
+                '<div class="form-group field-summary-jobs-'+experienceIndex+'-company_name" >'+
+                '<input type="text" class="form-control" id="summary-jobs-'+experienceIndex+'-company_name" name="Summary[jobs]['+experienceIndex+'][company_name]">'+
+                '<div class="help-block"></div>'+
+                '</div>' +
                 '</div> ' +
                 '</div> ' +
                 '<div class="form-group"> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Должность</label> ' +
                 '<div class="col-md-9 col-sm-9 col-xs-12"> ' +
-                '<input type="text" class="form-control" name="Summary[jobs]['+experienceIndex+'][position]"> ' +
+                '<div class="form-group field-summary-jobs-'+experienceIndex+'-position" >'+
+                '<input type="text" class="form-control" id="summary-jobs-'+experienceIndex+'-position" name="Summary[jobs]['+experienceIndex+'][position]"> ' +
+                '<div class="help-block"></div>'+
+                '</div>' +
                 '</div> ' +
                 '</div> ' +
                 '<div class="form-group"> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Период с (мм/гггг)</label> ' +
                 '<div class="col-md-3 col-sm-3 col-xs-12"> ' +
-                '<input type="text" class="form-control" name="Summary[jobs]['+experienceIndex+'][start_working]"> ' +
+                '<div class="form-group field-summary-jobs-'+experienceIndex+'-start_working" >'+
+                '<input type="text" class="form-control" id="summary-jobs-'+experienceIndex+'-start_working" name="Summary[jobs]['+experienceIndex+'][start_working]" data-inputmask="\'mask\' : \'99/9999\'"> ' +
+                '<div class="help-block"></div>'+
+                '</div> ' +
                 '</div> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Период по (мм/гггг)</label> ' +
                 '<div class="col-md-3 col-sm-3 col-xs-12"> ' +
-                '<input type="text" class="form-control" name="Summary[jobs]['+experienceIndex+'][finish_working]"> ' +
+                '<div class="form-group field-summary-jobs-'+experienceIndex+'-finish_working" >'+
+                '<input type="text" class="form-control" id="summary-jobs-'+experienceIndex+'-finish_working" name="Summary[jobs]['+experienceIndex+'][finish_working]" data-inputmask="\'mask\' : \'99/9999\'"> ' +
+                '<div class="help-block"></div>'+
+                '</div> ' +
                 '</div> ' +
                 '</div><button type="button" class="btn btn-round delete-experience"><i class="fa fa-times"></i></button>');
             
+                 
+                 $('#summary-jobs-'+experienceIndex+'-start_working').inputmask();
+                 $('#summary-jobs-'+experienceIndex+'-finish_working').inputmask();
+                 //.inputmask("+7 (999) 999-9999");
+            
+            /*$('#w0').yiiActiveForm('add', {
+                'id': 'summary-jobs-'+experienceIndex+'-company_name',
+                'name': 'Summary[jobs]['+experienceIndex+'][company_name]',
+                'container': '.field-summary-jobs-'+experienceIndex+"-company_name",
+                'input': '#summary-jobs-'+experienceIndex+"-company_name",
+                'error': '.help-block',
+                'validate' :  function (attribute, value, messages, deferred, $form) {
+                   yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                   yii.validation.string(value, messages, {max: "30", tooLong: "Fullname should contain at most 5 characters."});
+                   reg = /^[a-zA-Z\-\s\_.0-9]{1,30}$/;
+                   message = 'pattern!';
+                   yii.validation.regularExpression(value, messages, {pattern: new RegExp(reg), message: message});
+
+                }
+            });
+
+            $('#w0').yiiActiveForm('add', {
+                'id': 'summary-jobs-'+experienceIndex+'-position',
+                'name': 'Summary[jobs]['+experienceIndex+'][position]',
+                'container': '.field-summary-jobs-'+experienceIndex+"-position",
+                'input': '#summary-jobs-'+experienceIndex+"-position",
+                'error': '.help-block',
+                'validate' :  function (attribute, value, messages, deferred, $form) {
+                   yii.validation.required(value, messages, {message: "Position cannot be blank."});
+                   yii.validation.string(value, messages, {max: "30", tooLong: "Position should contain at most 5 characters."});
+                   reg =  /^[a-zA-Z\-\s\_.0-9]{1,30}$/;
+                   message = 'pattern!';
+                   yii.validation.regularExpression(value, messages, {pattern: new RegExp(reg), message: message});
+
+                }
+            });
+
+            $('#w0').yiiActiveForm('add', {
+                'id': 'summary-jobs-'+experienceIndex+'-start_working',
+                'name': 'Summary[jobs]['+experienceIndex+'][start_working]',
+                'container': '.field-summary-jobs-'+experienceIndex+"-start_working",
+                'input': '#summary-jobs-'+experienceIndex+"-start_working",
+                'error': '.help-block',
+                'validate' :  function (attribute, value, messages, deferred, $form) {
+                   yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                   yii.validation.string(value, messages, {max: "30", tooLong: "Position should contain at most 5 characters."});
+                                     
+                   reg = /^(0[1-9]|1[012])[\/]\d{4}$/;
+                   message = "Поле должно быть в формате М/Г!";
+                   
+                   yii.validation.regularExpression(value, messages, {pattern: new RegExp(reg), message: message});
+
+                }
+            });
+
+            $('#w0').yiiActiveForm('add', {
+                'id': 'summary-jobs-'+experienceIndex+'-finish_working',
+                'name': 'Summary[jobs]['+experienceIndex+'][finish_working]',
+                'container': '.field-summary-jobs-'+experienceIndex+"-finish_working",
+                'input': '#summary-jobs-'+experienceIndex+"-finish_working",
+                'error': '.help-block',
+                'validate' :  function (attribute, value, messages, deferred, $form) {
+                   yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                   yii.validation.string(value, messages, {max: "30", tooLong: "Position should contain at most 5 characters."});
+                   
+                   reg = /^(0[1-9]|1[012])[\/]\d{4}$/;
+                   message = "Поле должно быть в формате М/Г!";
+                   
+                   yii.validation.regularExpression(value, messages, {pattern: new RegExp(reg), message: message});
+
+                }
+            });*/
+
+            validations = { 
+
+                ["Summary[jobs]["+experienceIndex+"][company_name]"]:{
+                    validator:{
+                        required :true,
+                        regular :{
+                            reg:  /^[a-zA-Z\-\s\_.0-9]{1,30}$/,
+                            message: "Только латинские буквы, цифры, пробел, дефис и точка!"
+                        }
+                    }
+                },
+
+                ["Summary[jobs]["+experienceIndex+"][position]"]:{
+                    validator:{
+                        required :true,
+                        regular :{
+                            reg:  /^[a-zA-Z\-\s\_.0-9]{1,30}$/,
+                            message: "Только латинские буквы, цифры, пробел, дефис и точка!"
+                        }
+                    }
+                },
+
+                ["Summary[jobs]["+experienceIndex+"][start_working]"]:{
+                    validator:{
+                        required :true,
+                        regular :{
+                            reg:  /^(0[1-9]|1[012])[\/]\d{4}$/,
+                            message: "Поле должно быть в формате М/Г!"
+                        }
+                    }
+                },
+
+                ["Summary[jobs]["+experienceIndex+"][finish_working]"]:{
+                    validator:{
+                        required :true,
+                        regular :{
+                            reg:  /^(0[1-9]|1[012])[\/]\d{4}$/,
+                            message: "Поле должно быть в формате М/Г!"
+                        }
+                    }
+                }
+
+            };
+
+            $.each(validations, function( index, value ) {
+                $('[name = "'+index+'"]').on("click", function () {
+                  window.fieldValidation(index, value.validator);
+              });
+            });
+
             $('.delete-experience').on('click', function () {
                 Stan.Experience.deleteField(this);
             });
