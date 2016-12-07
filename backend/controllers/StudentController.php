@@ -9,6 +9,8 @@ use common\models\User;
 use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
 use yii\web\BadRequestHttpException;
+use common\models\Program;
+use common\models\Agreement;
 
 class StudentController extends BackendController
 {
@@ -48,6 +50,8 @@ class StudentController extends BackendController
     public function actionAdd()
     {
         $model = new ContactForm();
+        $programs = Program::find()->asArray()->all();
+        $data = ArrayHelper::map($programs,'id', 'title');
 
         if ($model->load(\Yii::$app->request->post()) ) {
 
@@ -83,6 +87,7 @@ class StudentController extends BackendController
     
         return $this->render('new', [
             'model' => $model,
+            'data' => $data,
         ]);
     }
 

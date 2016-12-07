@@ -4,6 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
+use kartik\select2\Select2;
 ?>
 
 <h3>Invite student</h3>

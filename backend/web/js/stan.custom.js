@@ -26,10 +26,6 @@
     });
 
 
-
-
-
-
 })(jQuery);
 
 $('#reset-password-form button').on('click',function (event){
