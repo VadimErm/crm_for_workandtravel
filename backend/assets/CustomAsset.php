@@ -11,7 +11,8 @@ class CustomAsset extends AssetBundle
     public $css = [
         'css/maps/jquery-jvectormap-2.0.3.css',
         'css/custom.min.css',
-        'css/dropzone.css'
+        'css/dropzone.css',
+        'css/site.css'
     ];
     public $js = [
         'js/flot/jquery.flot.orderBars.js',
@@ -28,6 +29,7 @@ class CustomAsset extends AssetBundle
         'js/stan.custom.js',
         'js/dropzone.js',
         'js/yii.activeForm.js',
+
 
       //'js/dataTables.js'
     ];

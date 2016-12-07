@@ -105,6 +105,7 @@ class StudentController extends BackendController
             \Yii::$app->session->setFlash('success', 'New password was saved.');
 
             return $this->goHome();
+
         }
 
         return $this->render('resetPassword', [

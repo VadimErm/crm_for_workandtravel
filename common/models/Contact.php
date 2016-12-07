@@ -57,6 +57,7 @@ class Contact extends \yii\db\ActiveRecord
             [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status', 'contract_id', 'work_search'], 'integer'],
             [['fullname', 'another_fullname'], 'string', 'max' => 25],
             [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number'], 'string', 'max' => 20],
+            [['approved'], 'boolean']
         ];
     }
 
@@ -94,6 +95,7 @@ class Contact extends \yii\db\ActiveRecord
             'contract_id' => 'Contract ID',
             'work_search' => 'Work Search',
             'social_security_number' => 'Social Security Number',
+            'approved' => 'Approved'
         ];
     }
 
@@ -117,7 +119,7 @@ class Contact extends \yii\db\ActiveRecord
 
     public function getUsers()
     {
-        return $this->hasMany(User::className(), ['id' => 'person_id'])
+        return $this->hasMany(User::className(), ['id' => 'user_id'])
             ->viaTable('contact_user', ['contact_id' => 'id']);
     }
 

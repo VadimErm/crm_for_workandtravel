@@ -25,25 +25,45 @@
         Stan.Travel.addField();
     });
 
-    var agreement = null;
-    return;
 
+
+
+
+
+})(jQuery);
+
+$('#reset-password-form button').on('click',function (event){
+    event.preventDefault();
+    loadAgreement('#reset-password-form');
+});
+
+$(document).on('click', '#check', function(event){
+    if ($(event.currentTarget).is(':checked')) {
+        $('.confirm').removeAttr("disabled");
+    } else {
+        $('.confirm').attr('disabled', 'disabled');
+    }
+});
+
+
+function loadAgreement (form) {
+    var agreement = null;
     $.ajax({
-        url: '/index.php?r=site/agreement',
+        url: '/site/agreement',
         method: 'GET',
         success: function (response) {
             agreement = new Stan.Modal({
                 id: 'agreementModal',
                 confirmHandler: function () {
-                    Stan.log('Agree');
+                    this.hide();
+                    $(form).submit();
                 },
                 html: response
-            }).show(5000);
+            }).show();
         }
     });
 
-
-})(jQuery);
+}
 
 $(document).ready(function() {
 
@@ -595,6 +615,8 @@ $(document).ready(function() {
     });
 
 });
+   // agreement = null;
+
 
 
 
@@ -1005,12 +1027,27 @@ var Stan = {
             } else {
                 $('#' + id).modal('show');
             }
+
         };
 
-        this.attachConfirm = function () {
-            $('#' + id).find('.confirm').on('click', options.confirmHandler);
+        this.hide = function (delay) {
+
+            if (delay) {
+                setTimeout(function () {
+                    $('#' + id).modal('hide');
+                }, delay)
+            } else {
+                $('#' + id).modal('hide');
+            }
         };
 
-        this.attachConfirm();
+        this.attachConfirm = function (self) {
+            $('#' + id).find('.confirm').on('click', function(){
+                return options.confirmHandler.apply(self);
+            });
+        };
+
+        this.attachConfirm(this);
     }
 };
+

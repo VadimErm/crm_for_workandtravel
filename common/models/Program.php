@@ -40,4 +40,11 @@ class Program extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
+    public function getAgreements()
+    {
+
+        return $this->hasMany(Agreement::className(), ['program_id' => 'id']);
+
+    }
+
 }
