@@ -210,7 +210,7 @@ use yii\helpers\Json;
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Где выдан, страна</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_country') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_country]') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -320,11 +320,11 @@ use yii\helpers\Json;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][city]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][city]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][mobile]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -345,11 +345,11 @@ use yii\helpers\Json;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][home]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][mobile]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -451,11 +451,11 @@ use yii\helpers\Json;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">C</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_start]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_start]') ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">По</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_finish]', ['data-inputmask' => "'mask' : '99/99/9999'"] ) ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_finish]') ?>
                                     </div>
                                 </div>
                             </fieldset>
@@ -540,10 +540,10 @@ use yii\helpers\Json;
                         </div>
                     </div>
                     <div class="form-group">
-                        <fieldset>
+                        <fieldset id="abroad-travels">
                             <legend>Предыдущие поездки за границу</legend>
                             <button id="add-travel" type="button" class="btn btn-round btn-success">+</button>
-                            <div class="form-group">
+                            <div  class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_countries[0][country]') ?>
@@ -553,13 +553,14 @@ use yii\helpers\Json;
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_countries[0][visa_type]') ?>
                                 </div>
                             </div>
+                        </fieldset>
                             <div id="social-number" class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Social Security number</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'social_security_number') ?>
                                 </div>
                             </div>
-                        </fieldset>
+                        
                     </div>
                     <hr>
                     <div class="form-group">
