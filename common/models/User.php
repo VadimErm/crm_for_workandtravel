@@ -7,6 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\models\Agreement;
 
 /**
  * User model
@@ -54,6 +55,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'unique'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['program_id'], 'integer']
         ];
     }
 
@@ -76,10 +78,16 @@ class User extends ActiveRecord implements IdentityInterface
         return isset($userRole->name) ? $userRole->name : null;
     }
 
-     public function getContact()
+    public function getContact()
     {
         return $this->hasMany(Contact::className(), ['id' => 'contact_id'])
             ->viaTable('contact_user', ['user_id' => 'id']);
+    }
+
+    public function getAgreements()
+    {
+        return $this->hasMany(Agreement::className(), ['id' => 'agreement_id'])
+            ->viaTable('user_agreements',['user_id' => 'id']);
     }
 
     /**

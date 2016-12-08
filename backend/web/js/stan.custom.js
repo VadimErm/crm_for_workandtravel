@@ -42,10 +42,11 @@ $(document).on('click', '#check', function(event){
 });
 
 
-function loadAgreement (form) {
+function loadAgreement (form, program_id) {
+    var program_id = program_id || 0;
     var agreement = null;
     $.ajax({
-        url: '/site/agreement',
+        url: '/site/agreement?program_id='+program_id,
         method: 'GET',
         success: function (response) {
             agreement = new Stan.Modal({
@@ -53,6 +54,7 @@ function loadAgreement (form) {
                 confirmHandler: function () {
                     this.hide();
                     $(form).submit();
+                    console.log(response);
                 },
                 html: response
             }).show();

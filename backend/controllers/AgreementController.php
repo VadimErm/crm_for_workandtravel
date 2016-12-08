@@ -82,9 +82,19 @@ class AgreementController extends BackendController
         $programs = Program::find()->asArray()->all();
         $data = ArrayHelper::map($programs,'id', 'title');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //var_dump($model);
-            //exit;
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (empty($model->program_id)) {
+
+                $model->program_id = 0;
+                $model->save();
+
+            } else {
+
+                $model->save();
+
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
 
         } else {
@@ -104,12 +114,15 @@ class AgreementController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $programs = Program::find()->asArray()->all();
+        $data = ArrayHelper::map($programs,'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'data' => $data
             ]);
         }
     }
@@ -122,7 +135,9 @@ class AgreementController extends BackendController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->unlinkAll('users', true);
+        $model->delete();
 
         return $this->redirect(['index']);
     }
@@ -136,7 +151,7 @@ class AgreementController extends BackendController
      */
     protected function findModel($id)
     {
-        if (($model = Agreement::findOne($id)) !== null) {
+        if (($model = Agreement::find()->with('users')->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

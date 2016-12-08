@@ -12,6 +12,7 @@ class ContactForm extends Model
 {
 
     public $email;
+    public $program_id;
 
 
     /**
@@ -25,7 +26,18 @@ class ContactForm extends Model
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
+            [['program_id'], 'integer']
          ];
+    }
+    public function attributeLabels()
+    {
+        return
+        [
+            'program_id' => 'Program'
+
+        ];
+
+
     }
 
 

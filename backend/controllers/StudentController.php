@@ -11,6 +11,7 @@ use backend\models\ResetPasswordForm;
 use yii\web\BadRequestHttpException;
 use common\models\Program;
 use common\models\Agreement;
+use yii\helpers\ArrayHelper;
 
 class StudentController extends BackendController
 {
@@ -60,6 +61,17 @@ class StudentController extends BackendController
             $user = new User;
             $user->username = $model->email;
             $user->email = $model->email;
+
+            if (empty($model->program_id)) {
+
+                $user->program_id = 0;
+
+            } else {
+
+                $user->program_id = (int) $model->program_id;
+
+            }
+
             $user->setPassword($password);
             $user->generateAuthKey();
             if ($user->save()) {

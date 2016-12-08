@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use common\models\Program;
+use common\models\User;
 
 /**
  * This is the model class for table "agreements".
@@ -55,6 +56,7 @@ class Agreement extends \yii\db\ActiveRecord
             'agreement' => 'Agreement',
             'created_at' => 'Created',
             'updated_at' => 'Updated',
+            'program_id' => 'Program'
         ];
     }
 
@@ -63,6 +65,12 @@ class Agreement extends \yii\db\ActiveRecord
 
         return $this->hasOne(Program::className(), ['id' => 'program_id']);
 
+    }
+
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['id' =>  'user_id'])
+            ->viaTable('user_agreements', ['agreement_id' => 'id']);
     }
 
 }

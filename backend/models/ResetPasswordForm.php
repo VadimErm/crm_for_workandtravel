@@ -5,7 +5,7 @@ use yii\base\Model;
 use yii\base\InvalidParamException;
 use common\models\User;
 use common\models\Contact;
-
+use common\models\Agreement;
 /**
  * Password reset form
  */
@@ -61,12 +61,26 @@ class ResetPasswordForm extends Model
         $user = $this->_user;
         $user->setPassword($this->password);
         $user->removePasswordResetToken();
+        $program_id = $user->program_id;
 
+        $agreements = Agreement::find()
+            ->where(['program_id' => $program_id])
+            ->all();
 
-        /*$contact = new Contact();
+        foreach ($agreements as $agreement) {
 
-        $contact->save(false);
-        $contact->link('users', $user);*/
+            if ($agreement->program_id == 0) {
+
+                $user->link('agreements', $agreement, ['approved' => true]);
+
+            } else {
+
+                $user->link('agreements', $agreement, ['approved' => false]);
+
+            }
+
+        }
+
 
         return $user->save(false);
     }

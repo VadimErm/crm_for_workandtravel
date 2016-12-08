@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\ckeditor\CKEditor;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Agreement */
@@ -23,6 +24,12 @@ $this->params['breadcrumbs'][] = 'Update';
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'agreement')->widget(CKEditor::className(), ['options' => ['rows' => 6], 'preset' => 'basic']) ?>
+
+        <?= $form->field($model, 'program_id')->widget(Select2::className(), [
+            'data' => $data,
+            'options' => ['placeholder' => 'Select a program ...'],
+        ])?>
+
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

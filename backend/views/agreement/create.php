@@ -26,10 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'agreement')->widget(CKEditor::className(), ['options' => ['rows' => 6], 'preset' => 'basic']) ?>
 
         <?= $form->field($model, 'program_id')->widget(Select2::className(), [
+
             'data' => $programs,
             'options' => ['placeholder' => 'Select a program ...'],
 
+
         ])?>
+
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
