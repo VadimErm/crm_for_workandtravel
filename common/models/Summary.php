@@ -163,12 +163,16 @@ class Summary extends Model
     {
         return [
         
-           [['fullname'], 'required'],
+           [['fullname', 'kcet_number', 'kcet_date', 'another_fullname', 'firstname_ipass','lastname_ipass',
+            'birth_date', 'birth_country', 'birth_region', 'birth_city','married', 'passport_address', 'real_address',
+            'departure_date', 'arrival_date', 'email', 'skype', 'preferred_job', 'preferred_state',
+            'social_security_number', 'travel_with_whom'], 'required'],
+
            //['siblines', 'string', 'max' => 5],
            //[['siblines'], 'each', 'rule' => ['fullname', 'each', 'rule' => ['string', 'max' => 5]]],
           // ['siblines', 'each', 'rule' =>  ['string', 'max' => 5]],
            //[['siblines'], 'safe'],
-           [['fullname'], 'string', 'max' => 5],
+           [['fullname'], 'string'],
 
         ];
     }

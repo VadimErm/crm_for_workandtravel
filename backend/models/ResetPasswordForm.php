@@ -66,6 +66,8 @@ class ResetPasswordForm extends Model
         $agreements = Agreement::find()
             ->where(['program_id' => $program_id])
             ->all();
+        $agreements[] = Agreement::find()->where(['program_id' =>  0])->one();
+
 
         foreach ($agreements as $agreement) {
 
@@ -80,7 +82,6 @@ class ResetPasswordForm extends Model
             }
 
         }
-
 
         return $user->save(false);
     }

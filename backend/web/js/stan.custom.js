@@ -30,7 +30,7 @@
 
 $('#reset-password-form button').on('click',function (event){
     event.preventDefault();
-    loadAgreement('#reset-password-form');
+    loadDefaultAgreement('#reset-password-form');
 });
 
 $(document).on('click', '#check', function(event){
@@ -42,11 +42,11 @@ $(document).on('click', '#check', function(event){
 });
 
 
-function loadAgreement (form, program_id) {
-    var program_id = program_id || 0;
+function loadDefaultAgreement (form) {
+
     var agreement = null;
     $.ajax({
-        url: '/site/agreement?program_id='+program_id,
+        url: '/admin/agreement-api/get-default',
         method: 'GET',
         success: function (response) {
             agreement = new Stan.Modal({
@@ -595,11 +595,11 @@ $(document).ready(function() {
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
-        },
+        }
 
     };
-
-    $.each(validation_fields, function( index, value ) {
+    //Валидация подуровней
+    /*$.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
       });
@@ -610,10 +610,10 @@ $(document).ready(function() {
         $.each(validation_fields, function( index, value ) {
             fieldValidation(index, value.validator);
         });
-    });
+    });*/
 
 });
-   // agreement = null;
+
 
 
 

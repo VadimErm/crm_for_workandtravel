@@ -6,6 +6,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use backend\assets\CustomAsset;
+
+CustomAsset::register($this);
 
 $this->title = 'Reset password';
 $this->params['breadcrumbs'][] = $this->title;

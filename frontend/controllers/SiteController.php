@@ -166,7 +166,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionAgreement($program_id = 0)
+   /* public function actionAgreement($program_id = 0)
     {
         $agreement = Agreement::findOne(['program_id' => $program_id]);
 
@@ -174,7 +174,7 @@ class SiteController extends Controller
             [
                 'agreement' =>$agreement
             ]);
-    }
+    }*/
 
     public function actionQuestionary()
     {
