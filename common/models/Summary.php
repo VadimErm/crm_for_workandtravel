@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
+use common\models\Address;
+use common\models\Contact;
 
 /**
  * This is the model class for table "contacts".
@@ -52,6 +54,7 @@ class Summary extends Model
     public $birth_city;
     public $birth_region;
     public $married;
+    public $addresses;
 
     public $passport_address;
     public $real_address;
@@ -161,18 +164,28 @@ class Summary extends Model
 
     public function rules()
     {
-        return [
+        return
+        [
         
-           [['fullname', 'kcet_number', 'kcet_date', 'another_fullname', 'firstname_ipass','lastname_ipass',
+           /*[['fullname', 'kcet_number', 'kcet_date', 'another_fullname', 'firstname_ipass','lastname_ipass',
             'birth_date', 'birth_country', 'birth_region', 'birth_city','married', 'passport_address', 'real_address',
             'departure_date', 'arrival_date', 'email', 'skype', 'preferred_job', 'preferred_state',
             'social_security_number', 'travel_with_whom'], 'required'],
 
-           //['siblines', 'string', 'max' => 5],
-           //[['siblines'], 'each', 'rule' => ['fullname', 'each', 'rule' => ['string', 'max' => 5]]],
-          // ['siblines', 'each', 'rule' =>  ['string', 'max' => 5]],
-           //[['siblines'], 'safe'],
-           [['fullname'], 'string'],
+            ['kcet_number', 'match', 'pattern' => '/^[A-Z0-9]{1,}$/'],
+
+            [['kcet_date', 'birth_date', 'departure_date', 'arrival_date'],'match', 'pattern' => '/^[0-3]\d\.[01]\d\.[12][09]\d\d$/'],
+
+            [['fullname', 'another_fullname', 'birth_country', 'birth_region',
+             'birth_city', 'firstname_ipass', 'lastname_ipass', 'married', 'travel_with_whom'], 'match', 'pattern' =>'/^[A-Za-z\s]+$/'],
+
+            [['passport_address', 'real_address', 'preferred_job', 'preferred_state'], 'match', 'pattern' => '/^[^\.\,][A-Za-z\s\.\,]+$/'],
+
+            ['email', 'email'],
+
+            ['skype', 'match', 'pattern' => '/^[a-z][a-z0-9\.,\-_]{5,31}$/i'],
+
+            ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/']*/
 
         ];
     }
@@ -201,14 +214,16 @@ class Summary extends Model
         }
 
         $contact = new Contact();
-
         $contact->load(['Contact' => (array)$this]);
-        // TODO contact save
+        $contact->save();
 
-        $realAddress = new Address();
-        $passportAddress = new Address();
+        $this->saveAddress($contact, $this['addresses']['passport_address'], Address::TYPE_PASSPORT);
+        $this->saveAddress($contact, $this['addresses']['real_address'], Address::TYPE_REAL);
+        //var_dump($address);
+        //exit;
+
         
-        foreach ($this->bro_and_sis_fullname as $key => $sibling) {
+        /*foreach ($this->bro_and_sis_fullname as $key => $sibling) {
             $siblingModel = new Sibling();
             $siblingModel->load(['Sibling' => (array)$sibling]);
             $siblingModel->save();
@@ -248,17 +263,17 @@ class Summary extends Model
 
             //$parentModel->save();
 
-        }
+        }*/
 
         
         //echo "<pre>";
         //var_dump($this->bro_and_sis_fullname);
         //echo "</pre>";
 
-        $realAddress->type = Address::TYPE_REAL;
+       /* $realAddress->type = Address::TYPE_REAL;
         $realAddress->address = $this->real_address;
         $passportAddress->type = Address::TYPE_PASSPORT;
-        $passportAddress->address = $this->passport_address;
+        $passportAddress->address = $this->passport_address;*/
 
 
         // TODO addresses save
@@ -268,5 +283,15 @@ class Summary extends Model
 //        var_dump($contact);
         //var_dump($this);
         return true;
+    }
+
+    protected function saveAddress(Contact $contact, $address, $type)
+    {
+
+         $model = new Address();
+         $model->load(['Address' => array('address' => $address, 'type' => $type)]);
+         $model->save();
+         $contact->link('addresses', $model);
+
     }
 }

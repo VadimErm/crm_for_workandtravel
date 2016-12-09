@@ -13,9 +13,9 @@ use Yii;
  */
 class Address extends \yii\db\ActiveRecord
 {
-    const TYPE_HOME = 1;
-    const TYPE_WORK = 2; 
-    const TYPE_REAL = 3;
+    const TYPE_HOME = 1;//Родителей, прочих лиц
+    const TYPE_OFFICIAL = 2; //Учебных заведений
+    const TYPE_REAL = 3; //Реальный
     const TYPE_PASSPORT = 4;// По прописке
 
     

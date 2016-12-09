@@ -37,7 +37,8 @@ class SiteController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             echo "<pre>";
-            var_dump($model);exit;
+            //var_dump(Yii::$app->request->post());
+            //exit;
             echo "</pre>";
         }
 

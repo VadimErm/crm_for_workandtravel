@@ -57,7 +57,7 @@ class Contact extends \yii\db\ActiveRecord
             [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status', 'contract_id', 'work_search'], 'integer'],
             [['fullname', 'another_fullname'], 'string', 'max' => 25],
             [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number'], 'string', 'max' => 20],
-            [['approved'], 'boolean']
+            //[['approved'], 'boolean']
         ];
     }
 
@@ -102,7 +102,7 @@ class Contact extends \yii\db\ActiveRecord
     public function getAddresses()
     {
         return $this->hasMany(Address::className(), ['id' => 'address_id'])
-            ->viaTable('contact_adress', ['contact_id' => 'id']);
+            ->viaTable('contact_address', ['contact_id' => 'id']);
     }
 
     public function getPhones()

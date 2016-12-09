@@ -65,7 +65,29 @@ function loadDefaultAgreement (form) {
 
 $(document).ready(function() {
 
-    validation_fields = { 
+    /*validation_fields = {
+
+        "Summary[addresses][passport_address]":{
+            validator:{
+                required: true,
+                regular: {
+                    reg: /^[^\.\,][A-Za-z\s\.\,]+$/,
+                    message: "В поле должны быть только латинские буквы, цыфры, точки, запятые "
+
+                }
+            }
+        },
+
+        "Summary[addresses][real_address]":{
+            validator:{
+                required: true,
+                regular: {
+                    reg: /^[^\.\,][A-Za-z\s\.\,]+$/,
+                    message: "В поле должны быть только латинские буквы, цыфры, точки, запятые "
+
+                }
+            }
+        },
 
         "Summary[card][name]":{
             validator:{
@@ -75,7 +97,7 @@ $(document).ready(function() {
                 },
                 regular :{
                     reg: /^[A-Z0-9]{1,30}$/,
-                    message: "В поле должны быть токо большие латинские буквы и арабские цифры!"
+                    message: "В поле должны быть только большие латинские буквы и арабские цифры!"
                 }
             }
         },
@@ -108,7 +130,7 @@ $(document).ready(function() {
                 },
                 regular :{
                     reg: /^[A-Z0-9]{1,30}$/,
-                    message: "В поле должны быть токо большие латинские буквы и арабские цифры!"
+                    message: "В поле должны быть только большие латинские буквы и арабские цифры!"
                 }
             }
         },
@@ -597,9 +619,9 @@ $(document).ready(function() {
             }
         }
 
-    };
+    };*/
     //Валидация подуровней
-    /*$.each(validation_fields, function( index, value ) {
+   /* $.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
       });

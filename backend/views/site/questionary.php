@@ -134,13 +134,13 @@ use yii\helpers\Json;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">По прописке</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'passport_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[passport_address]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Реальный</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'real_address') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[real_address]') ?>
                                 </div>
                             </div>
                         </fieldset>
