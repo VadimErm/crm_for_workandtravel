@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use common\models\Address;
 use common\models\Contact;
+use common\models\ClientParent;
 
 /**
  * This is the model class for table "contacts".
@@ -215,7 +216,15 @@ class Summary extends Model
 
         $contact = new Contact();
         $contact->load(['Contact' => (array)$this]);
-        $contact->save();
+
+        $clientParent = new ClientParent();
+        $clientParent->load(['ClientParent' => ['fullname' => $this['parents']['father'], 'type' => ClientParent::TYPE_FATHER]]);
+        $clientParent->setBirthDate($this['parents']['father']['birth']);
+        $clientParent->save();
+
+        var_dump($clientParent->getBirthDate());
+        exit;
+        //$contact->save();
 
         $this->saveAddress($contact, $this['addresses']['passport_address'], Address::TYPE_PASSPORT);
         $this->saveAddress($contact, $this['addresses']['real_address'], Address::TYPE_REAL);
@@ -292,6 +301,11 @@ class Summary extends Model
          $model->load(['Address' => array('address' => $address, 'type' => $type)]);
          $model->save();
          $contact->link('addresses', $model);
+
+    }
+
+    protected function saveParents ($parents) {
+
 
     }
 }

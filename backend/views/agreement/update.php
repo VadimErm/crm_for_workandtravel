@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dosamigos\ckeditor\CKEditor;
+use dosamigos\tinymce\TinyMce;
 use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
@@ -23,7 +23,18 @@ $this->params['breadcrumbs'][] = 'Update';
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'agreement')->widget(CKEditor::className(), ['options' => ['rows' => 6], 'preset' => 'basic']) ?>
+        <?= $form->field($model, 'agreement')->widget(TinyMce::className(), [
+            'options' => ['rows' => 6],
+            'language' => 'ru',
+            'clientOptions' => [
+                'plugins' => [
+                    "advlist autolink lists link charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table contextmenu paste"
+                ],
+                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            ]
+        ]) ?>
 
         <?= $form->field($model, 'program_id')->widget(Select2::className(), [
             'data' => $data,

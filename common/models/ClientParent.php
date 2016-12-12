@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use common\models\Address;
 
 /**
  * This is the model class for table "client_parents".
@@ -10,7 +11,7 @@ use Yii;
  * @property integer $id
  * @property integer $type
  * @property string $birth
- * @property string $birth_country
+ *
  * @property string $fullname
  */
 class ClientParent extends \yii\db\ActiveRecord
@@ -35,7 +36,7 @@ class ClientParent extends \yii\db\ActiveRecord
         return [
             [['type'], 'integer'],
             [['birth'], 'safe'],
-            [['birth_country', 'fullname'], 'string', 'max' => 20],
+            [['fullname'], 'string', 'max' => 20],
         ];
     }
 
@@ -48,8 +49,25 @@ class ClientParent extends \yii\db\ActiveRecord
             'id' => 'ID',
             'type' => 'Type',
             'birth' => 'Birth',
-            'birth_country' => 'Birth Country',
             'fullname' => 'Fullname',
         ];
+    }
+
+    public function setBirthDate($value)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $value);
+        $this->birth = $date->format('Y-m-d');
+    }
+
+    public function getBirthDate()
+    {
+        $date = \DateTime::createFromFormat('Y-m-d', $this->birth);
+        return date_format($date, 'd/m/Y');
+    }
+
+    public function getAddress()
+    {
+        return $this->hasOne(Address::className(), ['id' => 'address_id'])
+            ->viaTable('parent_address', ['parent_id' => 'id']);
     }
 }

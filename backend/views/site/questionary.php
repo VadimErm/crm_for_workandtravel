@@ -254,7 +254,7 @@ use yii\helpers\Json;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][birthday]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][birth]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -282,7 +282,7 @@ use yii\helpers\Json;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][birthday]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][birth]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -557,7 +557,7 @@ use yii\helpers\Json;
                             <div id="social-number" class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Social Security number</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'social_security_number') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'social_security_number', ['data-inputmask' => "'mask' : '999-99-9999'"]) ?>
                                 </div>
                             </div>
                         
