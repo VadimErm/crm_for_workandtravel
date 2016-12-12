@@ -27,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'options' => ['rows' => 6],
             'language' => 'ru',
             'clientOptions' => [
+                'valid_elements' => '*[*]',
+                'forced_root_block' => "",
                 'plugins' => [
                     "advlist autolink lists link charmap print preview anchor",
                     "searchreplace visualblocks code fullscreen",
