@@ -4,8 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use common\models\Program;
-use common\models\User;
 
 /**
  * This is the model class for table "agreements".

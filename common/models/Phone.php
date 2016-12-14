@@ -16,6 +16,10 @@ class Phone extends \yii\db\ActiveRecord
     
     const TYPE_HOME = 1;
     const TYPE_WORK = 2;
+    const TYPE_MOBILE =3;
+    const TYPE_CITY = 4;
+    const TYPE_OTHER = 5;
+    const TYPE_FAX = 6;
 
     /**
      * @inheritdoc

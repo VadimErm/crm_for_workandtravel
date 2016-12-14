@@ -26,7 +26,7 @@ class Person extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fullname'], 'string', 'max' => 20],
+            [['fullname'], 'string', 'max' => 35],
         ];
     }
 
@@ -39,5 +39,17 @@ class Person extends \yii\db\ActiveRecord
             'id' => 'ID',
             'fullname' => 'Fullname',
         ];
+    }
+
+    public function getAddresses()
+    {
+        return $this->hasOne(Address::className(), ['id' => 'address_id'])
+            ->viaTable('person_address', ['person_id' => 'id']);
+    }
+
+    public function getPhones()
+    {
+        return $this->hasMany(Phone::className(), ['id' => 'phone_id'])
+            ->viaTable('person_phone', ['person_id' => 'id']);
     }
 }

@@ -15,8 +15,8 @@ class m161027_130345_create_colleges_table extends Migration
         $this->createTable('colleges', [
             'id' => $this->primaryKey(),
             'number' => $this->integer(3),
-            'educ_start' => $this->dateTime(),
-            'educ_finish' => $this->dateTime(),
+            'educ_start' => $this->integer(4),
+            'educ_finish' => $this->integer(4),
         ]);
     }
 

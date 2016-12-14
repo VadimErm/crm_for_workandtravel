@@ -28,7 +28,7 @@ class Card extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['issue_date'], 'safe'],
+            [['issued_date'], 'safe'],
             [['name', 'issued_by'], 'string', 'max' => 100],
         ];
     }
@@ -40,9 +40,21 @@ class Card extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'issue_date' => 'Issue Date',
+            'issued_date' => 'Issued Date',
             'name' => 'Name',
             'issued_by' => 'Issued By',
         ];
+    }
+
+    public function setIssuedDate($value)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $value);
+        $this->issued_date = $date->format('Y-m-d');
+    }
+
+    public function getIssuedDate()
+    {
+        $date = \DateTime::createFromFormat('Y-m-d', $this->issued_date);
+        return date_format($date, 'd/m/Y');
     }
 }

@@ -7,6 +7,7 @@ use yii\captcha\Captcha;
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
 use yii\helpers\Json;
+use kartik\select2\Select2;
 
 ?>
 <div class="row">
@@ -59,7 +60,8 @@ use yii\helpers\Json;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата заключения договора</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= $form->field($model, 'kcet_date')->textInput()->label(false) ?>
+                            <?= $form->field($model, 'kcet_date')->textInput(['data-inputmask' => "'mask': '99/99/9999'"])
+                                ->label(false) ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -125,7 +127,13 @@ use yii\helpers\Json;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Семейное положение</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'married') ?>
+                            <?= $form->field($model, 'married')->widget(Select2::className(), [
+
+                                'data' => [0 => 'не женат/не замужем', 1 => 'женат/замужем'],
+                                'options' => ['placeholder' => 'Выберите семейное положение'],
+                                'hideSearch' => true
+
+                            ])->label(false)?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -194,7 +202,7 @@ use yii\helpers\Json;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[name]') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[number]') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -206,7 +214,7 @@ use yii\helpers\Json;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Период действия</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[date]') ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[expired_date]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Где выдан, страна</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
@@ -250,6 +258,10 @@ use yii\helpers\Json;
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][work]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Мобильный телефон</label>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
@@ -277,6 +289,10 @@ use yii\helpers\Json;
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Рабочий телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][work]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                </div>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Мобильный телефон</label>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -308,7 +324,7 @@ use yii\helpers\Json;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][person][fullname]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][fullname]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -320,11 +336,11 @@ use yii\helpers\Json;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][city]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phones][city]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phone][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phones][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -333,7 +349,7 @@ use yii\helpers\Json;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'person[second][fullname]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][fullname]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -345,11 +361,11 @@ use yii\helpers\Json;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phones][home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phone][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phones][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -397,11 +413,11 @@ use yii\helpers\Json;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phone][work]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][work]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Факс</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phone][fax]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][fax]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -495,7 +511,7 @@ use yii\helpers\Json;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Поиск работы</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            с помощью КСЕТ<input type="checkbox" name="Summary[search_work]" class="js-switch" data-switchery="true">самостоятельно
+                            с помощью КСЕТ<input type="checkbox" name="Summary[work_search]" class="js-switch" data-switchery="true">самостоятельно
                         </div>
                     </div>
                     <div class="form-group">
@@ -546,11 +562,11 @@ use yii\helpers\Json;
                             <div  class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_countries[0][country]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_travels[0][country]') ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_countries[0][visa_type]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroad_travels[0][visa_type]') ?>
                                 </div>
                             </div>
                         </fieldset>

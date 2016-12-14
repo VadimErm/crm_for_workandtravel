@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use common\models\Address;
+
 
 /**
  * This is the model class for table "client_parents".
@@ -36,7 +36,7 @@ class ClientParent extends \yii\db\ActiveRecord
         return [
             [['type'], 'integer'],
             [['birth'], 'safe'],
-            [['fullname'], 'string', 'max' => 20],
+            [['fullname'], 'string', 'max' => 35],
         ];
     }
 
@@ -65,9 +65,15 @@ class ClientParent extends \yii\db\ActiveRecord
         return date_format($date, 'd/m/Y');
     }
 
-    public function getAddress()
+    public function getAddresses()
     {
         return $this->hasOne(Address::className(), ['id' => 'address_id'])
             ->viaTable('parent_address', ['parent_id' => 'id']);
+    }
+
+    public function getPhones()
+    {
+        return $this->hasMany(Phone::className(), ['id' => 'phone_id'])
+            ->viaTable('parent_phone', ['parent_id' => 'id']);
     }
 }

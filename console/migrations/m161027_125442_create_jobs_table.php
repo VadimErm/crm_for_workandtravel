@@ -14,10 +14,10 @@ class m161027_125442_create_jobs_table extends Migration
     {
         $this->createTable('jobs', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(50),
-            'position' => $this->string(20),
-            'start_working' => $this->dateTime(),
-            'finish_working' => $this->dateTime(),
+            'company_name' => $this->string(50),
+            'position' => $this->string(50),
+            'start_working' => $this->date(),
+            'finish_working' => $this->date(),
             
         ]);
     }

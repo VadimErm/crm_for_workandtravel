@@ -703,8 +703,9 @@ var Stan = {
     },
     Travel: {
         deleteField: function (element) {
-            Stan.deleteRecursive(element, 5);
-            $(element).parent().remove();
+            Stan.deleteRecursive(element, 1);
+            $(element).remove();
+
         },
         addField: function () {
             abroadCountryIndex++;
@@ -712,15 +713,15 @@ var Stan = {
             $('#abroad-travels').append('<div class="form-group"> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label> ' +
                 '<div class="col-md-3 col-sm-3 col-xs-12"> ' +
-                '<div class="form-group field-summary-abroad_countries-'+abroadCountryIndex+'-country" >'+
-                '<input type="text" class="form-control"  id="summary-abroad_countries-'+abroadCountryIndex+'-country"  name="Summary[abroad_countries]['+abroadCountryIndex+'][country]">'+
+                '<div class="form-group field-summary-abroad_travels-'+abroadCountryIndex+'-country" >'+
+                '<input type="text" class="form-control"  id="summary-abroad_travels-'+abroadCountryIndex+'-country"  name="Summary[abroad_travels]['+abroadCountryIndex+'][country]">'+
                 '<div class="help-block"></div>'+
                 '</div>' +
                 '</div> ' +
                 '<label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label> ' +
                 '<div class="col-md-3 col-sm-3 col-xs-12"> ' +
-                '<div class="form-group field-summary-abroad_countries-'+abroadCountryIndex+'-visa_type" >'+
-                '<input type="text" class="form-control" id="summary-abroad_countries-'+abroadCountryIndex+'-visa_type" name="Summary[abroad_countries]['+abroadCountryIndex+'][visa_type]"> ' +
+                '<div class="form-group field-summary-abroad_travels-'+abroadCountryIndex+'-visa_type" >'+
+                '<input type="text" class="form-control" id="summary-abroad_travels-'+abroadCountryIndex+'-visa_type" name="Summary[abroad_travels]['+abroadCountryIndex+'][visa_type]"> ' +
                 '<div class="help-block"></div>'+
                 '</div>' +
                 '</div>' +
@@ -761,7 +762,7 @@ var Stan = {
 
             validations = { 
 
-                ["Summary[abroad_countries]["+abroadCountryIndex+"][visa_type]"]:{
+                ["Summary[abroad_travels]["+abroadCountryIndex+"][visa_type]"]:{
                     validator:{
                         required :true,
                         regular :{
@@ -771,7 +772,7 @@ var Stan = {
                     }
                 },
 
-                ["Summary[abroad_countries]["+abroadCountryIndex+"][country]"]:{
+                ["Summary[abroad_travels]["+abroadCountryIndex+"][country]"]:{
                     validator:{
                         required :true,
                         regular :{
@@ -1028,7 +1029,7 @@ var Stan = {
                 'validate' :  function (attribute, value, messages, deferred, $form) {
                 console.log(attribute);
                    yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
-                   yii.validation.string(value, messages, {max: "5", tooLong: "Fullname should contain at most 5 characters."});
+                   yii.validation.string(value, messages, {max: "50", tooLong: "Fullname should contain at most 50 characters."});
                 }
             });
 
