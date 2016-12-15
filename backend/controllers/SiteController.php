@@ -35,9 +35,9 @@ class SiteController extends BackendController
 
 //        var_dump(Yii::$app->request->post());exit;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()  ) {
             echo "<pre>";
-            //var_dump(Yii::$app->request->post());
+            //var_dump();
             //exit;
             echo "</pre>";
         }
@@ -55,7 +55,7 @@ class SiteController extends BackendController
                     $view = 'index';
                 } else {
                    $view  = 'questionary';
-                   $model = new Summary; 
+                   $model = new Summary();
                 }
             } else {
                 $view  = 'index';

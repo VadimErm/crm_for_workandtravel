@@ -65,13 +65,13 @@ function loadDefaultAgreement (form) {
 
 $(document).ready(function() {
 
-    /*validation_fields = {
+    validation_fields = {
 
         "Summary[addresses][passport_address]":{
             validator:{
                 required: true,
                 regular: {
-                    reg: /^[^\.\,][A-Za-z\s\.\,]+$/,
+                    reg: /^[^\.\,][A-Za-z\d\s\.\,]+$/,
                     message: "В поле должны быть только латинские буквы, цыфры, точки, запятые "
 
                 }
@@ -82,7 +82,7 @@ $(document).ready(function() {
             validator:{
                 required: true,
                 regular: {
-                    reg: /^[^\.\,][A-Za-z\s\.\,]+$/,
+                    reg: /^[^\.\,][A-Za-z\d\s\.\,]+$/,
                     message: "В поле должны быть только латинские буквы, цыфры, точки, запятые "
 
                 }
@@ -91,12 +91,12 @@ $(document).ready(function() {
 
         "Summary[card][name]":{
             validator:{
-                required :true,
+
                 string:{
                     max: 30
                 },
                 regular :{
-                    reg: /^[A-Z0-9]{1,30}$/,
+                    reg: /^[A-Z0-9]{1,30}$|^$/,
                     message: "В поле должны быть только большие латинские буквы и арабские цифры!"
                 }
             }
@@ -104,9 +104,9 @@ $(document).ready(function() {
 
         "Summary[card][issued_date]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$|^$/,
                     message: "Поле должно быть в формате Д/М/Г!"
                 }
             }
@@ -114,15 +114,15 @@ $(document).ready(function() {
 
         "Summary[card][issued_by]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s\0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\0-9]{1,60}$|^$/,
                     message: "Поле должно быть в формате Д/М/Г!"
                 }
             }
         },
 
-        "Summary[ipassport][name]":{
+        "Summary[ipassport][number]":{
             validator:{
                 required :true,
                 string:{
@@ -145,12 +145,12 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[ipassport][date]":{
+        "Summary[ipassport][expired_date]":{
             validator:{
                 required :true,
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
-                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    message: "Поле должно быть в формате Д/М/Г!"
                 }
             }
         },
@@ -186,11 +186,11 @@ $(document).ready(function() {
         },
 
         
-        "Summary[parents][father]":{
+        "Summary[parents][father][fullname]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s]{1,60}$|^$/,
                     message: "Только латинские буквы, пробел и дефис!"
                 }
             }
@@ -198,9 +198,9 @@ $(document).ready(function() {
 
         "Summary[parents][father][address][home]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$|^$/,
                     message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
                 }
             }
@@ -208,9 +208,9 @@ $(document).ready(function() {
 
         "Summary[parents][father][phones][work]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
@@ -218,29 +218,40 @@ $(document).ready(function() {
 
         "Summary[parents][father][phones][home]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
         },
 
-        "Summary[parents][father][phones][home]":{
+        "Summary[parents][father][phones][mobile]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[parents][father][birth]":{
+            validator:{
+
+            regular :{
+                reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$|^$/,
                     message: "Поле должно быть в формате Д/М/Г!"
-                }
             }
-        },
+        }
+    },
 
-        "Summary[parents][mother]":{
+
+    "Summary[parents][mother][fullname]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s]{1,60}$|^$/,
                     message: "Только латинские буквы, пробел и дефис!"
                 }
             }
@@ -248,9 +259,9 @@ $(document).ready(function() {
 
         "Summary[parents][mother][address][home]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$|^$/,
                     message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
                 }
             }
@@ -258,9 +269,9 @@ $(document).ready(function() {
 
         "Summary[parents][mother][phones][work]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
@@ -268,19 +279,28 @@ $(document).ready(function() {
 
         "Summary[parents][mother][phones][home]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+        "Summary[parents][mother][phones][mobile]":{
+            validator:{
+
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
         },
 
-        "Summary[parents][mother][phones][home]":{
+        "Summary[parents][mother][birth]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
+                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$|^$/,
                     message: "Поле должно быть в формате Д/М/Г!"
                 }
             }
@@ -288,7 +308,7 @@ $(document).ready(function() {
 
 
 
-        "Summary[persons][first][person][fullname]":{
+        "Summary[persons][first][fullname]":{
             validator:{
                 required :true,
                 regular :{
@@ -302,13 +322,25 @@ $(document).ready(function() {
             validator:{
                 required :true,
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$/,
                     message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
                 }
             }
         },
 
-        "Summary[persons][first][phone][city]":{
+        "Summary[persons][first][phones][city]":{
+            validator:{
+
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+
+
+        "Summary[persons][first][phones][mobile]":{
             validator:{
                 required :true,
                 regular :{
@@ -318,24 +350,42 @@ $(document).ready(function() {
             }
         },
 
-
-
-        "Summary[persons][first][phone][mobile]":{
+        "Summary[persons][second][fullname]":{
             validator:{
-                required :true,
-                regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
-                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
-                }
-            }
-        },
-
-        "Summary[persons][first][person][fullname]":{
-            validator:{
-                required :true,
+                required: true,
                 regular :{
                     reg: /^[a-zA-Z\-\s]{1,60}$/,
                     message: "Только латинские буквы, пробел и дефис!"
+                }
+            }
+        },
+
+        "Summary[persons][second][address][home]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$/,
+                    message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
+                }
+            }
+        },
+
+        "Summary[persons][second][phones][city]":{
+            validator:{
+
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
+                }
+            }
+        },
+
+        "Summary[persons][second][phones][mobile]":{
+            validator:{
+                required :true,
+                regular :{
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
         },
@@ -356,13 +406,13 @@ $(document).ready(function() {
             validator:{
                 required :true,
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$/,
                     message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
                 }
             }
         },
 
-        "Summary[university][phone][work]":{
+        "Summary[university][phones][work]":{
             validator:{
                 required :true,
                 regular :{
@@ -372,7 +422,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[university][phone][fax]":{
+        "Summary[university][phones][fax]":{
             validator:{
                 required :true,
                 regular :{
@@ -436,7 +486,7 @@ $(document).ready(function() {
             validator:{
                 required :true,
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$/,
                     message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
                 }
             }
@@ -464,9 +514,9 @@ $(document).ready(function() {
 
         "Summary[college][number]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[0-9]{1,3}$/,
+                    reg: /^[0-9]{1,3}$|^$/,
                     message: "Только латинские цыфры 0-9!"
                 }
             }
@@ -474,9 +524,9 @@ $(document).ready(function() {
 
         "Summary[college][address][official]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s\.0-9]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s\.\,\d]{1,60}$|^$/,
                     message: "Только латинские буквы, цыфры, пробел и дефис и точка!"
                 }
             }
@@ -484,73 +534,65 @@ $(document).ready(function() {
 
         "Summary[college][educ_start]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
-                    message: "Поле должно быть в формате Д/М/Г!"
+                    reg: /^\d{4}$/,
+                    message: "Поле должно быть в формате 9999"
                 }
             }
         },
 
         "Summary[college][educ_finish]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/,
-                    message: "Поле должно быть в формате Д/М/Г!"
+                    reg: /^\d{4}$/,
+                    message: "Поле должно быть в формате 9999"
                 }
             }
         },
         
-        "Summary[abroad_countries][0][country]":{
+        "Summary[abroad_travels][0][country]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s]{1,60}$|^$/,
                     message: "Только латинские буквы, пробел и дефис!"
                 }
             }
         },
 
-        "Summary[abroad_countries][0][visa_type]":{
+        "Summary[abroad_travels][0][visa_type]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[a-zA-Z\-\s]{1,60}$/,
+                    reg: /^[a-zA-Z\-\s]{1,60}$|^$/,
                     message: "Только латинские буквы, пробел и дефис!"
                 }
             }
         },
-
-
-        "Summary[phones][home]":{
-            validator:{
-                required :true,
-                regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
-                    message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
-                }
-            }
-        },
-
 
         "Summary[siblines][0][fullname]":{
             validator:{
-                required :true,
+
                 string:{
-                    max :5
+                    max :35
+                },
+                regular :{
+                    reg: /^[a-zA-Z\-\s]{1,60}$|^$/,
+                    message: "Только латинские буквы, пробел и дефис!"
                 }
             }
         },
 
         "Summary[jobs][0][position]":{
             validator:{
-                required :true,
+
                 string:{
-                    max: 300
+                    max: 30
                 },
                 regular :{
-                    reg: /^[a-zA-Z\-\s\_0-9]{1,30}$/,
+                    reg: /^[a-zA-Z\-\s\_0-9]{1,30}$|^$/,
                     message: "Только латинские буквы, цифры, пробел, дефис и точка!"
                 }
             }
@@ -558,12 +600,12 @@ $(document).ready(function() {
 
         "Summary[jobs][0][company_name]":{
             validator:{
-                required :true,
+
                 string:{
                     max: 30
                 },
                 regular :{
-                    reg: /^[a-zA-Z\-\s\_.0-9]{1,30}$/,
+                    reg: /^[a-zA-Z\-\s\_.0-9]{1,30}$|^$/,
                     message: "Только латинские буквы, цифры, пробел, дефис и точка!"
                 }
             }
@@ -571,9 +613,9 @@ $(document).ready(function() {
 
         "Summary[jobs][0][start_working]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^(0[1-9]|1[012])[\/]\d{4}$/,
+                    reg: /^(0[1-9]|1[012])[\/]\d{4}$|^$/,
                     message: "Поле должно быть в формате М/Г!"
                 }
             }
@@ -581,9 +623,9 @@ $(document).ready(function() {
 
         "Summary[jobs][0][finish_working]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^(0[1-9]|1[012])[\/]\d{4}$/,
+                    reg: /^(0[1-9]|1[012])[\/]\d{4}$|^$/,
                     message: "Поле должно быть в формате М/Г!"
                 }
             }
@@ -591,19 +633,19 @@ $(document).ready(function() {
 
         "Summary[phones][home]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
         },
 
-        "Summary[phones][other]":{
+       "Summary[phones][other]":{
             validator:{
-                required :true,
+
                 regular :{
-                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$/,
+                    reg: /^[\(]\d{3}[\)]\s\d{3}[\-]\d{4}$|^$/,
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
@@ -619,11 +661,12 @@ $(document).ready(function() {
             }
         }
 
-    };*/
+    };
     //Валидация подуровней
-   /* $.each(validation_fields, function( index, value ) {
+    $.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
+
       });
     });
 
@@ -632,7 +675,7 @@ $(document).ready(function() {
         $.each(validation_fields, function( index, value ) {
             fieldValidation(index, value.validator);
         });
-    });*/
+    });
 
 });
 
@@ -656,7 +699,7 @@ function fieldValidation(name, validator) {
         'validate' :  function (attribute, value, messages, deferred, $form) {
 
             if (validator.required == true) {
-                yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                yii.validation.required(value, messages, {message: "Cannot be blank."});
             }
 
             if (typeof(validator.string) === 'object' ) {
@@ -1028,7 +1071,7 @@ var Stan = {
                 'error': '.help-block',
                 'validate' :  function (attribute, value, messages, deferred, $form) {
                 console.log(attribute);
-                   yii.validation.required(value, messages, {message: "Fullname cannot be blank."});
+                   yii.validation.required(value, messages, {message: "Cannot be blank."});
                    yii.validation.string(value, messages, {max: "50", tooLong: "Fullname should contain at most 50 characters."});
                 }
             });

@@ -26,7 +26,7 @@ class Sibling extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fullname'], 'string', 'max' => 30],
+            [['fullname'], 'string', 'max' => 35],
         ];
     }
 

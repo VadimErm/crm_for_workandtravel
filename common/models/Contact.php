@@ -61,10 +61,10 @@ class Contact extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['birth_date', 'departure_date', 'arrival_date', 'created_at', 'updated_at'], 'safe'],
-            [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status',  'work_search', 'married', 'kcet_number'], 'integer'],
-            [['fullname', 'another_fullname'], 'string', 'max' => 35],
-            [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number' ], 'string', 'max' => 20],
+            [['birth_date', 'departure_date', 'arrival_date', 'created_at', 'updated_at', 'work_search'], 'safe'],
+            [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status', 'kcet_number'], 'safe'],
+            [['fullname', 'another_fullname'], 'safe'],
+            [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number' ], 'safe'],
             //[['approved'], 'boolean']
         ];
     }

@@ -32,7 +32,7 @@ class Ipassport extends \yii\db\ActiveRecord
             [['expired_date'], 'safe'],
             [['issued_by'], 'string', 'max' => 100],
             [['number'], 'string', 'max' => 30],
-            [['issued_city', 'issued_region', 'issued_country'], 'string', 'max' => 20],
+            [['issued_city', 'issued_region', 'issued_country'], 'string', 'max' => 35],
         ];
     }
 

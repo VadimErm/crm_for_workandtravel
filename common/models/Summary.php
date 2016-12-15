@@ -91,25 +91,26 @@ class Summary extends Model
         return
         [
         
-           /*[['fullname', 'kcet_number', 'kcet_date', 'another_fullname', 'firstname_ipass','lastname_ipass',
-            'birth_date', 'birth_country', 'birth_region', 'birth_city','married', 'passport_address', 'real_address',
-            'departure_date', 'arrival_date', 'email', 'skype', 'preferred_job', 'preferred_state',
-             'travel_with_whom'], 'required'],
+            [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
+              'birth_date', 'birth_country', 'birth_region', 'birth_city','married',
+              'email', 'skype', 'preferred_job', 'preferred_state'], 'required'],
 
-            ['kcet_number', 'match', 'pattern' => '/^[A-Z0-9]{1,}$/'],
+             ['kcet_number', 'match', 'pattern' => '/^[A-Z0-9]{1,}$/'],
 
-            [['kcet_date', 'birth_date', 'departure_date', 'arrival_date'],'match', 'pattern' => '/^[0-3]\d\.[01]\d\.[12][09]\d\d$/'],
+             [['kcet_date', 'birth_date', 'departure_date', 'arrival_date'],'match', 'pattern' => '/^([0-2][0-9]|[3][01])[\/](0[1-9]|1[012])[\/]\d{4}$/'],
 
-            [['fullname', 'another_fullname', 'birth_country', 'birth_region',
-             'birth_city', 'firstname_ipass', 'lastname_ipass', 'married', 'travel_with_whom'], 'match', 'pattern' =>'/^[A-Za-z\s]+$/'],
+             [['fullname', 'another_fullname', 'birth_country', 'birth_region',
+              'birth_city', 'firstname_ipass', 'lastname_ipass', 'travel_with_whom'], 'match', 'pattern' =>'/^[a-zA-Z\-\s]{1,60}$/'],
 
-            [['passport_address', 'real_address', 'preferred_job', 'preferred_state'], 'match', 'pattern' => '/^[^\.\,][A-Za-z\s\.\,]+$/'],
+             [[ 'preferred_job', 'preferred_state'], 'match', 'pattern' => '/^[^\.\,][A-Za-z\s\.\,]+$/'],
 
-            ['email', 'email'],
+             ['email', 'email'],
 
-            ['skype', 'match', 'pattern' => '/^[a-z][a-z0-9\.,\-_]{5,31}$/i'],
+             ['skype', 'match', 'pattern' => '/^[a-z][a-z0-9\.,\-_]{5,31}$/i', 'message' => 'Только маленькие латинские буквы, цыфры, точка, запятая, дефис, нижний прочерк'],
 
-            ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/']*/
+             ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/'],
+
+             [['work_search'], 'safe']
 
         ];
     }
@@ -137,13 +138,7 @@ class Summary extends Model
             return false;
         }
 
-
         $this->saveContact((array)$this);
-
-
-
-        //var_dump($user);
-        //exit;
 
         return true;
     }
@@ -154,12 +149,14 @@ class Summary extends Model
         $user = User::findOne($user_id);
 
         $contact = new Contact();
+
         $contact->load(['Contact' => $attributes]);
         $contact->setBirthDate($attributes['birth_date']);
         $contact->setKcetDate($attributes['kcet_date']);
         $contact->setDepartureDate($attributes['departure_date']);
         $contact->setArrivalDate($attributes['arrival_date']);
         $contact->work_search = ($attributes['work_search'] !== null) ? 0 : 1;
+
         $contact->save();
         $contact->link('users', $user);
 
@@ -192,7 +189,7 @@ class Summary extends Model
 
          } else {
 
-             return false;
+            return false;
 
          }
 
@@ -207,7 +204,7 @@ class Summary extends Model
             $model->save();
             $activeRecord->link('phones', $model);
 
-        return true;
+            return true;
 
         } else {
 

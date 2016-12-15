@@ -6,7 +6,7 @@ class m161115_154047_kcet_number extends Migration
 {
     public function up()
     {
-        $this->addColumn('{{%contacts}}', 'kcet_number', $this->integer());
+        $this->addColumn('{{%contacts}}', 'kcet_number', $this->string(20));
     }
 
     public function down()
