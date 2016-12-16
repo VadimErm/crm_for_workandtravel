@@ -52,9 +52,6 @@ class Job extends \yii\db\ActiveRecord
     public function setStartWorking($value)
     {
         $date = \DateTime::createFromFormat('m/Y', $value);
-
-        //var_dump($date->format('Y-m-d'));
-        //exit;
         $this->start_working = $date->format('Y-m-d');
     }
 

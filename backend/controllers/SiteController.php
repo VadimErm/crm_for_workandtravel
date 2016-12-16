@@ -44,26 +44,32 @@ class SiteController extends BackendController
 
         $role = \Yii::$app->user->getIdentity()->getRole();
         $modelUser = User::findOne(Yii::$app->user->getId());
+
         $contact = $modelUser
             ->getContact()
             ->select('id')
             ->asArray()
             ->one();
 
-            if ($role == 'student') {
-                if(!empty($contact)) {
-                    $view = 'index';
-                } else {
-                   $view  = 'questionary';
-                   $model = new Summary();
-                }
+        if ($role == 'student') {
+            if(!empty($contact)) {
+
+
+                $model = Summary::getSummary($modelUser->id);
+                //var_dump($model->getBirthDate());
+                //exit;
+                $view = 'viewSummary';
             } else {
-                $view  = 'index';
+                $view  = 'questionary';
+                $model = new Summary();
             }
+        } else {
+            $view  = 'index';
+        }
         
         return $this->render($view , [
-                'model' => $model,
-            ]);
+            'model' => $model,
+        ]);
         
     }
 

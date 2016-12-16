@@ -143,6 +143,22 @@ class Summary extends Model
         return true;
     }
 
+    public static function getSummary($user_id)
+    {
+
+
+        $summary = User::findOne($user_id)->getContact()
+            ->with('addresses', 'phones',
+                    'persons', 'persons.addresses', 'persons.phones', 'abroadTravels', 'siblings',
+                    'jobs', 'parents', 'parents.addresses','parents.phones', 'ipassport',
+                    'school','school.addresses', 'university', 'university.addresses','university.phones',
+                    'college', 'card')
+            ->one();
+        //return $summary->getAddresses()->filterWhere(['type' => Address::TYPE_REAL])->one();
+       return $summary;
+
+    }
+
     protected function saveContact($attributes)
     {
         $user_id = Yii::$app->user->id;
@@ -316,11 +332,9 @@ class Summary extends Model
 
                 $clientParent->type = ClientParent::TYPE_FATHER;
 
-
             } elseif ($key == 'mother') {
 
                 $clientParent->type = ClientParent::TYPE_MOTHER;
-
 
             }
             $clientParent->save();
@@ -332,7 +346,6 @@ class Summary extends Model
         }
 
         return true;
-
 
     }
 

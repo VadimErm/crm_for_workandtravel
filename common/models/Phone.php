@@ -52,9 +52,9 @@ class Phone extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getParents()
+   /* public function getParents()
     {
-        return $this->hasMany(Parent::className(), ['id' => 'parent_id'])
+        return $this->hasMany(ClientParent::className(), ['id' => 'parent_id'])
             ->viaTable('parent_job', ['phone_id' => 'id']);
     }
 
@@ -68,5 +68,5 @@ class Phone extends \yii\db\ActiveRecord
     {
         return $this->hasMany(University::className(), ['id' => 'university_id'])
             ->viaTable('university_job', ['phone_id' => 'id']);
-    }
+    }*/
 }

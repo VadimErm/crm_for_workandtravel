@@ -156,6 +156,8 @@ class Contact extends \yii\db\ActiveRecord
         return date_format($date, 'd/m/Y');
     }
 
+    //Relations
+
     public function getAddresses()
     {
         return $this->hasMany(Address::className(), ['id' => 'address_id'])
@@ -176,7 +178,7 @@ class Contact extends \yii\db\ActiveRecord
 
     public function getUsers()
     {
-        return $this->hasMany(User::className(), ['id' => 'user_id'])
+        return $this->hasOne(User::className(), ['id' => 'user_id'])
             ->viaTable('contact_user', ['contact_id' => 'id']);
     }
 
@@ -200,7 +202,7 @@ class Contact extends \yii\db\ActiveRecord
 
     public function getParents()
     {
-        return $this->hasMany(Person::className(), ['id' => 'parent_id'])
+        return $this->hasMany(ClientParent::className(), ['id' => 'parent_id'])
             ->viaTable('contact_parent', ['contact_id' => 'id']);
     }
 
