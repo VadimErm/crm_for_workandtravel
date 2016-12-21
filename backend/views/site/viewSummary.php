@@ -35,8 +35,6 @@ use kartik\select2\Select2;
             </div>
             <div class="x_content">
                 <br>
-                
-
 
                 <?php $form = \yii\widgets\ActiveForm::begin(
                     [ 
@@ -61,7 +59,7 @@ use kartik\select2\Select2;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата заключения договора</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= $form->field($model, 'kcetdate')->textInput(['disabled' =>'disabled'])
+                            <?= $form->field($model, 'kcet_date')->textInput(['disabled' =>'disabled'])
                                 ->label(false) ?>
                         </div>
                     </div>
@@ -86,7 +84,7 @@ use kartik\select2\Select2;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <?= $form->field($model, 'birthdate')
+                            <?= $form->field($model, 'birth_date')
                                 ->textInput(['disabled' =>'disabled'])
                                 ->label(false)
                             ?>
@@ -143,13 +141,13 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">По прописке</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[0][address]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[passport_address]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Реальный</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[1][address]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[real_address]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -160,17 +158,17 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Домашний</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[0][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[home]', ['disabled' =>'disabled']) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Мобильный</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[1][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[mobile]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Другой</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[2][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[other]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -191,7 +189,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-3">Когда выдано</label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'card[issueddate]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'card[issued_date]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -215,7 +213,7 @@ use kartik\select2\Select2;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Период действия</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[expireddate]', ['disabled' =>'disabled']) ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[expired_date]', ['disabled' =>'disabled']) ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Где выдан, страна</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
@@ -241,65 +239,65 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О. папы (даже если умер или не живёт с вами)</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][fullname]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][fullname]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дом. адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][addresses][address]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][addresses][home]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Домашний телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][phones][0][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][home]', ['disabled' =>'disabled']) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Рабочий телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][phones][1][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][work]', ['disabled' =>'disabled']) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Мобильный телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][phones][2][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][phones][mobile]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][birthdate]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][birth]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О. мамы (даже если умерла или не живёт с вами)</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[1][fullname]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][fullname]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дом. адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[1][addresses][address]',  ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][addresses][home]',  ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Домашний телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[1][phones][0][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][home]', ['disabled' =>'disabled']) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Рабочий телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][phones][1][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][work]', ['disabled' =>'disabled']) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Мобильный телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[0][phones][2][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][phones][mobile]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения (д/м/г)</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[1][birthdate]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][birth]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -324,23 +322,23 @@ use kartik\select2\Select2;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[0][fullname]',['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][fullname]',['disabled' =>'disabled']) ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[0][addresses][address]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][addresses][home]', ['disabled' =>'disabled']) ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[0][phones][0][number]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phones][city]', ['disabled' =>'disabled']) ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[0][phones][1][number]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phones][mobile]', ['disabled' =>'disabled']) ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -349,23 +347,23 @@ use kartik\select2\Select2;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[0][fullname]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][fullname]', ['disabled' =>'disabled']) ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[0][addresses][address]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][addresses][home]', ['disabled' =>'disabled']) ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Городской телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[1][phones][0][number]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phones][city]', ['disabled' =>'disabled']) ?>
                                         </div>
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[1][phones][1][number]', ['disabled' =>'disabled']) ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phones][mobile]', ['disabled' =>'disabled']) ?>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -376,11 +374,11 @@ use kartik\select2\Select2;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Желаемая дата вылета из США</label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'departuredate', ['disabled' =>'disabled']) ?>
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'departure_date', ['disabled' =>'disabled']) ?>
                         </div>
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Желаемая дата вылета в США</label>
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'arrivaldate', ['disabled' =>'disabled']) ?>
+                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'arrival_date', ['disabled' =>'disabled']) ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -407,17 +405,17 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[addresses][address]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[addresses][official]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Телефон</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][0][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][work]', ['disabled' =>'disabled']) ?>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Факс</label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][1][number]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][fax]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -459,7 +457,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[addresses][address]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[addresses][official]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -489,7 +487,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[addresses][address]', ['disabled' =>'disabled']) ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[addresses][official]', ['disabled' =>'disabled']) ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -511,13 +509,13 @@ use kartik\select2\Select2;
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Поиск работы</label>
                         <?php if($model->work_search == 1) { ?>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input class="form-control" type="text" value="с помощью КСЕТ" disabled="disabled">
-                                </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input class="form-control" type="text" value="с помощью КСЕТ" disabled="disabled">
+                            </div>
                         <?php } else { ?>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                самостоятельно
-                                </div>
+                                <input class="form-control" type="text" value="самостоятельно" disabled="disabled">
+                            </div>
                         <?php } ?>
                     </div>
                     <div class="form-group">
@@ -539,11 +537,11 @@ use kartik\select2\Select2;
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Период с (мм/гггг)</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, "jobs[$i][startworking]", ['disabled' =>'disabled']) ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, "jobs[$i][start_working]", ['disabled' =>'disabled']) ?>
                                     </div>
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Период по (мм/гггг)</label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, "jobs[$i][finishworking]" , ['disabled' =>'disabled']) ?>
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, "jobs[$i][finish_working]" , ['disabled' =>'disabled']) ?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -565,17 +563,18 @@ use kartik\select2\Select2;
                     <div class="form-group">
                         <fieldset id="abroad-travels">
                             <legend>Предыдущие поездки за границу</legend>
-                            <!-- TODO цыкл вывода-->
-                            <div  class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label>
-                                <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroadTravels[0][country]', ['disabled' =>'disabled']) ?>
+                            <?php for ($i = 0; $i < count($model->abroad_travels); $i++) { ?>
+                                <div  class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Страна</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, "abroad_travels[$i][country]", ['disabled' =>'disabled']) ?>
+                                    </div>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <?= ActiveFormHelper::textWithoutLabel($form, $model, "abroad_travels[$i][visa_type]", ['disabled' =>'disabled']) ?>
+                                    </div>
                                 </div>
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Тип визы</label>
-                                <div class="col-md-3 col-sm-3 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'abroadTravels[0][visa_type]', ['disabled' =>'disabled']) ?>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </fieldset>
                             <div id="social-number" class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Social Security number</label>

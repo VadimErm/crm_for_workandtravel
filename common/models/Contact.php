@@ -176,7 +176,7 @@ class Contact extends \yii\db\ActiveRecord
             ->viaTable('contact_person', ['contact_id' => 'id']);
     }
 
-    public function getUsers()
+    public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id'])
             ->viaTable('contact_user', ['contact_id' => 'id']);

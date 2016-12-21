@@ -35,6 +35,7 @@ class University extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 40],
             [['department', 'dean_fullname'], 'string', 'max' => 35],
             [['group'], 'string', 'max' => 10],
+            [['depdean'], 'safe']
         ];
     }
 

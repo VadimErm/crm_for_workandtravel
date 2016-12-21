@@ -29,7 +29,7 @@ class Job extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['start_working', 'finish_working'], 'safe'],
+            [['start_working', 'finish_working'], 'string', 'max' =>7],
             [['company_name'], 'string', 'max' => 50],
             [['position'], 'string', 'max' => 50],
         ];
@@ -49,27 +49,5 @@ class Job extends \yii\db\ActiveRecord
         ];
     }
 
-    public function setStartWorking($value)
-    {
-        $date = \DateTime::createFromFormat('m/Y', $value);
-        $this->start_working = $date->format('Y-m-d');
-    }
 
-    public function getStartWorking()
-    {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->start_working);
-        return date_format($date, 'm/Y');
-    }
-
-    public function setFinishWorking($value)
-    {
-        $date = \DateTime::createFromFormat('m/Y', $value);
-        $this->finish_working = $date->format('Y-m-d');
-    }
-
-    public function getFinishWorking()
-    {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->finish_working);
-        return date_format($date, 'm/Y');
-    }
 }

@@ -246,7 +246,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дом. адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][address][home]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[father][addresses][home]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -278,7 +278,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Дом. адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][address][home]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'parents[mother][addresses][home]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -308,7 +308,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'siblines[0][fullname]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'siblings[0][fullname]') ?>
             
                                  
                                 </div>
@@ -330,7 +330,7 @@ use kartik\select2\Select2;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][address][home]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][addresses][home]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -355,7 +355,7 @@ use kartik\select2\Select2;
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][address][home]') ?>
+                                            <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][addresses][home]') ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -407,7 +407,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[address][official]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[addresses][official]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -440,7 +440,7 @@ use kartik\select2\Select2;
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И. декана<span class="required">*</span>
-                                    <input type="checkbox" name="Summary[university][depdean_fullname]" class="js-switch" data-switchery="true"> заместителя</label>
+                                    <input type="checkbox" name="Summary[university][depdean]" class="js-switch" data-switchery="true"> заместителя</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[dean_fullname]') ?>
                                 </div>
@@ -459,7 +459,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[address][official]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[addresses][official]') ?>
                                 </div>
                             </div>
                             <fieldset>
@@ -489,7 +489,7 @@ use kartik\select2\Select2;
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[address][official]') ?>
+                                    <?= ActiveFormHelper::textWithoutLabel($form, $model, 'college[addresses][official]') ?>
                                 </div>
                             </div>
                             <fieldset>

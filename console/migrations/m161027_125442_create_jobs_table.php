@@ -16,8 +16,8 @@ class m161027_125442_create_jobs_table extends Migration
             'id' => $this->primaryKey(),
             'company_name' => $this->string(50),
             'position' => $this->string(50),
-            'start_working' => $this->date(),
-            'finish_working' => $this->date(),
+            'start_working' => $this->string(7),
+            'finish_working' => $this->string(7),
             
         ]);
     }

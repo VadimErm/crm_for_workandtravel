@@ -55,14 +55,21 @@ class ClientParent extends \yii\db\ActiveRecord
 
     public function setBirthDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->birth = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->birth = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->birth = null;
+        }
+
     }
 
     public function getBirthDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->birth);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->birth)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->birth), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 
     public function getAddresses()

@@ -67,7 +67,7 @@ $(document).ready(function() {
 
     validation_fields = {
 
-        "Summary[addresses][passport_address]":{
+       /* "Summary[addresses][passport_address]":{
             validator:{
                 required: true,
                 regular: {
@@ -572,7 +572,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[siblines][0][fullname]":{
+        "Summary[siblings][0][fullname]":{
             validator:{
 
                 string:{
@@ -659,11 +659,11 @@ $(document).ready(function() {
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
-        }
+        }*/
 
     };
     //Валидация подуровней
-    $.each(validation_fields, function( index, value ) {
+   /* $.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
 
@@ -675,7 +675,7 @@ $(document).ready(function() {
         $.each(validation_fields, function( index, value ) {
             fieldValidation(index, value.validator);
         });
-    });
+    });*/
 
 });
 
@@ -1043,11 +1043,11 @@ var Stan = {
             label.className = 'control-label col-md-3 col-sm-3 col-xs-12';
             label.innerText = 'Ф.И.О';
             div1.className = 'col-md-9 col-sm-9 col-xs-12';                
-            div2.className = 'form-group field-summary-siblines-'+relativeIndex+' required';
+            div2.className = 'form-group field-summary-siblings-'+relativeIndex+' required';
             div3.className = 'help-block';
             input.setAttribute('type', 'text');
-            input.setAttribute('name', 'Summary[siblines]['+relativeIndex+'][fullname]');
-            input.setAttribute('id', 'summary-siblines-'+relativeIndex);
+            input.setAttribute('name', 'Summary[siblings]['+relativeIndex+'][fullname]');
+            input.setAttribute('id', 'summary-siblings-'+relativeIndex);
             input.className = 'form-control';
             
             
@@ -1064,10 +1064,10 @@ var Stan = {
             formGroup.parentNode.insertBefore(deleteBtn, formGroup.nextSibling);
             
             $('#w0').yiiActiveForm('add', {
-                'id': 'summary-siblines-'+relativeIndex,
-                'name': 'Summary[siblines]['+relativeIndex+'][fullname]',
-                'container': '.field-summary-siblines-'+relativeIndex,
-                'input': '#summary-siblines-'+relativeIndex,
+                'id': 'summary-siblings-'+relativeIndex,
+                'name': 'Summary[siblings]['+relativeIndex+'][fullname]',
+                'container': '.field-summary-siblings-'+relativeIndex,
+                'input': '#summary-siblings-'+relativeIndex,
                 'error': '.help-block',
                 'validate' :  function (attribute, value, messages, deferred, $form) {
                 console.log(attribute);

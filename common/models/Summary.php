@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\db\ActiveRecord;
+use common\helpers\SummaryArrayHelper;
 
 /**
  * This is the model class for table "contacts".
@@ -74,7 +75,7 @@ class Summary extends Model
     // Загран паспорт
     public $ipassport =[];
     // Братья и сестры
-    public $siblines = [];
+    public $siblings = [];
     // Учебные заведения
     public $university = [];
     public $school = [];
@@ -91,7 +92,7 @@ class Summary extends Model
         return
         [
         
-            [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
+           /*[['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
               'birth_date', 'birth_country', 'birth_region', 'birth_city','married',
               'email', 'skype', 'preferred_job', 'preferred_state'], 'required'],
 
@@ -110,7 +111,7 @@ class Summary extends Model
 
              ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/'],
 
-             [['work_search'], 'safe']
+             [['work_search'], 'safe']*/
 
         ];
     }
@@ -131,14 +132,22 @@ class Summary extends Model
         }
     }
 
-    public function save($runValidation = true, $attributes = null)
+    public function save($runValidation = true, $user_id = null, $attributes = null)
     {
         if ($runValidation && !$this->validate($attributes)) {
             Yii::info('Model not inserted due to validation error.', __METHOD__);
             return false;
         }
+        //$this->load(['Summary' => (array)$this]);
+        //var_dump($this);
+        //exit;
+        if ($user_id !== null){
 
-        $this->saveContact((array)$this);
+            $this->saveContact((array)$this, $user_id);
+
+        } else {
+            $this->saveContact((array)$this);
+        }
 
         return true;
     }
@@ -146,60 +155,115 @@ class Summary extends Model
     public static function getSummary($user_id)
     {
 
-
         $summary = User::findOne($user_id)->getContact()
             ->with('addresses', 'phones',
                     'persons', 'persons.addresses', 'persons.phones', 'abroadTravels', 'siblings',
                     'jobs', 'parents', 'parents.addresses','parents.phones', 'ipassport',
                     'school','school.addresses', 'university', 'university.addresses','university.phones',
-                    'college', 'card')
-            ->one();
-        //return $summary->getAddresses()->filterWhere(['type' => Address::TYPE_REAL])->one();
-       return $summary;
+                    'college','college.addresses', 'card')
+            ->asArray()->one();
+
+        $contact = User::findOne($user_id)->contact;
+        //var_dump($summary);exit;
+
+        $model = new Summary();
+        $model->load(['Summary' => $summary]);
+        $model->kcet_date = $contact->getKcetDate();
+        $model->birth_date = $contact->getBirthDate();
+        $model->departure_date= $contact->getDepartureDate();
+        $model->arrival_date = $contact->getArrivalDate();
+        $model->addresses = SummaryArrayHelper::map($summary['addresses'], ['passport_address', 'real_address'], 'address');
+        $model->phones = SummaryArrayHelper::map($summary['phones'], ['home','mobile', 'other'], 'number');
+        $model->parents = SummaryArrayHelper::map($summary['parents'], ['father', 'mother'], ['fullname']);
+        $model->parents['father']['birth'] = $contact->parents[0]->getBirthDate();
+        $model->parents['father']['addresses']['home']= $summary['parents'][0]['addresses']['address'];
+        $model->parents['father']['phones'] = SummaryArrayHelper::map($summary['parents'][0]['phones'], ['home','work','mobile'], 'number');
+        $model->parents['mother']['addresses']['home']= $summary['parents'][1]['addresses']['address'];
+        $model->parents['mother']['phones'] = SummaryArrayHelper::map($summary['parents'][1]['phones'], ['home','work','mobile'], 'number');
+        $model->parents['mother']['birth'] = $contact->parents[1]->getBirthDate();
+        $model->university['addresses'] = [];
+        $model->university['addresses']['official'] = $summary['university']['addresses']['address'];
+        $model->university['phones'] = SummaryArrayHelper::map($summary['university']['phones'], ['work','fax'], 'number');
+        $model->school['addresses'] = [];
+        $model->school['addresses']['official'] = $summary['school']['addresses']['address'];
+        $model->college['addresses'] = [];
+        $model->college['addresses']['official'] = $summary['college']['addresses']['address'];
+        $model->persons = SummaryArrayHelper::map($summary['persons'], ['first', 'second'], ['fullname']);
+        $model->persons['first']['addresses']['home']= $summary['persons'][0]['addresses']['address'];
+        $model->persons['first']['phones'] = SummaryArrayHelper::map($summary['persons'][0]['phones'], ['city','mobile'], 'number');
+        $model->persons['second']['addresses']['home']= $summary['persons'][1]['addresses']['address'];
+        $model->persons['second']['phones'] = SummaryArrayHelper::map($summary['persons'][1]['phones'], ['city','mobile'], 'number');
+        $model->card['issued_date'] = $contact->card->getIssuedDate();
+        $model->ipassport['expired_date'] = $contact->ipassport->getExpiredDate();
+        $model->abroad_travels = $summary['abroadTravels'];
+
+        return $model;
 
     }
 
-    protected function saveContact($attributes)
+    protected function saveContact($attributes, $user_id = null)
     {
-        $user_id = Yii::$app->user->id;
-        $user = User::findOne($user_id);
-
-        $contact = new Contact();
+        if ($user_id !== null){
+            $user = User::findOne($user_id);
+            $contact = $user->contact;
+            $update = true;
+        } else {
+            $user = User::findOne(Yii::$app->user->id);
+            $contact = new Contact();
+            $update = false;
+        }
 
         $contact->load(['Contact' => $attributes]);
         $contact->setBirthDate($attributes['birth_date']);
         $contact->setKcetDate($attributes['kcet_date']);
         $contact->setDepartureDate($attributes['departure_date']);
         $contact->setArrivalDate($attributes['arrival_date']);
-        $contact->work_search = ($attributes['work_search'] !== null) ? 0 : 1;
+        $contact->work_search = ($attributes['work_search'] == 'on') ? 0 : 1;
 
         $contact->save();
-        $contact->link('users', $user);
 
-        $this->saveAbroadTravels($contact,$attributes['abroad_travels']);
-        $this->saveJobs($contact, $attributes['jobs']);
-        $this->saveCollege($contact,$attributes['college']);
-        $this->saveSchool($contact,$attributes['school']);
-        $this->saveUniversity($contact, $attributes['university']);
-        $this->savePersons($contact, $attributes['persons']);
-        $this->saveSiblings($contact, $attributes['siblines']);
-        $this->saveCard($contact, $attributes['card']);
-        $this->saveIpassport($contact, $attributes['ipassport']);
-        $this->savePhones($contact, $attributes['phones']);
-        $this->saveParents($contact, $attributes['parents']);
-        $this->saveAddress($contact, $attributes['addresses']['passport_address'], Address::TYPE_PASSPORT);
-        $this->saveAddress($contact, $attributes['addresses']['real_address'], Address::TYPE_REAL);
+        if($user_id == null){
+            $contact->link('user', $user);
+        }
+
+        $this->saveAbroadTravels($contact,$attributes['abroad_travels'], $update);
+        $this->saveJobs($contact, $attributes['jobs'], $update);
+        $this->saveCollege($contact,$attributes['college'], $update);
+        $this->saveSchool($contact,$attributes['school'], $update);
+        $this->saveUniversity($contact, $attributes['university'], $update);
+        $this->savePersons($contact, $attributes['persons'], $update);
+        $this->saveSiblings($contact, $attributes['siblings'], $update);
+        $this->saveCard($contact, $attributes['card'], $update);
+        $this->saveIpassport($contact, $attributes['ipassport'], $update);
+        $this->savePhones($contact, $attributes['phones'], $update);
+        $this->saveParents($contact, $attributes['parents'],  $update);
+        $this->saveAddress($contact, $attributes['addresses']['passport_address'], Address::TYPE_PASSPORT, $update);
+        $this->saveAddress($contact, $attributes['addresses']['real_address'], Address::TYPE_REAL, $update);
 
     }
 
-    protected function saveAddress(ActiveRecord $activeRecord, $address, $type)
+    protected function saveAddress(ActiveRecord $activeRecord, $address, $type, $update = false)
     {
          if(!empty($address)) {
 
-            $model = new Address();
+            if($update == false){
+
+                $model = new Address();
+
+            } else {
+
+                $model = $activeRecord->getAddresses()->filterWhere(['type' => $type])->one();
+
+            }
+
             $model->load(['Address' => ['address' => $address, 'type' => $type]]);
             $model->save();
-            $activeRecord->link('addresses', $model);
+
+            if($update == false){
+
+                $activeRecord->link('addresses', $model);
+
+            }
 
             return true;
 
@@ -211,15 +275,26 @@ class Summary extends Model
 
     }
 
-    protected function savePhone(ActiveRecord $activeRecord, $phoneNumber, $type)
+    protected function savePhone(ActiveRecord $activeRecord, $phoneNumber, $type, $update =false)
     {
         if(!empty($phoneNumber)) {
 
-            $model = new Phone();
+            if($update == false){
+
+                $model = new Phone();
+
+            } else {
+
+                $model = $activeRecord->getPhones()->filterWhere(['type' => $type])->one();
+
+            }
+
             $model->load(["Phone" => ['number' => $phoneNumber, 'type' => $type]]);
             $model->save();
-            $activeRecord->link('phones', $model);
 
+            if($update == false){
+                $activeRecord->link('phones', $model);
+            }
             return true;
 
         } else {
@@ -229,54 +304,28 @@ class Summary extends Model
 
     }
 
-    protected function saveCard(Contact $contact, $card)
+    protected function saveCard(Contact $contact, $card, $update = false)
     {
         if(!empty($card)){
 
-            $model = new Card();
+            if($update == false){
+
+                $model = new Card();
+
+            } else {
+
+                $model = $contact->getCard()->one();
+
+            }
+
             $model->load(['Card' =>['name' => $card['name'], 'issued_by' => $card['issued_by']]]);
+
             $model->setIssuedDate($card['issued_date']);
+            //var_dump($model);exit;
             $model->save();
-            $contact->link('card', $model);
 
-            return true;
-
-        } else {
-
-            return false;
-        }
-
-    }
-
-    protected function saveIpassport(Contact $contact, $ipassport)
-    {
-        if(!empty($ipassport)){
-
-            $model = new Ipassport();
-            $model->load(['Ipassport' => $ipassport]);
-            $model->setExpiredDate($ipassport['expired_date']);
-            $model->save();
-            $contact->link('ipassport', $model);
-
-            return true;
-
-        } else {
-
-            return false;
-        }
-
-    }
-
-    protected function saveSiblings(Contact $contact, $siblings)
-    {
-        if(!empty($siblings)) {
-
-            foreach($siblings as $sibling) {
-
-                $model = new Sibling();
-                $model->load(['Sibling' => $sibling]);
-                $model->save();
-                $contact->link('siblings', $model);
+            if($update == false){
+                $contact->link('card', $model);
             }
 
             return true;
@@ -288,28 +337,94 @@ class Summary extends Model
 
     }
 
-    protected function savePhones(ActiveRecord $activeRecord, $phones)
+    protected function saveIpassport(Contact $contact, $ipassport, $update = false)
+    {
+        if(!empty($ipassport)){
+
+            if($update == false){
+
+                $model = new Ipassport();
+
+            } else {
+
+                $model = $contact->getIpassport()->one();
+
+            }
+
+            $model->load(['Ipassport' => $ipassport]);
+            $model->setExpiredDate($ipassport['expired_date']);
+            $model->save();
+
+            if($update == false){
+                $contact->link('ipassport', $model);
+            }
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
+    protected function saveSiblings(Contact $contact, $siblings, $update = false)
+    {
+        if(!empty($siblings)) {
+
+            $i = 0;
+            foreach($siblings as $sibling) {
+
+                if($update == false){
+
+                    $model = new Sibling();
+
+                } else {
+
+                    $model = $contact->getSiblings()->all()[$i];
+                    $i++;
+
+                }
+
+                $model->load(['Sibling' => $sibling]);
+                $model->save();
+                if($update == false){
+                    $contact->link('siblings', $model);
+                }
+
+            }
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
+    protected function savePhones(ActiveRecord $activeRecord, $phones, $update =false)
     {
         foreach($phones as $key => $phone) {
 
             switch($key){
                 case 'home':
-                    $this->savePhone($activeRecord, $phone, Phone::TYPE_HOME);
+                    $this->savePhone($activeRecord, $phone, Phone::TYPE_HOME, $update);
                     break;
                 case 'work':
-                    $this->savePhone($activeRecord, $phone, Phone::TYPE_WORK);
+                    $this->savePhone($activeRecord, $phone, Phone::TYPE_WORK, $update);
                     break;
                 case 'mobile':
-                    $this->savePhone($activeRecord, $phone, Phone::TYPE_MOBILE);
+                    $this->savePhone($activeRecord, $phone, Phone::TYPE_MOBILE, $update);
                     break;
                 case 'city':
-                    $this->savePhone($activeRecord, $phone, Phone::TYPE_CITY);
+                    $this->savePhone($activeRecord, $phone, Phone::TYPE_CITY, $update);
                     break;
                 case 'other':
-                    $this->savePhone($activeRecord, $phone, Phone::TYPE_OTHER);
+                    $this->savePhone($activeRecord, $phone, Phone::TYPE_OTHER, $update);
                     break;
                 case 'fax':
-                    $this->savePhone($activeRecord, $phone, Phone::TYPE_FAX);
+                    $this->savePhone($activeRecord, $phone, Phone::TYPE_FAX, $update);
                     break;
 
             }
@@ -319,29 +434,43 @@ class Summary extends Model
         return true;
     }
 
-    protected function saveParents(Contact $contact, $parents)
+    protected function saveParents(Contact $contact, $parents, $update = false)
     {
 
         foreach ($parents as $key => $parent) {
 
-            $clientParent = new ClientParent();
-            $clientParent->load(['ClientParent' => ['fullname' => $parent['fullname']]]);
-            $clientParent->setBirthDate($parent['birth']);
-
             if ($key == 'father') {
 
-                $clientParent->type = ClientParent::TYPE_FATHER;
+                $type = ClientParent::TYPE_FATHER;
 
             } elseif ($key == 'mother') {
 
-                $clientParent->type = ClientParent::TYPE_MOTHER;
+                $type = ClientParent::TYPE_MOTHER;
 
             }
-            $clientParent->save();
-            $contact->link('parents', $clientParent);
 
-            $this->saveAddress($clientParent, $parent['address']['home'], Address::TYPE_HOME );
-            $this->savePhones($clientParent, $parent['phones']);
+            if($update == false){
+
+                $clientParent = new ClientParent();
+
+            } else {
+
+                $clientParent = $contact->getParents()->filterWhere(['type' => $type])->one();;
+
+            }
+
+            $clientParent->load(['ClientParent' => ['fullname' => $parent['fullname']]]);
+            $clientParent->setBirthDate($parent['birth']);
+            $clientParent->type = $type;
+
+            $clientParent->save();
+
+            if($update == false){
+                $contact->link('parents', $clientParent);
+            }
+
+            $this->saveAddress($clientParent, $parent['addresses']['home'], Address::TYPE_HOME , $update);
+            $this->savePhones($clientParent, $parent['phones'], $update);
 
         }
 
@@ -349,17 +478,32 @@ class Summary extends Model
 
     }
 
-    protected function savePersons(Contact $contact, $persons)
+    protected function savePersons(Contact $contact, $persons, $update= false)
     {
+
+        $i = 0;
         foreach($persons as $person) {
 
-            $model = new Person();
+            if($update == false){
+
+                $model = new Person();
+
+            } else {
+
+                $model = $contact->getPersons()->all()[$i];
+                $i++;
+
+            }
+
             $model->load(['Person' => $person]);
             $model->save();
-            $contact->link('persons', $model);
 
-            $this->saveAddress($model, $person['address']['home'], Address::TYPE_HOME);
-            $this->savePhones($model, $person['phones']);
+            if($update == false){
+                $contact->link('persons', $model);
+            }
+
+            $this->saveAddress($model, $person['addresses']['home'], Address::TYPE_HOME, $update);
+            $this->savePhones($model, $person['phones'], $update);
 
         }
 
@@ -367,55 +511,90 @@ class Summary extends Model
 
     }
 
-    protected function saveUniversity(Contact $contact, $university)
+    protected function saveUniversity(Contact $contact, $university, $update = false)
     {
-        $model = new University();
-        $model->load(['University' => ['name' => $university['name'], 'department' => $university['department'],
-            'group' => $university['group'], 'course' => $university['course']]]);
+        if($update == false){
 
-        if(isset($university['depdean_fullname'])) {
-
-            $model->depdean_fullname = $university['dean_fullname'];
+            $model = new University();
 
         } else {
 
-            $model->dean_fullname = $university['dean_fullname'];
+            $model= $contact->getUniversity()->one();
+
+        }
+
+        $model->load(['University' => $university]);
+
+        if(!empty($university['depdean'])) {
+
+            $model->depdean = true;
+
+        } else {
+
+            $model->depdean = false;
 
         }
 
         $model->save();
-        $contact->link('university', $model);
 
-        $this->saveAddress($model, $university['address']['official'], Address::TYPE_OFFICIAL);
-        $this->savePhones($model, $university['phones']);
+        if($update == false){
+            $contact->link('university', $model);
+        }
+
+        $this->saveAddress($model, $university['addresses']['official'], Address::TYPE_OFFICIAL, $update);
+        $this->savePhones($model, $university['phones'], $update);
 
         return true;
 
     }
 
-    protected function saveSchool(Contact $contact, $school)
+    protected function saveSchool(Contact $contact, $school, $update = false)
     {
+        if($update == false){
 
-        $model = new School();
+            $model = new School();
+
+        } else {
+
+            $model= $contact->getSchool()->one();
+
+        }
+
         $model->load(['School' => $school]);
         $model->save();
-        $contact->link('school', $model);
 
-        $this->saveAddress($model, $school['address']['official'], Address::TYPE_OFFICIAL);
+        if($update == false){
+            $contact->link('school', $model);
+        }
+
+        $this->saveAddress($model, $school['addresses']['official'], Address::TYPE_OFFICIAL, $update);
 
         return true;
     }
 
-    protected function saveCollege(Contact $contact, $college)
+    protected function saveCollege(Contact $contact, $college, $update = false)
     {
         if(!empty($college)) {
 
-            $model = new College();
+            if($update == false){
+
+                $model = new College();
+
+            } else {
+
+                $model= $contact->getCollege()->one();
+
+            }
+
             $model->load(['College' => $college]);
             $model->save();
-            $contact->link('college', $model);
 
-            $this->saveAddress($model, $college['address']['official'], Address::TYPE_OFFICIAL);
+            if($update == false){
+                $contact->link('college', $model);
+            }
+
+
+            $this->saveAddress($model, $college['addresses']['official'], Address::TYPE_OFFICIAL, $update);
 
             return true;
 
@@ -427,18 +606,30 @@ class Summary extends Model
 
     }
 
-    protected function saveJobs(Contact $contact, $jobs)
+    protected function saveJobs(Contact $contact, $jobs, $update = false)
     {
         if(!empty($jobs)) {
 
+            $i = 0;
             foreach($jobs as $job) {
 
-                $model = new Job();
+                if($update == false){
+
+                    $model = new Job();
+
+                } else {
+
+                    $model = $contact->getJobs()->all()[$i];
+                    $i++;
+
+                }
+
                 $model->load(['Job' => $job]);
-                $model->setStartWorking($job['start_working']);
-                $model->setFinishWorking($job['finish_working']);
                 $model->save();
-                $contact->link('jobs', $model);
+                if($update == false){
+                    $contact->link('jobs', $model);
+                }
+
             }
 
             return true;
@@ -450,16 +641,31 @@ class Summary extends Model
 
     }
 
-    protected function saveAbroadTravels(Contact $contact, $abroadTravels)
+    protected function saveAbroadTravels(Contact $contact, $abroadTravels, $update = false)
     {
         if(!empty($abroadTravels)) {
 
+            $i = 0;
             foreach($abroadTravels as $abroadTravel) {
 
-                $model = new AbroadTravel();
+                if($update == false){
+
+                    $model = new AbroadTravel();
+
+                } else {
+
+                    $model = $contact->getAbroadTravels()->all()[$i];
+                    $i++;
+
+                }
+
                 $model->load(['AbroadTravel' => $abroadTravel]);
                 $model->save();
-                $contact->link('abroadTravels', $model);
+
+                if($update == false){
+                    $contact->link('abroadTravels', $model);
+                }
+
             }
 
             return true;

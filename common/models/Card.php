@@ -48,13 +48,20 @@ class Card extends \yii\db\ActiveRecord
 
     public function setIssuedDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->issued_date = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->issued_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->issued_date = null;
+        }
+
     }
 
     public function getIssuedDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->issued_date);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->issued_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->issued_date), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 }
