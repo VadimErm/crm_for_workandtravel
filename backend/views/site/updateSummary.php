@@ -44,19 +44,19 @@ use kartik\select2\Select2;
                     ]);
                 ?>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О.</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О.<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'fullname')->textInput()->label(false); ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер договора с КСЕТ</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер договора с КСЕТ<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'kcet_number')->textInput()->label(false); ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата заключения договора</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата заключения договора<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'kcet_date')->textInput(['data-inputmask' => "'mask': '99/99/9999'"])
                             ->label(false) ?>
@@ -69,19 +69,19 @@ use kartik\select2\Select2;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">First name ( имя как в загранпаспорте)</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">First name ( имя как в загранпаспорте)<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'firstname_ipass')->textInput()->label(false) ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Last name ( фамилия как в загранпаспорте)</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Last name ( фамилия как в загранпаспорте)<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'lastname_ipass')->textInput()->label(false) ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата рождения<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'birth_date')
                             ->textInput(['data-inputmask' => "'mask': '99/99/9999'"])
@@ -94,14 +94,14 @@ use kartik\select2\Select2;
                         <legend class="scheduler-border">Место рождения</legend>
                         <div class="control-group">
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Страна</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Страна<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <?= $form->field($model, 'birth_country')
                                         ->textInput()
                                         ->label(false);
                                     ?>
                                 </div>
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Область</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Область<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <?= $form->field($model, 'birth_region')
                                         ->textInput()
@@ -110,7 +110,7 @@ use kartik\select2\Select2;
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Город</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-3">Город<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                     <?= $form->field($model, 'birth_city')
                                         ->textInput()
@@ -123,7 +123,7 @@ use kartik\select2\Select2;
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Семейное положение</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Семейное положение<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= $form->field($model, 'married')->widget(Select2::className(), [
 
@@ -138,13 +138,13 @@ use kartik\select2\Select2;
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Адрес</legend>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">По прописке</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">По прописке<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[passport_address]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Реальный</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Реальный<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'addresses[real_address]') ?>
                             </div>
@@ -159,7 +159,7 @@ use kartik\select2\Select2;
                             <div class="col-md-3 col-sm-3 col-xs-3">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[home]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                             </div>
-                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Мобильный</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Мобильный<span class="required">*</span></label>
                             <div class="col-md-3 col-sm-3 col-xs-3">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'phones[mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                             </div>
@@ -198,33 +198,33 @@ use kartik\select2\Select2;
                         <legend class="scheduler-border">Заграничный паспорт</legend>
                         <div class="form-group">
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер<span class="required">*</span></label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[number]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Кем выдан</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Кем выдан<span class="required">*</span></label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_by]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Период действия</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Период действия<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[expired_date]', ['data-inputmask' => "'mask' : '99/99/9999'"]) ?>
                                 </div>
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Где выдан, страна</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Где выдан, страна<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_country]') ?>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Область</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Область<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_region]') ?>
                                 </div>
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Город</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Город<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'ipassport[issued_city]') ?>
                                 </div>
@@ -320,13 +320,13 @@ use kartik\select2\Select2;
                             <fieldset>
                                 <legend>1.</legend>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О<span class="required">*</span></label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][fullname]') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][addresses][home]') ?>
                                     </div>
@@ -336,7 +336,7 @@ use kartik\select2\Select2;
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phones][city]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                     </div>
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон<span class="required">*</span></label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[first][phones][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                     </div>
@@ -345,13 +345,13 @@ use kartik\select2\Select2;
                             <fieldset>
                                 <legend>2.</legend>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И.О<span class="required">*</span></label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][fullname]') ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][addresses][home]') ?>
                                     </div>
@@ -361,7 +361,7 @@ use kartik\select2\Select2;
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phones][city]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                     </div>
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон</label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Сотовый телефон<span class="required">*</span></label>
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'persons[second][phones][mobile]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                                     </div>
@@ -382,13 +382,13 @@ use kartik\select2\Select2;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Электронный адрес</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Электронный адрес<span class="required">*</span></label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'email') ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Skype</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Skype<span class="required">*</span></label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'skype') ?>
                     </div>
@@ -397,47 +397,47 @@ use kartik\select2\Select2;
                     <fieldset>
                         <legend>ВУЗ</legend>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Название</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Название<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[name]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[addresses][official]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Телефон</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Телефон<span class="required">*</span></label>
                             <div class="col-md-3 col-sm-3 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][work]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                             </div>
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Факс</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Факс<span class="required">*</span></label>
                             <div class="col-md-3 col-sm-3 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[phones][fax]', ['data-inputmask' => "'mask' : '(999) 999-9999'"]) ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Курс</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Курс<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[course]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Факультет</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Факультет<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[department]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Группа</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Группа<span class="required">*</span></label>
                             <div class="col-md-3 col-sm-3 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'university[group]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И. декана/заместителя
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Ф.И. декана<span class="required">*</span>
                             <?php if ($model->university['depdean'] == 0) { ?>
                                 <input type="checkbox" name="Summary[university][depdean]" class="js-switch" data-switchery="true">
 
@@ -455,13 +455,13 @@ use kartik\select2\Select2;
                     <fieldset>
                         <legend>Средняя школа</legend>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер<span class="required">*</span></label>
                             <div class="col-md-3 col-sm-3 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[number]') ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Адрес<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[addresses][official]') ?>
                             </div>
@@ -469,11 +469,11 @@ use kartik\select2\Select2;
                         <fieldset>
                             <legend>Годы обучения</legend>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">C</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">C<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_start]') ?>
                                 </div>
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">По</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">По<span class="required">*</span></label>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
                                     <?= ActiveFormHelper::textWithoutLabel($form, $model, 'school[educ_finish]') ?>
                                 </div>
@@ -513,7 +513,7 @@ use kartik\select2\Select2;
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Поиск работы</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Поиск работы<span class="required">*</span></label>
 
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             с помощью КСЕТ
@@ -560,13 +560,13 @@ use kartik\select2\Select2;
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые вакансии (Кем бы хотели работать в США)</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые вакансии (Кем бы хотели работать в США)<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?=  ActiveFormHelper::textWithoutLabel($form, $model, 'preferred_job') ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые штат</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Предпочитаемые штат<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <?= ActiveFormHelper::textWithoutLabel($form, $model, 'preferred_state') ?>
                     </div>

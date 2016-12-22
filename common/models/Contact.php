@@ -122,38 +122,57 @@ class Contact extends \yii\db\ActiveRecord
 
     public function setKcetDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->kcet_date = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->kcet_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->kcet_date = null;
+        }
+
     }
 
     public function getKcetDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->kcet_date);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->kcet_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->kcet_date), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 
     public function setDepartureDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->departure_date = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->departure_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->departure_date = null;
+        }
     }
 
     public function getDepartureDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->departure_date);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->departure_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->departure_date), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 
     public function setArrivalDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->arrival_date = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->arrival_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->arrival_date = null;
+        }
     }
 
     public function getArrivalDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->arrival_date);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->arrival_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->arrival_date), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 
     //Relations

@@ -106,8 +106,8 @@ class SiteController extends BackendController
     public function actionViewSummary($user_id)
     {
         $model = Summary::getSummary($user_id);
-        //var_dump($model);
-        //exit;
+       // var_dump($model);
+       // exit;
 
         return $this->render('viewSummary', [
                 'model' =>$model,
@@ -121,13 +121,13 @@ class SiteController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save(true, $user_id)) {
 
-            //var_dump(Yii::$app->request->post()['Summary']);exit;
+            //var_dump($model);exit;
             return $this->redirect(['update-summary', 'user_id' => $user_id]);
 
         } else {
 
         //var_dump($model);exit;
-        return $this->render('updateSummary', [
+            return $this->render('updateSummary', [
                 'model' => $model,
             ]);
         }

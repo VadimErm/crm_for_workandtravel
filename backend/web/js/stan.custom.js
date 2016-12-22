@@ -67,7 +67,7 @@ $(document).ready(function() {
 
     validation_fields = {
 
-       /* "Summary[addresses][passport_address]":{
+       "Summary[addresses][passport_address]":{
             validator:{
                 required: true,
                 regular: {
@@ -196,7 +196,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[parents][father][address][home]":{
+        "Summary[parents][father][addresses][home]":{
             validator:{
 
                 regular :{
@@ -257,7 +257,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[parents][mother][address][home]":{
+        "Summary[parents][mother][addresses][home]":{
             validator:{
 
                 regular :{
@@ -318,7 +318,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[persons][first][address][home]":{
+        "Summary[persons][first][addresses][home]":{
             validator:{
                 required :true,
                 regular :{
@@ -360,7 +360,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[persons][second][address][home]":{
+        "Summary[persons][second][addresses][home]":{
             validator:{
                 required :true,
                 regular :{
@@ -402,7 +402,7 @@ $(document).ready(function() {
 
         
 
-        "Summary[university][address][official]":{
+        "Summary[university][addresses][official]":{
             validator:{
                 required :true,
                 regular :{
@@ -482,7 +482,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[school][address][official]":{
+        "Summary[school][addresses][official]":{
             validator:{
                 required :true,
                 regular :{
@@ -522,7 +522,7 @@ $(document).ready(function() {
             }
         },
 
-        "Summary[college][address][official]":{
+        "Summary[college][addresses][official]":{
             validator:{
 
                 regular :{
@@ -659,11 +659,11 @@ $(document).ready(function() {
                     message: "Поле должно быть в формате (ЧЧЧ)ЧЧЧ-ЧЧЧ!"
                 }
             }
-        }*/
+        }
 
     };
     //Валидация подуровней
-   /* $.each(validation_fields, function( index, value ) {
+    $.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
 
@@ -675,7 +675,7 @@ $(document).ready(function() {
         $.each(validation_fields, function( index, value ) {
             fieldValidation(index, value.validator);
         });
-    });*/
+    });
 
 });
 

@@ -92,7 +92,7 @@ class Summary extends Model
         return
         [
         
-           /*[['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
+           [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
               'birth_date', 'birth_country', 'birth_region', 'birth_city','married',
               'email', 'skype', 'preferred_job', 'preferred_state'], 'required'],
 
@@ -111,7 +111,7 @@ class Summary extends Model
 
              ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/'],
 
-             [['work_search'], 'safe']*/
+             [['work_search'], 'safe']
 
         ];
     }
@@ -244,161 +244,119 @@ class Summary extends Model
 
     protected function saveAddress(ActiveRecord $activeRecord, $address, $type, $update = false)
     {
-         if(!empty($address)) {
 
-            if($update == false){
+        if($update == false){
 
-                $model = new Address();
+            $model = new Address();
 
-            } else {
+        } else {
 
-                $model = $activeRecord->getAddresses()->filterWhere(['type' => $type])->one();
+             $model = $activeRecord->getAddresses()->filterWhere(['type' => $type])->one();
 
-            }
+        }
 
-            $model->load(['Address' => ['address' => $address, 'type' => $type]]);
-            $model->save();
+        $model->load(['Address' => ['address' => $address, 'type' => $type]]);
+        $model->save();
 
-            if($update == false){
+        if($update == false){
 
-                $activeRecord->link('addresses', $model);
+             $activeRecord->link('addresses', $model);
 
-            }
-
-            return true;
-
-         } else {
-
-            return false;
-
-         }
+        }
 
     }
 
     protected function savePhone(ActiveRecord $activeRecord, $phoneNumber, $type, $update =false)
     {
-        if(!empty($phoneNumber)) {
 
-            if($update == false){
+        if($update == false){
 
-                $model = new Phone();
-
-            } else {
-
-                $model = $activeRecord->getPhones()->filterWhere(['type' => $type])->one();
-
-            }
-
-            $model->load(["Phone" => ['number' => $phoneNumber, 'type' => $type]]);
-            $model->save();
-
-            if($update == false){
-                $activeRecord->link('phones', $model);
-            }
-            return true;
+            $model = new Phone();
 
         } else {
 
-            return false;
+            $model = $activeRecord->getPhones()->filterWhere(['type' => $type])->one();
+
+        }
+
+        $model->load(["Phone" => ['number' => $phoneNumber, 'type' => $type]]);
+        $model->save();
+
+        if($update == false){
+            $activeRecord->link('phones', $model);
         }
 
     }
 
     protected function saveCard(Contact $contact, $card, $update = false)
     {
-        if(!empty($card)){
 
-            if($update == false){
+        if($update == false){
 
-                $model = new Card();
-
-            } else {
-
-                $model = $contact->getCard()->one();
-
-            }
-
-            $model->load(['Card' =>['name' => $card['name'], 'issued_by' => $card['issued_by']]]);
-
-            $model->setIssuedDate($card['issued_date']);
-            //var_dump($model);exit;
-            $model->save();
-
-            if($update == false){
-                $contact->link('card', $model);
-            }
-
-            return true;
+            $model = new Card();
 
         } else {
 
-            return false;
+            $model = $contact->getCard()->one();
+
+        }
+
+        $model->load(['Card' =>['name' => $card['name'], 'issued_by' => $card['issued_by']]]);
+        $model->setIssuedDate($card['issued_date']);
+        $model->save();
+
+        if($update == false){
+            $contact->link('card', $model);
         }
 
     }
 
     protected function saveIpassport(Contact $contact, $ipassport, $update = false)
     {
-        if(!empty($ipassport)){
 
-            if($update == false){
+        if($update == false){
 
-                $model = new Ipassport();
-
-            } else {
-
-                $model = $contact->getIpassport()->one();
-
-            }
-
-            $model->load(['Ipassport' => $ipassport]);
-            $model->setExpiredDate($ipassport['expired_date']);
-            $model->save();
-
-            if($update == false){
-                $contact->link('ipassport', $model);
-            }
-
-            return true;
+            $model = new Ipassport();
 
         } else {
 
-            return false;
+            $model = $contact->getIpassport()->one();
+
+        }
+
+        $model->load(['Ipassport' => $ipassport]);
+        $model->setExpiredDate($ipassport['expired_date']);
+        $model->save();
+
+        if($update == false){
+            $contact->link('ipassport', $model);
         }
 
     }
 
     protected function saveSiblings(Contact $contact, $siblings, $update = false)
     {
-        if(!empty($siblings)) {
 
-            $i = 0;
-            foreach($siblings as $sibling) {
+        $i = 0;
+        foreach($siblings as $sibling) {
 
-                if($update == false){
+            if($update == false){
 
-                    $model = new Sibling();
+                $model = new Sibling();
 
-                } else {
+            } else {
 
-                    $model = $contact->getSiblings()->all()[$i];
-                    $i++;
-
-                }
-
-                $model->load(['Sibling' => $sibling]);
-                $model->save();
-                if($update == false){
-                    $contact->link('siblings', $model);
-                }
+                $model = $contact->getSiblings()->all()[$i];
+                $i++;
 
             }
 
-            return true;
+            $model->load(['Sibling' => $sibling]);
+            $model->save();
+            if($update == false){
+                $contact->link('siblings', $model);
+            }
 
-        } else {
-
-            return false;
         }
 
     }
@@ -431,7 +389,7 @@ class Summary extends Model
 
         }
 
-        return true;
+
     }
 
     protected function saveParents(Contact $contact, $parents, $update = false)
@@ -474,7 +432,7 @@ class Summary extends Model
 
         }
 
-        return true;
+
 
     }
 
@@ -507,7 +465,7 @@ class Summary extends Model
 
         }
 
-        return true;
+
 
     }
 
@@ -544,7 +502,7 @@ class Summary extends Model
         $this->saveAddress($model, $university['addresses']['official'], Address::TYPE_OFFICIAL, $update);
         $this->savePhones($model, $university['phones'], $update);
 
-        return true;
+
 
     }
 
@@ -569,110 +527,84 @@ class Summary extends Model
 
         $this->saveAddress($model, $school['addresses']['official'], Address::TYPE_OFFICIAL, $update);
 
-        return true;
+
     }
 
     protected function saveCollege(Contact $contact, $college, $update = false)
     {
-        if(!empty($college)) {
 
-            if($update == false){
+       if($update == false){
 
-                $model = new College();
+            $model = new College();
 
-            } else {
+       } else {
 
-                $model= $contact->getCollege()->one();
+            $model= $contact->getCollege()->one();
 
-            }
+       }
 
-            $model->load(['College' => $college]);
-            $model->save();
+       $model->load(['College' => $college]);
+       $model->save();
 
-            if($update == false){
-                $contact->link('college', $model);
-            }
+       if($update == false){
+            $contact->link('college', $model);
+       }
 
+       $this->saveAddress($model, $college['addresses']['official'], Address::TYPE_OFFICIAL, $update);
 
-            $this->saveAddress($model, $college['addresses']['official'], Address::TYPE_OFFICIAL, $update);
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
 
     }
 
     protected function saveJobs(Contact $contact, $jobs, $update = false)
     {
-        if(!empty($jobs)) {
+        $i = 0;
+        foreach($jobs as $job) {
 
-            $i = 0;
-            foreach($jobs as $job) {
+            if($update == false){
 
-                if($update == false){
+                $model = new Job();
 
-                    $model = new Job();
+            } else {
 
-                } else {
-
-                    $model = $contact->getJobs()->all()[$i];
-                    $i++;
-
-                }
-
-                $model->load(['Job' => $job]);
-                $model->save();
-                if($update == false){
-                    $contact->link('jobs', $model);
-                }
+                $model = $contact->getJobs()->all()[$i];
+                $i++;
 
             }
 
-            return true;
+            $model->load(['Job' => $job]);
+            $model->save();
+            if($update == false){
+                 $contact->link('jobs', $model);
+            }
 
-        } else {
-
-            return false;
         }
 
     }
 
     protected function saveAbroadTravels(Contact $contact, $abroadTravels, $update = false)
     {
-        if(!empty($abroadTravels)) {
 
-            $i = 0;
-            foreach($abroadTravels as $abroadTravel) {
+        $i = 0;
+        foreach($abroadTravels as $abroadTravel) {
 
-                if($update == false){
+            if($update == false){
 
-                    $model = new AbroadTravel();
+                $model = new AbroadTravel();
 
-                } else {
+            } else {
 
-                    $model = $contact->getAbroadTravels()->all()[$i];
-                    $i++;
-
-                }
-
-                $model->load(['AbroadTravel' => $abroadTravel]);
-                $model->save();
-
-                if($update == false){
-                    $contact->link('abroadTravels', $model);
-                }
+                $model = $contact->getAbroadTravels()->all()[$i];
+                $i++;
 
             }
 
-            return true;
+            $model->load(['AbroadTravel' => $abroadTravel]);
+            $model->save();
 
-        } else {
+            if($update == false){
+                $contact->link('abroadTravels', $model);
+            }
 
-            return false;
         }
 
     }
