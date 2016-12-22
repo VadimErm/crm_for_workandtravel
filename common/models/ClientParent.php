@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use common\models\Address;
+
 
 /**
  * This is the model class for table "client_parents".
@@ -36,7 +36,7 @@ class ClientParent extends \yii\db\ActiveRecord
         return [
             [['type'], 'integer'],
             [['birth'], 'safe'],
-            [['fullname'], 'string', 'max' => 20],
+            [['fullname'], 'string', 'max' => 35],
         ];
     }
 
@@ -55,19 +55,32 @@ class ClientParent extends \yii\db\ActiveRecord
 
     public function setBirthDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->birth = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->birth = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->birth = null;
+        }
+
     }
 
     public function getBirthDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->birth);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->birth)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->birth), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 
-    public function getAddress()
+    public function getAddresses()
     {
         return $this->hasOne(Address::className(), ['id' => 'address_id'])
             ->viaTable('parent_address', ['parent_id' => 'id']);
+    }
+
+    public function getPhones()
+    {
+        return $this->hasMany(Phone::className(), ['id' => 'phone_id'])
+            ->viaTable('parent_phone', ['parent_id' => 'id']);
     }
 }

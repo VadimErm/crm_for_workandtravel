@@ -28,7 +28,7 @@ class School extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type'], 'integer'],
+            [['number'], 'integer'],
             [['educ_start', 'educ_finish'], 'safe'],
         ];
     }
@@ -40,9 +40,15 @@ class School extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type' => 'Type',
+            'number' => 'Number',
             'educ_start' => 'Educ Start',
             'educ_finish' => 'Educ Finish',
         ];
+    }
+
+    public function getAddresses()
+    {
+        return $this->hasOne(Address::className(), ['id' => 'address_id'])
+            ->viaTable('school_address', ['school_id' => 'id']);
     }
 }

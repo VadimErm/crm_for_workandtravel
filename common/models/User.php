@@ -80,7 +80,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getContact()
     {
-        return $this->hasMany(Contact::className(), ['id' => 'contact_id'])
+        return $this->hasOne(Contact::className(), ['id' => 'contact_id'])
             ->viaTable('contact_user', ['user_id' => 'id']);
     }
 

@@ -14,10 +14,10 @@ class m161027_113550_create_contacts_table extends Migration
     {
         $this->createTable('contacts', [
             'id' => $this->primaryKey(),
-            'fullname' => $this->string(25),
+            'fullname' => $this->string(35),
             'firstname_ipass' => $this->string(20),
             'lastname_ipass' => $this->string(20),
-            'birth_date' => $this->dateTime(),
+            'birth_date' => $this->date(),
             'birth_country' => $this->string(20),
             'birth_city' => $this->string(20),
             'birth_region' => $this->string(20),
@@ -28,18 +28,18 @@ class m161027_113550_create_contacts_table extends Migration
             'school_id' => $this->integer(),
             'college_id' => $this->integer(),
             'university_id' => $this->integer(),
-            'departure_date' => $this->dateTime(),
-            'arrival_date' => $this->dateTime(),
+            'departure_date' => $this->date(),
+            'arrival_date' => $this->date(),
             'email' => $this->string(20),
             'skype' => $this->string(20),
             'preferred_job' => $this->string(20),
             'preferred_state' => $this->string(20),
             'travel_with_whom' => $this->string(20),
-            'created_at' => $this->dateTime(),
-            'updated_at'=> $this->dateTime(),
+            'created_at' => $this->integer(),
+            'updated_at'=> $this->integer(),
             'status' => $this->integer(1),
             'contract_id' => $this->integer(),
-            'work_search' => $this->integer(),
+            'work_search' => $this->boolean(),
             'social_security_number' => $this->string(20)
         ]);
     }

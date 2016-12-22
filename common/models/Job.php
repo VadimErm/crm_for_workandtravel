@@ -29,9 +29,9 @@ class Job extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['start_working', 'finish_working'], 'safe'],
-            [['title'], 'string', 'max' => 50],
-            [['position'], 'string', 'max' => 20],
+            [['start_working', 'finish_working'], 'string', 'max' =>7],
+            [['company_name'], 'string', 'max' => 50],
+            [['position'], 'string', 'max' => 50],
         ];
     }
 
@@ -42,10 +42,12 @@ class Job extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'company_name' => 'Company Name',
             'position' => 'Position',
             'start_working' => 'Start Working',
             'finish_working' => 'Finish Working',
         ];
     }
+
+
 }

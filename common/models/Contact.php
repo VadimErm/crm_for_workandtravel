@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "contacts".
@@ -39,6 +40,13 @@ use Yii;
  */
 class Contact extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -53,10 +61,10 @@ class Contact extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['birth_date', 'departure_date', 'arrival_date', 'created_at', 'updated_at'], 'safe'],
-            [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status', 'contract_id', 'work_search'], 'integer'],
-            [['fullname', 'another_fullname'], 'string', 'max' => 25],
-            [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number'], 'string', 'max' => 20],
+            [['birth_date', 'departure_date', 'arrival_date', 'created_at', 'updated_at', 'work_search'], 'safe'],
+            [['married', 'card_id', 'ipassport_id', 'language_id', 'school_id', 'college_id', 'university_id', 'status', 'kcet_number'], 'safe'],
+            [['fullname', 'another_fullname'], 'safe'],
+            [['firstname_ipass', 'lastname_ipass', 'birth_country', 'birth_city', 'birth_region', 'email', 'skype', 'preferred_job', 'preferred_state', 'travel_with_whom', 'social_security_number' ], 'safe'],
             //[['approved'], 'boolean']
         ];
     }
@@ -69,6 +77,8 @@ class Contact extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'fullname' => 'Fullname',
+            'kcet_number' => 'KCET Number',
+            'kcet_date' => 'KCET Date',
             'firstname_ipass' => 'Firstname Ipass',
             'lastname_ipass' => 'Lastname Ipass',
             'birth_date' => 'Birth Date',
@@ -92,12 +102,80 @@ class Contact extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'status' => 'Status',
-            'contract_id' => 'Contract ID',
             'work_search' => 'Work Search',
             'social_security_number' => 'Social Security Number',
-            'approved' => 'Approved'
+            //'approved' => 'Approved'
         ];
     }
+
+    public function setBirthDate($value)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $value);
+        $this->birth_date = $date->format('Y-m-d');
+    }
+
+    public function getBirthDate()
+    {
+        $date = \DateTime::createFromFormat('Y-m-d', $this->birth_date);
+        return date_format($date, 'd/m/Y');
+    }
+
+    public function setKcetDate($value)
+    {
+        if(!empty($value)) {
+            $this->kcet_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->kcet_date = null;
+        }
+
+    }
+
+    public function getKcetDate()
+    {
+        if(!empty($this->kcet_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->kcet_date), 'd/m/Y');
+        } else {
+            return null;
+        }
+    }
+
+    public function setDepartureDate($value)
+    {
+        if(!empty($value)) {
+            $this->departure_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->departure_date = null;
+        }
+    }
+
+    public function getDepartureDate()
+    {
+        if(!empty($this->departure_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->departure_date), 'd/m/Y');
+        } else {
+            return null;
+        }
+    }
+
+    public function setArrivalDate($value)
+    {
+        if(!empty($value)) {
+            $this->arrival_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->arrival_date = null;
+        }
+    }
+
+    public function getArrivalDate()
+    {
+        if(!empty($this->arrival_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->arrival_date), 'd/m/Y');
+        } else {
+            return null;
+        }
+    }
+
+    //Relations
 
     public function getAddresses()
     {
@@ -117,16 +195,16 @@ class Contact extends \yii\db\ActiveRecord
             ->viaTable('contact_person', ['contact_id' => 'id']);
     }
 
-    public function getUsers()
+    public function getUser()
     {
-        return $this->hasMany(User::className(), ['id' => 'user_id'])
+        return $this->hasOne(User::className(), ['id' => 'user_id'])
             ->viaTable('contact_user', ['contact_id' => 'id']);
     }
 
     public function getAbroadTravels()
     {
         return $this->hasMany(AbroadTravel::className(), ['id' => 'abroad_travel_id'])
-            ->viaTable('contact_abroad_travels', ['contact_id' => 'id']);
+            ->viaTable('contact_abroad_travel', ['contact_id' => 'id']);
     }
 
     public function getSiblings()
@@ -143,12 +221,12 @@ class Contact extends \yii\db\ActiveRecord
 
     public function getParents()
     {
-        return $this->hasMany(Person::className(), ['id' => 'parent_id'])
+        return $this->hasMany(ClientParent::className(), ['id' => 'parent_id'])
             ->viaTable('contact_parent', ['contact_id' => 'id']);
     }
 
 
-    public function getIPassport()
+    public function getIpassport()
     {
         return $this->hasOne(Ipassport::className(), ['id' => 'ipassport_id']);
     }

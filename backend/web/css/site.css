@@ -118,3 +118,7 @@ a.desc:after {
 #agreementModal .btn-close {
     margin-bottom: 0;
 }
+
+.required {
+    color: red;
+}

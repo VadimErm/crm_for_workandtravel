@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "addresses".
@@ -18,7 +19,12 @@ class Address extends \yii\db\ActiveRecord
     const TYPE_REAL = 3; //Реальный
     const TYPE_PASSPORT = 4;// По прописке
 
-    
+    private static $model;
+
+
+
+
+
     /**
      * @inheritdoc
      */
@@ -49,4 +55,32 @@ class Address extends \yii\db\ActiveRecord
             'address' => 'Address',
         ];
     }
+
+   /* public static function create($attributes, $type)
+    {
+        if(!empty($attributes)) {
+
+            static::$model = new self;
+
+            static::$model->load(['Address' => ['address' => $attributes, 'type' => $type]]);
+
+            static::$model->save();
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
+    public static function linkWithEntity (ActiveRecord $entity)
+    {
+        $entity->link('addresses', static::$model);
+
+
+    }*/
+
+
 }

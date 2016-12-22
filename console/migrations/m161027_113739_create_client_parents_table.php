@@ -17,7 +17,7 @@ class m161027_113739_create_client_parents_table extends Migration
             'type' => $this->integer(1),
             'birth' => $this->dateTime(),
             'birth_country' => $this->string(20),
-            'fullname' => $this->string(20),           
+            'fullname' => $this->string(35),
         ]);
     }
 

@@ -14,9 +14,9 @@ class m161027_130825_create_schools_table extends Migration
     {
         $this->createTable('schools', [
             'id' => $this->primaryKey(),
-            'type' => $this->integer(3),
-            'educ_start' => $this->dateTime(),
-            'educ_finish' => $this->dateTime(),
+            'number' => $this->integer(4),
+            'educ_start' => $this->integer(4),
+            'educ_finish' => $this->integer(4),
         ]);
     }
 

@@ -45,4 +45,10 @@ class College extends \yii\db\ActiveRecord
             'educ_finish' => 'Educ Finish',
         ];
     }
+
+    public function getAddresses()
+    {
+        return $this->hasOne(Address::className(), ['id' => 'address_id'])
+            ->viaTable('college_address', ['college_id' => 'id']);
+    }
 }

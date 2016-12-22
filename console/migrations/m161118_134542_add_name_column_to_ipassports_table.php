@@ -12,7 +12,7 @@ class m161118_134542_add_name_column_to_ipassports_table extends Migration
      */
     public function up()
     {
-        $this->addColumn('ipassports', 'name', $this->string(30));
+        $this->addColumn('ipassports', 'number', $this->string(30));
     }
 
     /**

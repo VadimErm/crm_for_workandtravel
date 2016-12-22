@@ -12,7 +12,7 @@ class m161118_144943_add_depdean_fullname_column_to_universities_table extends M
      */
     public function up()
     {
-        $this->addColumn('universities', 'depdean_fullname', $this->string(30));
+        $this->addColumn('universities', 'depdean_fullname', $this->string(35));
     }
 
     /**
