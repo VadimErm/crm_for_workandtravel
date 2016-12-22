@@ -70,6 +70,8 @@ class FileLoader extends Component
 
     public function pushFile($type)
     {
+        // TODO проверка на уже загруженый файл
+
         $file = UploadedFile::getInstanceByName('file');
 
         if (!empty($file)) {

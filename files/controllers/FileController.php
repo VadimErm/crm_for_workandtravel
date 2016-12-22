@@ -40,6 +40,7 @@ class FileController extends Controller
     {
         // Start download file
         $role = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->getId());
+
         $role = reset($role)->name;
 
         $own = ($role === 'manager' || $role === 'main_manager') ? false : true;

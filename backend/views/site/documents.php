@@ -7,6 +7,7 @@ use common\helpers\FileLoaderHelper;
 \backend\assets\SweetAlertAsset::register($this)
 ?>
 
+
 <div class="row">
     <input type="hidden" id="access-token" name="access-token"
            value="<?= Yii::$app->user->identity->getAccessToken() ?>">
@@ -34,4 +35,8 @@ use common\helpers\FileLoaderHelper;
     <?= $this->render('additional_docs', [
         'loaded' => FileLoaderHelper::isExists('additional_docs')
     ]) ?>
+
+    <!--Manager files-->
+    <?= $this->render('manager_documents') ?>
+
 </div>
