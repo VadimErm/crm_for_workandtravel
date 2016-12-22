@@ -5,6 +5,8 @@ use common\models\User;
 use common\models\Summary;
 use Yii;
 use common\models\LoginForm;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 /**
@@ -12,6 +14,39 @@ use yii\web\Controller;
  */
 class SiteController extends BackendController
 {
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'index'  => ['get'],
+                    'questionary'   => ['get', 'post'],
+                    'view-summary' => ['get'],
+                    'update-summary' => ['get', 'post']
+
+                ],
+            ],
+
+            /*'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' =>['index','questionary', 'view-summary'],
+                        'roles' => ['student', 'manager', 'main_manager']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update-summary'],
+                        'roles' => ['manager']
+
+                    ]
+                ]
+            ]*/
+        ];
+    }
+
     public function actionIndex()
     {
         $authManager = Yii::$app->authManager;
@@ -31,35 +66,73 @@ class SiteController extends BackendController
         $authManager = Yii::$app->authManager;
 
         $model = new Summary();
-
-        if ($model->load(Yii::$app->request->post())) {
-            var_dump($model);
-            exit;
-        }
-
         $role = \Yii::$app->user->getIdentity()->getRole();
         $modelUser = User::findOne(Yii::$app->user->getId());
+
+
+
+        if ($model->load(Yii::$app->request->post()) && $model->save() ) {
+
+            $this->redirect(['view-summary', 'user_id' => $modelUser->id]);
+            /*echo "<pre>";
+            var_dump($model);
+            exit;
+            echo "</pre>";*/
+        }
+
         $contact = $modelUser
             ->getContact()
             ->select('id')
             ->asArray()
             ->one();
 
-            if ($role == 'student') {
-                if(!empty($contact)) {
-                    $view = 'index';
-                } else {
-                   $view  = 'questionary';
-                   $model = new Summary; 
-                }
+        if ($role == 'student') {
+            if(!empty($contact)) {
+
+                $this->redirect(['view-summary', 'user_id' => $modelUser->id]);
+
             } else {
-                $view  = 'index';
+                $model = new Summary();
             }
+        } else {
+            $view  = 'index';
+        }
         
-        return $this->render($view , [
+        return $this->render('questionary' , [
+            'model' => $model,
+        ]);
+        
+    }
+    public function actionViewSummary($user_id)
+    {
+        $model = Summary::getSummary($user_id);
+       // var_dump($model);
+       // exit;
+
+        return $this->render('viewSummary', [
+                'model' =>$model,
+            ]);
+
+    }
+
+    public function actionUpdateSummary($user_id)
+    {
+        $model = Summary::getSummary($user_id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save(true, $user_id)) {
+
+            //var_dump($model);exit;
+            return $this->redirect(['update-summary', 'user_id' => $user_id]);
+
+        } else {
+
+        //var_dump($model);exit;
+            return $this->render('updateSummary', [
                 'model' => $model,
             ]);
-        
+        }
+
+
     }
 
     public function actionDocuments()
@@ -90,6 +163,6 @@ class SiteController extends BackendController
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect('login');
     }
 }

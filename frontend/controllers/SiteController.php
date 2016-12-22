@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Agreement;
 
 /**
  * Site controller
@@ -165,10 +166,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionAgreement()
+   /* public function actionAgreement($program_id = 0)
     {
-        return $this->renderAjax('agreement_modal');
-    }
+        $agreement = Agreement::findOne(['program_id' => $program_id]);
+
+        return $this->renderAjax('agreement_modal',
+            [
+                'agreement' =>$agreement
+            ]);
+    }*/
 
     public function actionQuestionary()
     {

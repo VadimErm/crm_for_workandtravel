@@ -73,7 +73,7 @@ a.desc:after {
 }
 
 .grid-view td {
-    white-space: nowrap;
+
 }
 
 .grid-view .filters input,
@@ -95,6 +95,7 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+
 /* align the logout "link" (button in form) of the navbar */
 .nav > li > form {
     padding: 8px;
@@ -108,4 +109,16 @@ a.desc:after {
 
 .nav > li > form > button:hover {
     text-decoration: none;
+}
+
+.agree {
+    text-align: left !important;
+    margin-left: 0;
+}
+#agreementModal .btn-close {
+    margin-bottom: 0;
+}
+
+.required {
+    color: red;
 }

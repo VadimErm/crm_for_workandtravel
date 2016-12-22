@@ -4,6 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use yii\bootstrap\Alert;
 use yii\helpers\Url;
+use kartik\select2\Select2;
 ?>
 
 <h3>Invite student</h3>
@@ -41,6 +42,13 @@ use yii\helpers\Url;
 			<div class="grp">
 				<?= $form->field($model, 'email')->label('Email'); ?>
 			</div>
+            <div class="grp">
+                <?= $form->field($model, 'program_id')->widget(Select2::className(), [
+                    'data' => $data,
+                    'options' => ['placeholder' => 'Select a program ...'],
+
+                ])?>
+            </div>
 			<div class="btn">
 				<?= Html::submitButton('Submit', [ 'name' => 'contact-button', 'class' => 'btn btn-default submit']) ?>
 			</div>

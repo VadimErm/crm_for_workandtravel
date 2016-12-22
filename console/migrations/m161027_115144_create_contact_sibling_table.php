@@ -14,7 +14,7 @@ class m161027_115144_create_contact_sibling_table extends Migration
     {
         $this->createTable('contact_sibling', [
             'contact_id' => $this->integer(),
-            'subling_id' => $this->integer(),
+            'sibling_id' => $this->integer(),
         ]);
     }
 

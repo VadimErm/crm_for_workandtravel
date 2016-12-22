@@ -14,7 +14,7 @@ class m161027_125301_create_cards_table extends Migration
     {
         $this->createTable('cards', [
             'id' => $this->primaryKey(),
-            'issue_date' => $this->dateTime(),
+            'issued_date' => $this->date(),
             'name' => $this->string(100),
             'issued_by' => $this->string(100)
         ]);

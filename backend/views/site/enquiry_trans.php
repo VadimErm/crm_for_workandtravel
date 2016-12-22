@@ -1,7 +1,14 @@
+<?php
+/**
+ * @var $loaded boolean
+ */
+
+use common\helpers\Url;
+?>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel" style="height: auto;">
         <div class="x_title">
-            <h2>Перевод справка с Университета</h2>
+            <h2>Перевод cправки с Университета</h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -21,11 +28,13 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content" style="display: none;">
-            <form action="/index.php" class="dropzone"></form>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <?php if ($loaded) : ?>
+                <img src="<?= Url::fileGet('enquiry_trans') ?>" alt="Enquiry" width="500" height="300">
+            <?php else : ?>
+                <form action="<?= Url::filePush() ?>" class="dropzone">
+                    <input type="hidden" name="enquiry_trans">
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 </div>

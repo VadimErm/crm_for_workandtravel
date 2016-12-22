@@ -14,7 +14,7 @@ class m161027_125245_create_persons_table extends Migration
     {
         $this->createTable('persons', [
             'id' => $this->primaryKey(),
-            'fullname' => $this->string(20),
+            'fullname' => $this->string(35),
         ]);
     }
 

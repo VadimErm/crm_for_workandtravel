@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\InvalidParamException;
 
 /**
  * This is the model class for table "files".
@@ -14,6 +15,16 @@ use Yii;
  */
 class File extends \yii\db\ActiveRecord
 {
+    private static $_types = [
+        'photo_3_5x4_5' => 1,
+        'photo_10x15' => 2,
+        'passport' => 3,
+        'identification' => 4,
+        'enquiry' => 5,
+        'enquiry_trans' => 6,
+        'birth_certificate' => 7,
+        'additional_docs' => 8
+    ];
     /**
      * @inheritdoc
      */
@@ -44,5 +55,25 @@ class File extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'type' => 'Type',
         ];
+    }
+
+    public function setType($type)
+    {
+        if (isset(self::$_types[$type])) {
+            $this->type = self::$_types[$type];
+        } else {
+            throw new InvalidParamException("Unknown file type");
+        }
+    }
+
+    /**
+     * @param $type string
+     * @return string | boolean
+     */
+    public static function getType($type)
+    {
+        if (isset(self::$_types[$type])) {
+            return self::$_types[$type];
+        }
     }
 }

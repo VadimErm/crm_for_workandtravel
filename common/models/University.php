@@ -31,10 +31,11 @@ class University extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course', 'dean_type'], 'integer'],
+            [['course'], 'integer'],
             [['name'], 'string', 'max' => 40],
-            [['department', 'dean_fullname'], 'string', 'max' => 30],
+            [['department', 'dean_fullname'], 'string', 'max' => 35],
             [['group'], 'string', 'max' => 10],
+            [['depdean'], 'safe']
         ];
     }
 
@@ -50,7 +51,19 @@ class University extends \yii\db\ActiveRecord
             'group' => 'Group',
             'course' => 'Course',
             'dean_fullname' => 'Dean Fullname',
-            'dean_type' => 'Dean Type',
+
         ];
+    }
+
+    public function getAddresses()
+    {
+        return $this->hasOne(Address::className(), ['id' => 'address_id'])
+            ->viaTable('university_address', ['university_id' => 'id']);
+    }
+
+    public function getPhones()
+    {
+        return $this->hasMany(Phone::className(), ['id' => 'phone_id'])
+            ->viaTable('university_phone', ['university_id' => 'id']);
     }
 }

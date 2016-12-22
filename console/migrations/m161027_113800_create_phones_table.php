@@ -15,7 +15,7 @@ class m161027_113800_create_phones_table extends Migration
         $this->createTable('phones', [
             'id' => $this->primaryKey(),
             'type' => $this->integer(2),
-            'number' => $this->string(10),
+            'number' => $this->string(14),
         ]);
     }
 

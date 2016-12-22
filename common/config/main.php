@@ -4,9 +4,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advancedbonus',
+            'dsn' => 'mysql:host=localhost;dbname=kset',
             'username' => 'root',
-            'password' => '68719101',
+            'password' => '12345',
             'charset' => 'utf8',
         ],
         'authManager' => [
@@ -19,7 +19,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'content-api'],
             ],
-        ]
+
+
+        ],
+
+
     ],
 ];

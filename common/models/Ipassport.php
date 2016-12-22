@@ -29,9 +29,10 @@ class Ipassport extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['issue_date'], 'safe'],
+            [['expired_date'], 'safe'],
             [['issued_by'], 'string', 'max' => 100],
-            [['issued_city', 'issued_region'], 'string', 'max' => 20],
+            [['number'], 'string', 'max' => 30],
+            [['issued_city', 'issued_region', 'issued_country'], 'string', 'max' => 35],
         ];
     }
 
@@ -42,10 +43,24 @@ class Ipassport extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'issue_date' => 'Issue Date',
+            'number' => 'Number',
+            'expired_date' => 'Expired Date',
             'issued_by' => 'Issued By',
             'issued_city' => 'Issued City',
             'issued_region' => 'Issued Region',
+            'issued_country' => 'Issued Country'
         ];
+    }
+
+    public function setExpiredDate($value)
+    {
+        $date = \DateTime::createFromFormat('d/m/Y', $value);
+        $this->expired_date = $date->format('Y-m-d');
+    }
+
+    public function getExpiredDate()
+    {
+        $date = \DateTime::createFromFormat('Y-m-d', $this->expired_date);
+        return date_format($date, 'd/m/Y');
     }
 }

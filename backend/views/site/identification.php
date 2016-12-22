@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var $loaded boolean
+ */
+use common\helpers\Url;
+
+?>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel" style="height: auto;">
         <div class="x_title">
@@ -21,11 +28,13 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content" style="display: none;">
-            <form action="/index.php" class="dropzone"></form>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <?php if ($loaded) : ?>
+                <img src="<?= Url::fileGet('photo_10x15') ?>" alt="Photo 3.4x4.5" width="500" height="300">
+            <?php else : ?>
+                <form action="<?= Url::filePush() ?>" class="dropzone">
+                    <input type="hidden" name="identification">
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 </div>

@@ -1,0 +1,39 @@
+<?php
+
+namespace frontend\controllers;
+
+use yii\rest\Controller;
+use common\models\Content;
+use yii\filters\Cors;
+
+class ContentApiController extends Controller
+{
+    public function behaviors()
+    {
+        return [
+            'corsFilter' => [
+                'class' => Cors::className(),
+                'cors' => [
+                    'Origin' => ['*'],
+                ]
+            ]
+        ];
+    }
+
+    public function verbs()
+    {
+        return [
+            'get' => ['GET'],];
+
+    }
+
+    public function actionGet($slug) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return Content::findOne(['slug' => $slug]);
+
+    }
+
+
+
+
+}
