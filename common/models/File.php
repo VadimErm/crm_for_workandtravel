@@ -23,7 +23,14 @@ class File extends \yii\db\ActiveRecord
         'enquiry' => 5,
         'enquiry_trans' => 6,
         'birth_certificate' => 7,
-        'additional_docs' => 8
+        'additional_docs' => 8,
+        'ds_2019' => 9,
+        'visa_j1' => 10,
+        'air_tickets' => 11,
+        'air_tickets_domestic' => 12,
+        'isic' => 13,
+        'bank_card' => 14
+
     ];
     /**
      * @inheritdoc
