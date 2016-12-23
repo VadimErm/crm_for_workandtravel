@@ -89,6 +89,10 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Agreement::className(), ['id' => 'agreement_id'])
             ->viaTable('user_agreements',['user_id' => 'id']);
     }
+    public function getProgram()
+    {
+        return $this->hasOne(Program::className(), ['id' =>'program_id']);
+    }
 
     /**
      * @inheritdoc
@@ -224,7 +228,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function beforeLogout($event)
     {
-        // Generate user access token
+        // Remove access token
         $event->identity->access_token = null;
         $event->identity->update();
     }
@@ -234,7 +238,8 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function afterLogin($event)
     {
-        // Remove access token
+
+        // Generate user access token
         $event->identity->access_token = Yii::$app->security->generateRandomString();
         $event->identity->update();
     }

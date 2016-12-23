@@ -49,6 +49,9 @@ class SiteController extends BackendController
 
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest){
+            $this->redirect(['site/login']);
+        }
         $authManager = Yii::$app->authManager;
 
         $role = $authManager->getRolesByUser(Yii::$app->user->getId());
@@ -74,10 +77,7 @@ class SiteController extends BackendController
         if ($model->load(Yii::$app->request->post()) && $model->save() ) {
 
             $this->redirect(['view-summary', 'user_id' => $modelUser->id]);
-            /*echo "<pre>";
-            var_dump($model);
-            exit;
-            echo "</pre>";*/
+
         }
 
         $contact = $modelUser
@@ -106,8 +106,6 @@ class SiteController extends BackendController
     public function actionViewSummary($user_id)
     {
         $model = Summary::getSummary($user_id);
-       // var_dump($model);
-       // exit;
 
         return $this->render('viewSummary', [
                 'model' =>$model,
@@ -121,12 +119,12 @@ class SiteController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save(true, $user_id)) {
 
-            //var_dump($model);exit;
+
             return $this->redirect(['update-summary', 'user_id' => $user_id]);
 
         } else {
 
-        //var_dump($model);exit;
+
             return $this->render('updateSummary', [
                 'model' => $model,
             ]);
@@ -135,10 +133,15 @@ class SiteController extends BackendController
 
     }
 
-    public function actionDocuments()
+    public function actionDocuments($user_id = null)
     {
-        
-        return $this->render('documents');
+        if ($user_id == null) {
+            $user_id = \Yii::$app->user->getId();
+        }
+
+        return $this->render('documents', [
+                'user_id' => $user_id
+            ]);
     }
 
     public function actionLogin()
@@ -163,6 +166,6 @@ class SiteController extends BackendController
     {
         Yii::$app->user->logout();
 
-        return $this->redirect('login');
+        return $this->redirect(['site/login']);
     }
 }

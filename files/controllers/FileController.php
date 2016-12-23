@@ -5,10 +5,12 @@ namespace files\controllers;
 use files\components\FileLoader;
 use yii\base\Module;
 use yii\filters\auth\QueryParamAuth;
+use yii\filters\VerbFilter;
 use yii\rest\Controller;
 
 class FileController extends Controller
 {
+
     /**
      * @var $_fileLoader FileLoader
      */
@@ -20,6 +22,7 @@ class FileController extends Controller
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className(),
         ];
+
         return $behaviors;
     }
 
@@ -52,11 +55,21 @@ class FileController extends Controller
     {
         $type = key(\Yii::$app->request->post());
 
-        if ($id = $this->_fileLoader->pushFile($type)) {
-            return ['status' => 'success', 'id' => $id];
+        if (empty(\Yii::$app->request->post()['user_id'])){
+            $user_id = null;
+        } else {
+            $user_id = \Yii::$app->request->post()['user_id'];
+        }
+        if(!($this->_fileLoader->isExists($user_id, $type))){
+
+            if ($id = $this->_fileLoader->pushFile($type, $user_id)) {
+                return ['status' => 'success', 'id' => $id];
+            }
         }
 
         return ['status' => 'fail'];
+
+
     }
 
     public function actionRemove($id)

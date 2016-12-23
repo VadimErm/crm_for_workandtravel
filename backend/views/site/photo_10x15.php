@@ -29,11 +29,14 @@ use common\helpers\Url;
         </div>
         <div class="x_content" style="display: none;">
             <?php if ($loaded) : ?>
-                <img src="<?= Url::fileGet('photo_10x15') ?>" alt="Photo 3.4x4.5" width="500" height="300">
+                <img src="<?= Url::fileGet('photo_10x15', $user_id) ?>" alt="Photo 3.4x4.5" width="500" height="300">
             <?php else : ?>
-                <form action="<?= Url::filePush() ?>" class="dropzone">
-                    <input type="hidden" name="photo_10x15">
-                </form>
+                <?php if($role === 'student') { ?>
+                    <form action="<?= Url::filePush($user_id) ?>" class="dropzone">
+                        <input type="hidden" name="photo_10x15">
+                    </form>
+                <?php } ?>
+
             <?php endif; ?>
         </div>
     </div>

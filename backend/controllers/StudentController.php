@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use yii\base\InvalidParamException;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use backend\models\ContactForm;
 use common\models\User;
@@ -12,6 +13,7 @@ use yii\web\BadRequestHttpException;
 use common\models\Program;
 use common\models\Agreement;
 use yii\helpers\ArrayHelper;
+use common\models\Contact;
 
 class StudentController extends BackendController
 {
@@ -132,11 +134,22 @@ class StudentController extends BackendController
 
     public function actionApplicants()
     {
-        return $this->render('students', ['title' => 'Applicants']);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Contact::find(),
+            'pagination' => [
+                'pageSize' => 10
+            ]
+
+        ]);
+        $contacts = Contact::find()->all();
+
+        return $this->render('students', [
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     public function actionParticipants()
     {
-        return $this->render('students', ['title' => 'Participants']);
+        return $this->render('participants', ['title' => 'Participants']);
     }
 }

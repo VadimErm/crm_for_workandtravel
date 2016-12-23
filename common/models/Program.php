@@ -27,6 +27,7 @@ class Program extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'string', 'max' => 20],
+            [['year'], 'integer', 'max' =>9999]
         ];
     }
 
@@ -38,6 +39,7 @@ class Program extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'year' => 'Year'
         ];
     }
     public function getAgreements()

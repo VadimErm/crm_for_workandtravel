@@ -536,7 +536,7 @@ $(document).ready(function() {
             validator:{
 
                 regular :{
-                    reg: /^\d{4}$/,
+                    reg: /^\d{4}$|^$/,
                     message: "Поле должно быть в формате 9999"
                 }
             }
@@ -546,7 +546,7 @@ $(document).ready(function() {
             validator:{
 
                 regular :{
-                    reg: /^\d{4}$/,
+                    reg: /^\d{4}$|^$/,
                     message: "Поле должно быть в формате 9999"
                 }
             }

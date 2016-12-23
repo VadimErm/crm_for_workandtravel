@@ -29,11 +29,12 @@ use common\helpers\Url;
         </div>
         <div class="x_content" style="display: none;">
             <?php if ($loaded) : ?>
-                <img src="<?= Url::fileGet('air_tickets') ?>" alt="Air tickets" width="500" height="300">
+                <img src="<?= Url::fileGet('air_tickets', $user_id) ?>" alt="Air tickets" width="500" height="300">
             <?php else : ?>
                 <?php if($role === 'manager' || $role === 'main_manager') { ?>
                     <form action="<?= Url::filePush() ?>" class="dropzone">
                         <input type="hidden" name="air_tickets">
+                        <input type="hidden" name="user_id" value="<?=$user_id?>">
                     </form>
                 <?php } ?>
             <?php endif; ?>

@@ -42,14 +42,15 @@ class FileLoader extends Component
 
     public function getFile($user_id, $type, $own = true)
     {
-        if ($own && \Yii::$app->user->getId() != $user_id) {
+        /*if ($own && \Yii::$app->user->getId() != $user_id) {
             throw new ForbiddenHttpException('You don\'t have permission');
-        }
+        }*/
 
         $fileModel = $this->_fileModel
-            ->find(['user_id' => $user_id])
-            ->andWhere(['type' => $type])
+            ->find()
+            ->andWhere(['user_id' => $user_id, 'type' => $type])
             ->one();
+        //var_dump($fileModel);exit;
 
         if ($fileModel) {
             $path = \Yii::getAlias($fileModel->path);
@@ -68,10 +69,13 @@ class FileLoader extends Component
         }
     }
 
-    public function pushFile($type)
+    public function pushFile($type, $user_id = null)
     {
         // TODO проверка на уже загруженый файл
 
+        if($user_id == null){
+            $user_id = \Yii::$app->user->getId();
+        }
         $file = UploadedFile::getInstanceByName('file');
 
         if (!empty($file)) {
@@ -82,7 +86,7 @@ class FileLoader extends Component
             if ($save) {
                 $this->_fileModel->path = $path;
                 $this->_fileModel->setType($type);
-                $this->_fileModel->user_id = \Yii::$app->user->getId();
+                $this->_fileModel->user_id = $user_id;
 
                 return $this->_fileModel->save() ? $this->_fileModel->getPrimaryKey() : false;
             } else {
@@ -113,9 +117,7 @@ class FileLoader extends Component
     {
         $file = new File();
 
-        $file = $file->find(['user_id' => $user_id])
-            ->where(['type' => $file::getType($type)])
-            ->one();
+        $file = $file->findOne(['user_id' => $user_id, 'type' => $file::getType($type)]);
 
         return !empty($file);
     }
