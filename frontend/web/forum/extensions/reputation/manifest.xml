@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension SYSTEM "ext-1.0.dtd">
+
+<!--
+/**
+ * Allow users to give reputation points to other users.
+ * 
+ *
+ * @copyright (C) 2011 hcs reputation extension for PunBB (C)
+ * @copyright Copyright (C) 2011 PunBB
+ * @license http://www.gnu.org/licenses/gpl.html GPL version 2 or higher
+ * @package reputation
+ */
+-->
+
+<extension engine="1.0">
+	<id>reputation</id>
+	<title>Reputation</title>
+	<version>5.0.0</version>
+	<description><![CDATA[Allow users to give reputation points to other users. Users necessarily specify the reason of change of reputation and can look who it changed. Admins can delete any reputation any users.]]></description>
+	<author>hcs</author>
+	<minversion>1.4.3</minversion>
+	<maxtestedon>1.4.5</maxtestedon>
+
+	<dependencies>
+		<dependency>developer_helper</dependency>
+		<dependency>pun_jquery</dependency>
+		<dependency>bootstrap</dependency>
+	</dependencies>
+
+	<install><![CDATA[
+Reputation_Model_Installer::install();
+	]]></install>	
+
+	<uninstall><![CDATA[
+Reputation_Model_Installer::uninstall();
+	]]></uninstall>
+
+	<hooks>
+	
+		<hook id="aex_add_repository_for_image_uploader"><![CDATA[
+$inst_exts['reputation']['repo_url'] = $repository_url_by_extension[] = 'http://punbb.ru/repository'; 
+		]]></hook>	
+			
+		<hook id="vt_start"><![CDATA[
+Reputation_Module_Hook_Dispatcher::front_end_init();
+		]]></hook>
+
+		<hook id="agr_start, aop_start"><![CDATA[
+Reputation_Module_Hook_Dispatcher::back_end_init();
+		]]></hook>
+
+		<hook id="pf_start"><![CDATA[
+Reputation_Module_Hook_Dispatcher::profile_init();
+		]]></hook>
+
+		<hook id="co_modify_url_scheme"><![CDATA[
+if (file_exists($ext_info['path'].'/url/'.$forum_config['o_sef'].'.php'))
+	require $ext_info['path'].'/url/'.$forum_config['o_sef'].'.php';
+else
+	require $ext_info['path'].'/url/Default.php';
+		]]></hook>
+		
+		<hook id="re_rewrite_rules"><![CDATA[
+require $ext_info['path'].'/url/rewrite_rule.php';
+		]]></hook>	
+		
+		<hook id="move_post_loop_insert_end"><![CDATA[
+$query = array(
+	'UPDATE' => 'reputation',
+	'SET' => 'post_id = '.$new_post_id,
+	'WHERE' => 'post_id = '.$cur_post['id'],
+);
+$forum_db->query_build($query); // or error(__FILE__, __LINE__);
+		]]></hook>	
+		
+	</hooks>
+</extension>
