@@ -26,7 +26,7 @@ class CustomAsset extends AssetBundle
         'js/maps/jquery-jvectormap-world-mill-en.js',
         'js/maps/jquery-jvectormap-us-aea-en.js',
         'js/maps/gdp-data.js',
-        'js/stan.custom.js',
+         'js/stan.custom.js',
         'js/dropzone.js',
         'js/yii.activeForm.js',
 
@@ -44,5 +44,6 @@ class CustomAsset extends AssetBundle
         if (Url::current() == AppAsset::STUDENT_INDEX) {
             $this->js[] = 'js/dataTables.js';
         }
+
     }
 }

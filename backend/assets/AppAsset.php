@@ -11,6 +11,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     const STUDENT_INDEX = '/admin/student/index';
+    const APPLICANTS = '/admin/student/applicants';
     public $sourcePath = '@bower';
     public $css = [
         'bootstrap/dist/css/bootstrap.min.css',

@@ -224,7 +224,9 @@
         // please refer to attributeDefaults for the structure of attribute
         add: function (attribute) {
             var $form = $(this);
+
             attribute = $.extend({value: getValue($form, attribute)}, attributeDefaults, attribute);
+            console.log(getValue($form, attribute));
             $form.data('yiiActiveForm').attributes.push(attribute);
             watchAttribute($form, attribute);
         },

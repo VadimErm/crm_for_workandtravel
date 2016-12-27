@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\ContactSearch;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -134,16 +135,21 @@ class StudentController extends BackendController
 
     public function actionApplicants()
     {
-        $dataProvider = new ActiveDataProvider([
+        $searchModel = new ContactSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+
+
+       /* $dataProvider = new ActiveDataProvider([
             'query' => Contact::find(),
             'pagination' => [
                 'pageSize' => 10
             ]
 
         ]);
-        $contacts = Contact::find()->all();
+        $contacts = Contact::find()->all();*/
 
         return $this->render('students', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
     }

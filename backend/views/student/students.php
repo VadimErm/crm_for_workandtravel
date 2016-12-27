@@ -52,7 +52,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-sm-12">
 
                             <?= GridView::widget([
+                                'options' => ['id' => 'w1', 'class' => 'grid-view'],
                                 'dataProvider' => $dataProvider,
+                                'filterModel' => $searchModel,
                                 'columns' => [
                                     ['class' => 'yii\grid\SerialColumn'],
 
