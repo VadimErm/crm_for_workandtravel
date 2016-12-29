@@ -27,7 +27,8 @@ class Program extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'string', 'max' => 20],
-            [['year'], 'integer', 'max' =>9999]
+            [['year'], 'integer', 'max' =>9999],
+            [['price'], 'number']
         ];
     }
 
@@ -39,7 +40,8 @@ class Program extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'year' => 'Year'
+            'year' => 'Year',
+            'price' => 'Price'
         ];
     }
     public function getAgreements()
@@ -47,6 +49,11 @@ class Program extends \yii\db\ActiveRecord
 
         return $this->hasMany(Agreement::className(), ['program_id' => 'id']);
 
+    }
+
+    public function getContracts()
+    {
+        return $this->hasMany(Contract::className(), ['program_id' => 'id']);
     }
 
 }

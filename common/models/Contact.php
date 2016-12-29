@@ -110,14 +110,20 @@ class Contact extends \yii\db\ActiveRecord
 
     public function setBirthDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->birth_date = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->birth_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->birth_date = null;
+        }
     }
 
     public function getBirthDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->birth_date);
-        return date_format($date, 'd/m/Y');
+        if(!empty($this->birth_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->birth_date), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 
     public function setKcetDate($value)
@@ -249,6 +255,11 @@ class Contact extends \yii\db\ActiveRecord
     public function getCard()
     {
         return $this->hasOne(Card::className(), ['id' => 'card_id']);
+    }
+
+    public function getContract()
+    {
+        return $this->hasOne(Contract::className(), ['kcet_number' => 'kcet_number']);
     }
 
 }

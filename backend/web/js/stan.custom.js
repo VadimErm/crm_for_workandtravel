@@ -663,7 +663,7 @@ $(document).ready(function() {
 
     };
     //Валидация подуровней
-    $.each(validation_fields, function( index, value ) {
+   /* $.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
 
@@ -675,7 +675,7 @@ $(document).ready(function() {
         $.each(validation_fields, function( index, value ) {
             fieldValidation(index, value.validator);
         });
-    });
+    });*/
 
 });
 

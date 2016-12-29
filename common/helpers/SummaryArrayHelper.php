@@ -6,53 +6,58 @@ namespace common\helpers;
 
 class SummaryArrayHelper {
 
-   public static function map(array $array, array $indexes = null, $keys)
+   public static function map($array, array $indexes = null, $keys)
     {
-        $arrayRes = [];
-        $i = 0;
-        $valueNew = [];
+        if(!empty($array)){
 
-        foreach ($array as  $value) {
+            $arrayRes = [];
+            $i = 0;
+            $valueNew = [];
 
-            if(is_array($value)){
+            foreach ($array as  $value) {
 
-                if(is_array($keys)) {
+                if(is_array($value)){
 
-                    foreach ($keys as $key){
+                    if(is_array($keys)) {
 
-                        if(array_key_exists($key, $value)){
+                        foreach ($keys as $key){
 
-                            $valueNew[$key] = $value[$key];
+                            if(array_key_exists($key, $value)){
+
+                                $valueNew[$key] = $value[$key];
+
+                            }
+
+                        }
+                    } else {
+
+                        if( array_key_exists($keys, $value)){
+
+                            $valueNew = $value[$keys];
 
                         }
 
                     }
+                }
+
+                if(isset($indexes)) {
+
+                    $arrayRes[$indexes[$i]] = $valueNew;
+
+                    $i++;
+
                 } else {
 
-                    if( array_key_exists($keys, $value)){
-
-                        $valueNew = $value[$keys];
-
-                    }
-
+                    $arrayRes[$i] = $valueNew;
+                    $i++;
                 }
             }
 
-            if(isset($indexes)) {
+            return $arrayRes;
 
-                $arrayRes[$indexes[$i]] = $valueNew;
-
-                $i++;
-
-            } else {
-
-                $arrayRes[$i] = $valueNew;
-                $i++;
-            }
+        } else {
+            return null;
         }
-
-        return $arrayRes;
-
     }
 
 } 

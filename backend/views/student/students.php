@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     [
                                         'class' => 'yii\grid\ActionColumn',
-                                        'template' => '{view} {update} {documents}',
+                                        'template' => '{view} {update} {documents} {payments}',
                                         'buttons' =>
                                         [
                                             'view' => function ($url, $model, $key) {
@@ -114,6 +114,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     return Html::a('<i class="fa fa-file-image-o" title="Загрузить документы" ></i>', $url);
 
                                                 },
+                                            'payments' => function ($url, $model, $key) {
+
+                                                    $url = Url::to(['payment/view-by-kcet', 'kcet_number' => $model->user->contact->kcet_number]);
+                                                    return Html::a('<i class="fa fa-money" aria-hidden="true" title="Оплата"></i>',  $url);
+                                                }
                                         ]
                                     ],
                                 ],

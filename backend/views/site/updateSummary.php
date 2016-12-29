@@ -52,13 +52,13 @@ use kartik\select2\Select2;
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Номер договора с КСЕТ<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                        <?= $form->field($model, 'kcet_number')->textInput()->label(false); ?>
+                        <?= $form->field($model, 'kcet_number')->textInput(['disabled' =>'disabled'])->label(false); ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Дата заключения договора<span class="required">*</span></label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                        <?= $form->field($model, 'kcet_date')->textInput(['data-inputmask' => "'mask': '99/99/9999'"])
+                        <?= $form->field($model, 'kcet_date')->textInput(['disabled' =>'disabled','data-inputmask' => "'mask': '99/99/9999'"])
                             ->label(false) ?>
                     </div>
                 </div>

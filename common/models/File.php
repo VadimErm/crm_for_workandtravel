@@ -29,7 +29,8 @@ class File extends \yii\db\ActiveRecord
         'air_tickets' => 11,
         'air_tickets_domestic' => 12,
         'isic' => 13,
-        'bank_card' => 14
+        'bank_card' => 14,
+        'payment_check' => 15
 
     ];
     /**

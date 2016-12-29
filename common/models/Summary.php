@@ -92,7 +92,7 @@ class Summary extends Model
         return
         [
         
-           [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
+          /* [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
               'birth_date', 'birth_country', 'birth_region', 'birth_city','married',
               'email', 'skype', 'preferred_job', 'preferred_state'], 'required'],
 
@@ -111,7 +111,7 @@ class Summary extends Model
 
              ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/'],
 
-             [['work_search'], 'safe']
+             [['work_search'], 'safe']*/
 
         ];
     }
@@ -138,9 +138,7 @@ class Summary extends Model
             Yii::info('Model not inserted due to validation error.', __METHOD__);
             return false;
         }
-        //$this->load(['Summary' => (array)$this]);
-        //var_dump($this);
-        //exit;
+
         if ($user_id !== null){
 
             $this->saveContact((array)$this, $user_id);
@@ -225,6 +223,8 @@ class Summary extends Model
         if($user_id == null){
             $contact->link('user', $user);
         }
+
+        $this->saveContract($contact,$update);
 
         $this->saveAbroadTravels($contact,$attributes['abroad_travels'], $update);
         $this->saveJobs($contact, $attributes['jobs'], $update);
@@ -604,6 +604,23 @@ class Summary extends Model
             if($update == false){
                 $contact->link('abroadTravels', $model);
             }
+
+        }
+
+    }
+
+    protected function saveContract(Contact $contact, $update = false)
+    {
+        if($update == false){
+
+            $model = new Contract();
+            $model->kcet_number = $contact->kcet_number;
+            $model->program_id = $contact->user->program->id;
+            $model->save();
+
+        } else {
+
+           return false;
 
         }
 

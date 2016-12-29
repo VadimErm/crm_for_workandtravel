@@ -54,13 +54,21 @@ class Ipassport extends \yii\db\ActiveRecord
 
     public function setExpiredDate($value)
     {
-        $date = \DateTime::createFromFormat('d/m/Y', $value);
-        $this->expired_date = $date->format('Y-m-d');
+        if(!empty($value)) {
+            $this->expired_date = \DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        } else {
+            $this->expired_date = null;
+        }
+
     }
 
     public function getExpiredDate()
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $this->expired_date);
-        return date_format($date, 'd/m/Y');
+
+        if(!empty($this->expired_date)){
+            return date_format(\DateTime::createFromFormat('Y-m-d', $this->expired_date), 'd/m/Y');
+        } else {
+            return null;
+        }
     }
 }

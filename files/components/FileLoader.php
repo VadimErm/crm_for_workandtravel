@@ -71,7 +71,7 @@ class FileLoader extends Component
 
     public function pushFile($type, $user_id = null)
     {
-        // TODO проверка на уже загруженый файл
+
 
         if($user_id == null){
             $user_id = \Yii::$app->user->getId();
