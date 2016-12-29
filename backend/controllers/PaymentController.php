@@ -90,11 +90,17 @@ class PaymentController extends BackendController
     public function actionCreate($kcet_number)
     {
         $model = new Payment();
-        $user_id = Contract::findOne(['kcet_number' => $kcet_number])->contact->user->id;
+        if($contract = Contract::findOne(['kcet_number' => $kcet_number])) {
+            $user_id = $contract->contact->user->id;
+         } else {
+            throw new NotFoundHttpException();
+        }
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //var_dump($model);exit;
+
             return $this->redirect(['view-by-kcet', 'kcet_number' => $kcet_number]);
+
         } else {
             return $this->render('create', [
                 'kcet_number' => $kcet_number,

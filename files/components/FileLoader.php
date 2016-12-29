@@ -40,17 +40,27 @@ class FileLoader extends Component
 
     }
 
-    public function getFile($user_id, $type, $own = true)
+    public function getFile()
     {
         /*if ($own && \Yii::$app->user->getId() != $user_id) {
             throw new ForbiddenHttpException('You don\'t have permission');
         }*/
 
+        if(func_num_args() == 2 ){
+
+            $query = ['user_id' => func_get_arg(0), 'type' => func_get_arg(1)];
+
+        } elseif (func_num_args() == 1) {
+
+            $query = ['id' => func_get_arg(0)];
+
+        }
+
         $fileModel = $this->_fileModel
             ->find()
-            ->andWhere(['user_id' => $user_id, 'type' => $type])
+            ->andWhere($query)
             ->one();
-        //var_dump($fileModel);exit;
+
 
         if ($fileModel) {
             $path = \Yii::getAlias($fileModel->path);
@@ -59,6 +69,8 @@ class FileLoader extends Component
             throw new NotFoundHttpException("File not found");
         }
     }
+
+
 
     protected function sendFile($path)
     {
@@ -113,11 +125,22 @@ class FileLoader extends Component
      * @param $user_id integer
      * @param $type string
      */
-    public static function isExists($user_id, $type)
+    public static function isExists()
     {
-        $file = new File();
 
-        $file = $file->findOne(['user_id' => $user_id, 'type' => $file::getType($type)]);
+        $file = new File();
+        if(func_num_args() == 2 ){
+
+            $query = ['user_id' => func_get_arg(0), 'type' => $file::getType(func_get_arg(1))];
+
+        } elseif (func_num_args() == 1) {
+
+            $query = ['id' => func_get_arg(0)];
+
+        }
+       // $file = $file->findOne(['user_id' => $user_id, 'type' => $file::getType($type)]);
+
+        $file = $file->findOne($query);
 
         return !empty($file);
     }

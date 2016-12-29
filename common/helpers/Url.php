@@ -12,14 +12,28 @@ class Url extends \yii\helpers\Url
         return "/files/file/push?&access-token=" . \Yii::$app->user->identity->getAccessToken();
     }
 
-    public static function fileGet($type, $user_id = null)
+    public static function fileGet()
     {
-        $type = File::getType($type);
+        if(func_num_args() == 2 ){
 
-        if ($user_id == null) {
-            $user_id = \Yii::$app->user->getId();
+            $user_id = func_get_arg(1);
+            $type = File::getType(func_get_arg(0));
+
+            if ($user_id == null) {
+                $user_id = \Yii::$app->user->getId();
+            }
+
+            return "/files/file/get?user_id=$user_id&type=$type&access-token=" . \Yii::$app->user->identity->getAccessToken();
+
+        } elseif (func_num_args() == 1) {
+
+            $id = func_get_arg(0);
+
+            return "/files/file/get-by-id?id=$id&access-token=" . \Yii::$app->user->identity->getAccessToken();
+
         }
 
-        return "/files/file/get?user_id=$user_id&type=$type&access-token=" . \Yii::$app->user->identity->getAccessToken();
     }
+
+
 }

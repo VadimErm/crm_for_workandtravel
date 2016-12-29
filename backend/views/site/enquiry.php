@@ -32,7 +32,7 @@ use common\helpers\Url;
                 <img src="<?= Url::fileGet('enquiry', $user_id) ?>" alt="Enquiry" width="500" height="300">
             <?php else : ?>
                 <?php if($role === 'student') { ?>
-                    <form action="<?= Url::filePush($user_id) ?>" class="dropzone">
+                    <form action="<?= Url::filePush() ?>" class="dropzone">
                         <input type="hidden" name="enquiry">
                     </form>
                 <?php } ?>

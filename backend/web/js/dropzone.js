@@ -384,6 +384,21 @@
             sending: noop,
             sendingmultiple: noop,
             success: function (file) {
+            
+            	var fileId = null;
+               try {
+               	fileId = JSON.parse(file.xhr.response).id;
+               } catch (e) {
+                 	fileId = 'Invalid JSON response from server.';
+              	}
+              	
+ 					var paymentCheck = document.getElementById('payment-payment_check');
+ 					
+               if (paymentCheck !== null) {
+               	paymentCheck.value = fileId;
+               }
+               
+                
                 if (file.previewElement) {
                     return file.previewElement.classList.add("dz-success");
                 }

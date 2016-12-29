@@ -31,7 +31,7 @@ use common\helpers\Url;
                 <img src="<?= Url::fileGet('photo_3_5x4_5', $user_id) ?>" alt="Photo 3.4x4.5" width="500" height="300">
             <?php else : ?>
                 <?php if($role === 'student') { ?>
-                    <form action="<?= Url::filePush($user_id) ?>" id="photo_3_5x4_5" class="dropzone">
+                    <form action="<?= Url::filePush() ?>" id="photo_3_5x4_5" class="dropzone">
                         <input type="hidden" name="photo_3_5x4_5">
                     </form>
                 <?php } ?>

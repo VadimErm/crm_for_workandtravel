@@ -54,9 +54,7 @@ class SiteController extends BackendController
         }
         $authManager = Yii::$app->authManager;
 
-        if (Yii::$app->user->isGuest) {
-            $this->redirect(['site/login']);
-        }
+
 
         $role = $authManager->getRolesByUser(Yii::$app->user->getId());
 

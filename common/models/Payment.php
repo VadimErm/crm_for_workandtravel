@@ -42,10 +42,10 @@ class Payment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'payment_check'], 'integer'],
+            [['created_at', 'updated_at', ], 'integer'],
             [['payment'], 'number'],
             [['is_cash'],'boolean'],
-            [['status', 'kcet_number'], 'safe']
+            [['status', 'kcet_number', 'payment_check'], 'safe']
         ];
     }
 

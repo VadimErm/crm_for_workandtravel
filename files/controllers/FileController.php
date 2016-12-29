@@ -41,14 +41,14 @@ class FileController extends Controller
 
     public function actionGet($user_id, $type)
     {
-        // Start download file
-        $role = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->getId());
 
-        $role = reset($role)->name;
+        $this->_fileLoader->getFile($user_id, $type);
 
-        $own = ($role === 'manager' || $role === 'main_manager') ? false : true;
+    }
 
-        $this->_fileLoader->getFile($user_id, $type, $own);
+    public function actionGetById($id)
+    {
+        $this->_fileLoader->getFile($id);
     }
 
     public function actionPush()
@@ -60,12 +60,12 @@ class FileController extends Controller
         } else {
             $user_id = \Yii::$app->request->post()['user_id'];
         }
-        if(!($this->_fileLoader->isExists($user_id, $type))){
+
 
             if ($id = $this->_fileLoader->pushFile($type, $user_id)) {
                 return ['status' => 'success', 'id' => $id];
             }
-        }
+
 
         return ['status' => 'fail'];
 

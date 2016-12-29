@@ -41,6 +41,23 @@ $(document).on('click', '#check', function(event){
     }
 });
 
+//Открытие/закрытие формы загрузки платежных квитанций
+var changeCheckbox = document.querySelector('.js-check-change');
+
+changeCheckbox.onclick = function() {
+
+    var paymentForm = $('#payment_check')[0];
+    if (paymentForm.style.display !== 'none') {
+        $('#collapse-link')[0].click();
+        $('#payment_check').hide();
+    } else {
+        $('#payment_check').show();
+        $('#collapse-link')[0].click();
+
+    }
+
+};
+
 
 function loadDefaultAgreement (form) {
 
@@ -62,6 +79,8 @@ function loadDefaultAgreement (form) {
     });
 
 }
+
+
 
 $(document).ready(function() {
 
