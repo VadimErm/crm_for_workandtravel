@@ -25,10 +25,14 @@ use common\helpers\Url;
             <div class="clearfix"></div>
         </div>
         <div class="x_content"   style="">
-            <form action="<?= Url::filePush() ?>" id="payment_check" class="dropzone" style="">
-                 <input type="hidden" name="payment_check">
-                 <input type="hidden" name="user_id" value="<?=$user_id?>">
-            </form>
+            <?php if ($loaded) { ?>
+                <img src="<?= Url::fileGet($model->payment_check) ?>" alt="Payment Check" width="500" height="300">
+            <?php } elseif ($model->is_cash == false) { ?>
+                <form action="<?= Url::filePush() ?>" id="payment_check" class="dropzone" style="">
+                    <input type="hidden" name="payment_check">
+                    <input type="hidden" name="user_id" value="<?=$user_id?>">
+                </form>
+            <?php } ?>
         </div>
     </div>
 </div>

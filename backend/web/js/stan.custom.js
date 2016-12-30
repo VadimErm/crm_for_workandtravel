@@ -42,21 +42,32 @@ $(document).on('click', '#check', function(event){
 });
 
 //Открытие/закрытие формы загрузки платежных квитанций
-var changeCheckbox = document.querySelector('.js-check-change');
+function togglePayment(checkbox) {
 
-changeCheckbox.onclick = function() {
+    var changeCheckbox = document.querySelector(checkbox);
 
-    var paymentForm = $('#payment_check')[0];
-    if (paymentForm.style.display !== 'none') {
-        $('#collapse-link')[0].click();
-        $('#payment_check').hide();
-    } else {
-        $('#payment_check').show();
-        $('#collapse-link')[0].click();
+    if(changeCheckbox !== null) {
+
+        changeCheckbox.onclick = function() {
+
+            var paymentForm = $('#payment_check')[0];
+            if (paymentForm.style.display !== 'none') {
+                $('#collapse-link')[0].click();
+                $('#payment_check').hide();
+            } else {
+                $('#payment_check').show();
+                $('#collapse-link')[0].click();
+
+            }
+        }
 
     }
 
-};
+}
+
+togglePayment('.js-check-change');
+
+
 
 
 function loadDefaultAgreement (form) {

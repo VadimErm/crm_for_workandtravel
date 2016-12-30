@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -15,6 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $payment_check
+ * @property mixed kcet_number
  */
 class Payment extends \yii\db\ActiveRecord
 {
@@ -84,6 +86,8 @@ class Payment extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+
 
 
     public function getContract()

@@ -42,8 +42,9 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?= $this->render('payment_check', [
-        'loaded' => FileLoaderHelper::isExists('payment_check', $user_id),
+        'loaded' => FileLoaderHelper::isExistsById($model->payment_check),
         'user_id' => $user_id,
+        'model' => $model
     ]) ?>
 
     <div class="form-group">

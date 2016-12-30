@@ -122,3 +122,18 @@ a.desc:after {
 .required {
     color: red;
 }
+
+.table td {
+    text-align: center;
+}
+.detail-view th{
+    width: 15%;
+}
+.payments .select2 {
+    width: 25% !important;
+    float: left;
+}
+.payments .text-muted {
+    width: 285px;
+    float: left;
+}

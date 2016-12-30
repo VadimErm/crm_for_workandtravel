@@ -15,4 +15,9 @@ class FileLoaderHelper
 
         return FileLoader::isExists($user_id, $type);
     }
+
+    public static function isExistsById($id)
+    {
+        return FileLoader::isExists($id);
+    }
 }

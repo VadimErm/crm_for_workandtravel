@@ -138,7 +138,7 @@ class FileLoader extends Component
             $query = ['id' => func_get_arg(0)];
 
         }
-       // $file = $file->findOne(['user_id' => $user_id, 'type' => $file::getType($type)]);
+
 
         $file = $file->findOne($query);
 

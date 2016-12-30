@@ -1,8 +1,11 @@
 <?php
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use common\helpers\Url as UrlHelper;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PaymentSearch */
@@ -32,10 +35,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 </ul>
                 <div class="clearfix"></div>
             </div>
-            <div class="x_content">
+            <div class="x_content payments">
                 <p class="text-muted font-13 m-b-30">
                     <?= Html::a('Create Payment', Url::to(['create', 'kcet_number' => $kcet_number]), ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Back to applicants', Url::to(['student/applicants']), ['class' => 'btn btn-primary']) ?>
+
+                        <?= Select2::widget(
+                            [
+                                'name' => 'status',
+                                'data' => [1 => 'Оплачен', 2 => 'Удален', 3 => 'Ошибочный'],
+                                'options' => ['placeholder' => 'Выберите статус'],
+                                'hideSearch' => true,
+
+
+                            ])
+                        ?>
+
                 </p>
+
                 <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                     <div class="row">
                     </div>
@@ -61,23 +78,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
 
                                     'kcet_number',
-                                    'payment',
 
-
+                                    [
+                                        'attribute' => 'payment',
+                                        'format' => 'currency'
+                                    ],
 
                                     [
                                         'attribute' => 'status',
+                                        'format' => 'raw',
                                         'value' => function ($data) {
 
                                                 switch($data->status){
                                                     case 1:
-                                                        return 'Оплачен';
+                                                        return Html::tag('span', 'Оплачен',['class' => "label label-success"] );
                                                         break;
                                                     case 2:
-                                                        return 'Удален';
+                                                        return Html::tag('span', 'Удален',['class' => "label label-default"] );
                                                         break;
                                                     case 3:
-                                                        return 'Ошибочный';
+                                                        return Html::tag('span', 'Ошибочный',['class' => "label label-danger"] );
                                                         break;
                                                 }
 
@@ -90,9 +110,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     ],
 
-                                    'payment_check',
 
-                                    ['class' => 'yii\grid\ActionColumn'],
+                                    [
+                                        'attribute' => 'payment_check',
+                                        'format' => 'raw',
+                                        'value' => function($data) {
+
+                                               if(!empty($data->payment_check)){
+                                                   return Html::tag('img', '',['src' => UrlHelper::fileGet($data->payment_check), 'height' => '100']);
+                                               } else {
+                                                   return '<span></span>';
+                                               }
+
+
+                                            }
+                                    ],
+
+                                    [
+                                        'class' => 'yii\grid\ActionColumn',
+                                        'template' => '{view} {update}',
+                                    ],
                                 ],
                             ]); ?>
 
