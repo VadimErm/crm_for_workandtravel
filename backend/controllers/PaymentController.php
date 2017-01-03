@@ -52,11 +52,16 @@ class PaymentController extends BackendController
         ]);
     }
 
-    public function actionViewByKcet($kcet_number)
+    public function actionViewBy($kcet_number, $status = null)
     {
+        if($status !== null) {
+            $filter = ['kcet_number' => $kcet_number, 'status' => $status];
+        } else {
+            $filter = ['kcet_number' => $kcet_number];
+        }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Payment::find()->andWhere(['kcet_number' => $kcet_number]),
+            'query' => Payment::find()->andWhere($filter),
             'pagination' => [
                 'pageSize' => 10
             ]

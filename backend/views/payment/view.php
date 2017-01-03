@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="x_content">
                 <p class="text-muted font-13 m-b-30">
                     <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('Back to applicants', Url::to(['view-by-kcet', 'kcet_number' => $model->kcet_number]), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('Back to payments', Url::to(['view-by', 'kcet_number' => $model->kcet_number]), ['class' => 'btn btn-primary']) ?>
                 </p>
 
                 <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">

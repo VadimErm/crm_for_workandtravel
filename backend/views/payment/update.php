@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['form' =>'w0', 'class' => 'btn btn-success' ]) ?>
-        <?= Html::a('Cancel', Url::to(['view-by-kcet', 'kcet_number' => $model->kcet_number]), ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Cancel', Url::to(['view-by', 'kcet_number' => $model->kcet_number]), ['class' => 'btn btn-primary']) ?>
     </div>
 
 </div>

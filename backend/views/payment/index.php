@@ -43,9 +43,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Select2::widget(
                             [
                                 'name' => 'status',
-                                'data' => [1 => 'Оплачен', 2 => 'Удален', 3 => 'Ошибочный'],
+                                'data' => ["kcet_number=$kcet_number" => 'Все', "kcet_number=$kcet_number&status=1" => 'Оплачен', "kcet_number=$kcet_number&status=2" => 'Удален', "kcet_number=$kcet_number&status=3" => 'Ошибочный'],
                                 'options' => ['placeholder' => 'Выберите статус'],
                                 'hideSearch' => true,
+                                'pluginEvents' => [
+                                    'select2:select' => "function(e) {
+                                            var val = e.currentTarget.value;
+                                            var url = 'http://kset.loc/admin/payment/view-by?'+val;
+                                            location.assign(url);
+                                        }",
+                                ]
 
 
                             ])

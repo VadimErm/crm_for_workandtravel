@@ -116,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 },
                                             'payments' => function ($url, $model, $key) {
 
-                                                    $url = Url::to(['payment/view-by-kcet', 'kcet_number' => $model->user->contact->kcet_number]);
+                                                    $url = Url::to(['payment/view-by', 'kcet_number' => $model->user->contact->kcet_number]);
                                                     return Html::a('<i class="fa fa-money" aria-hidden="true" title="Оплата"></i>',  $url);
                                                 }
                                         ]
