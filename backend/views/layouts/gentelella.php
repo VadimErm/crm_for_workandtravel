@@ -1,6 +1,8 @@
 <?php
 /* @var $this \yii\web\View */
 
+use common\helpers\FileLoaderHelper;
+use common\helpers\Url;
 use yii\helpers\Html;
 
 \backend\assets\CustomAsset::register($this);
@@ -35,11 +37,16 @@ use yii\helpers\Html;
                     <!-- menu profile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <img src="/admin/images/img.jpg" alt="..." class="img-circle profile_img">
+                            <?php if(FileLoaderHelper::isExists('photo_3_5x4_5', \Yii::$app->user->getIdentity()->id)) :?>
+                                <img src="<?= Url::fileGet('photo_3_5x4_5', \Yii::$app->user->getIdentity()->id) ?>" alt="..." class="img-circle profile_img">
+                            <?php else : ?>
+                                <img src="/admin/images/man.svg" alt="..." class="img-circle profile_img">
+                            <?php endif; ?>
+
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Student 1</h2>
+                            <h2><?= \Yii::$app->user->getIdentity()->username ?></h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -64,7 +71,12 @@ use yii\helpers\Html;
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="/admin/images/img.jpg" alt="">Student 1
+                                    <?php if(FileLoaderHelper::isExists('photo_3_5x4_5', \Yii::$app->user->getIdentity()->id)) :?>
+                                        <img src="<?= Url::fileGet('photo_3_5x4_5', \Yii::$app->user->getIdentity()->id) ?>" alt="...">
+                                    <?php else : ?>
+                                        <img src="/admin/images/man.svg" alt="...">
+                                    <?php endif; ?>
+                                    <?= \Yii::$app->user->getIdentity()->username ?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">

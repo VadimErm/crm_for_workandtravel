@@ -14,8 +14,8 @@ AgreementAsset::register($this);
     </li>
     <li><a><i class="fa fa-user"></i> Profile <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-            <li><a href="<?= \yii\helpers\Url::to(['site/questionary']) ?>">Summary</a></li>
-            <li><a href="<?= \yii\helpers\Url::to(['site/documents']) ?>">Documents</a></li>
+            <li><a href="<?= \yii\helpers\Url::to(['student/questionary']) ?>">Summary</a></li>
+            <li><a href="<?= \yii\helpers\Url::to(['student/documents']) ?>">Documents</a></li>
         </ul>
     </li>
     <li>

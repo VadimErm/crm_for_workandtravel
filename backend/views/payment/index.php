@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
 
-
                         </ul>
                     </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
@@ -37,14 +36,31 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="x_content payments">
                 <p class="text-muted font-13 m-b-30">
-                    <?= Html::a('Create Payment', Url::to(['create', 'kcet_number' => $kcet_number]), ['class' => 'btn btn-success']) ?>
-                    <?= Html::a('Back to applicants', Url::to(['student/applicants']), ['class' => 'btn btn-primary']) ?>
+                    <?php if($contactStatus == 3){
+                        $buttons = '{view}';
+                    ?>
+
+                    <?php } else {
+                        $buttons = '{view} {update}';
+                    ?>
+                        <?= Html::a('Create Payment', Url::to(['create', 'kcet_number' => $kcet_number]), ['class' => 'btn btn-success']) ?>
+                    <?php } ?>
+
+
+
+                    <?= Html::a('Back to students', Url::to(['student/students']), ['class' => 'btn btn-primary']) ?>
 
                         <?= Select2::widget(
                             [
                                 'name' => 'status',
-                                'data' => ["kcet_number=$kcet_number" => 'Все', "kcet_number=$kcet_number&status=1" => 'Оплачен', "kcet_number=$kcet_number&status=2" => 'Удален', "kcet_number=$kcet_number&status=3" => 'Ошибочный'],
-                                'options' => ['placeholder' => 'Выберите статус'],
+                                'data' => [
+                                    "kcet_number=$kcet_number" => 'All',
+                                    "kcet_number=$kcet_number&status=1" => 'Paid',
+                                    "kcet_number=$kcet_number&status=2" => 'Deleted',
+                                    "kcet_number=$kcet_number&status=3" => 'Wrong',
+                                    "kcet_number=$kcet_number&status=4" => 'Reject'
+                                ],
+                                'options' => ['placeholder' => 'Choose status'],
                                 'hideSearch' => true,
                                 'pluginEvents' => [
                                     'select2:select' => "function(e) {
@@ -65,6 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
+
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'columns' => [
@@ -88,7 +105,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     [
                                         'attribute' => 'payment',
-                                        'format' => 'currency'
+                                        'format' => 'currency',
+                                        'value' => function ($model) {
+                                                if(!empty($model->payment)){
+                                                    return $model->payment;
+                                                } else {
+                                                    return 0;
+                                                }
+                                            }
                                     ],
 
                                     [
@@ -98,13 +122,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                                 switch($data->status){
                                                     case 1:
-                                                        return Html::tag('span', 'Оплачен',['class' => "label label-success"] );
+                                                        return Html::tag('span', 'Paid',['class' => "label label-success"] );
                                                         break;
                                                     case 2:
-                                                        return Html::tag('span', 'Удален',['class' => "label label-default"] );
+                                                        return Html::tag('span', 'Deleted',['class' => "label label-default"] );
                                                         break;
                                                     case 3:
-                                                        return Html::tag('span', 'Ошибочный',['class' => "label label-danger"] );
+                                                        return Html::tag('span', 'Wrong',['class' => "label label-warning"] );
+                                                        break;
+                                                    case 4:
+                                                        return Html::tag('span', 'Reject',['class' => "label label-danger"] );
                                                         break;
                                                 }
 
@@ -135,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     [
                                         'class' => 'yii\grid\ActionColumn',
-                                        'template' => '{view} {update}',
+                                        'template' => $buttons,
                                     ],
                                 ],
                             ]); ?>

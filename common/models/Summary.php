@@ -217,6 +217,7 @@ class Summary extends Model
         $contact->setDepartureDate($attributes['departure_date']);
         $contact->setArrivalDate($attributes['arrival_date']);
         $contact->work_search = ($attributes['work_search'] == 'on') ? 0 : 1;
+        $contact->status = Contact::APPLICANT;
 
         $contact->save();
 

@@ -23,6 +23,7 @@ class Payment extends \yii\db\ActiveRecord
     const STATUS_PAID = 1;
     const STATUS_DELETED = 2;
     const STATUS_ERROR = 3;
+    const STATUS_REJECT = 4;
 
     public function behaviors()
     {

@@ -20,12 +20,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'payment')->textInput() ?>
 
-
-
     <?= $form->field($model, 'status')->widget(Select2::className(), [
 
-        'data' => [1 => 'Оплачен', 2 => 'Удален', 3 => 'Ошибочный'],
-        'options' => ['placeholder' => 'Выберите статус'],
+        'data' => [1 => 'Paid', 2 => 'Deleted', 3 => 'Wrong'],
+        'options' => ['placeholder' => 'Choose status'],
         'hideSearch' => true
 
     ])->label(false)?>
@@ -37,8 +35,8 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
     <div class="form-group">
-        <label>Безналичные
-            <input type="checkbox" name="Payment[is_cash]" class="js-switch js-check-change" data-switchery="true" form="w0"> Наличные </label>
+        <label>Cashless
+            <input type="checkbox" name="Payment[is_cash]" class="js-switch js-check-change" data-switchery="true" form="w0"> Cash </label>
 
     </div>
 

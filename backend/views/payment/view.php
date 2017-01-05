@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'attribute' => 'is_cash',
                                         'label' => 'Cash',
-                                        'value' => $model->is_cash == 1 ? 'Наличные' : 'Безнал',
+                                        'value' => $model->is_cash == 1 ? 'Cash' : 'Cashless',
                                         'format' => 'raw'
 
                                     ],

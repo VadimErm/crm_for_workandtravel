@@ -2,15 +2,50 @@
 /**
  * @var $this \yii\web\View
  */
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 
-$this->title = 'Applicants';
+$this->title = 'Students';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
+<!-- Modal -->
+<div class="modal fade status-change-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Change status</h4>
+            </div>
+            <div class="modal-body">
+                <?php $form = ActiveForm::begin(['action' => 'change-status']); ?>
+                <input type="hidden" id="contact" name="contact" value="">
+                <?= $form->field(new \common\models\Contact(), 'status')->widget(Select2::className(), [
+
+                    'data' => ["1" => 'Applicant', "2" => 'Participant'],
+                    'options' => ['placeholder' => 'Choose status'],
+                    'hideSearch' => true
+
+                ])->label(false)?>
+
+                <?php ActiveForm::end(); ?>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="w0">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content -->
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -60,64 +95,93 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     [
                                         'attribute' => 'fullname',
-                                        'label' => 'ФИО'
+                                        'label' => 'Fullname'
                                     ],
 
                                     [
                                         'attribute' => 'program',
                                         'value' => 'user.program.title',
-                                        'label' => "Программа"
+                                        'label' => "Program"
                                     ],
                                     [
                                         'attribute' => 'year',
                                         'value' => 'user.program.year',
-                                        'label' => "Год программы"
+                                        'label' => "Year of program"
                                     ],
                                     [
                                         'attribute' => 'status',
-                                        'label' => 'Статус'
+                                        'format' => 'raw',
+                                        'label' => 'Status',
+                                        'value' => function($model) {
+
+                                                switch ($model->status) {
+                                                    case 1:
+                                                        return Html::tag('span', 'Applicant',['class' => "label label-default"] );
+                                                        break;
+                                                    case 2;
+                                                        return Html::tag('span', 'Participant',['class' => "label label-success"] );
+                                                        break;
+                                                    case 3;
+                                                        return Html::tag('span', 'Reject',['class' => "label label-danger"] );
+                                                        break;
+
+                                                }
+                                            },
+                                        'filter' => [null => 'All','1' => 'Applicant', '2' => 'Participant', '3' => 'Reject']
                                     ],
                                     [
                                         'attribute' => 'created_at',
-                                        'format' => ['datetime', 'php:Y-m-d H:i:s'],
-                                        'label' => "Создан"
+                                        'format' => ['datetime', 'php:d-m-Y H:i:s'],
+                                        'label' => "Created"
 
                                     ],
 
                                     [
                                         'attribute' => 'updated_at',
-                                        'format' => ['datetime', 'php:Y-m-d H:i:s'],
-                                        'label' => 'Последние обновление'
+                                        'format' => ['datetime', 'php:d-m-Y H:i:s'],
+                                        'label' => 'Updated'
 
                                     ],
 
 
                                     [
                                         'class' => 'yii\grid\ActionColumn',
-                                        'template' => '{view} {update} {documents} {payments}',
+                                        'template' => '{view} {update} {documents} {payments}{status}',
                                         'buttons' =>
                                         [
                                             'view' => function ($url, $model, $key) {
 
-                                                    $url = Url::to(['site/view-summary', 'user_id' => $model->user->id]);
-                                                    return Html::a('<i class="fa fa-eye" aria-hidden="true" title="Просмотр"></i>', $url);
+                                                    $url = Url::to(['student/view-summary', 'user_id' => $model->user->id]);
+                                                    return Html::a('<i class="fa fa-eye" aria-hidden="true" title="View"></i>', $url);
                                                 },
                                             'update' => function ($url, $model, $key) {
 
-                                                    $url = Url::to(['site/update-summary', 'user_id' => $model->user->id]);
-                                                    return Html::a('<i class="fa fa-pencil" aria-hidden="true" title="Редактировать"></i>', $url);
+                                                    $url = Url::to(['student/update-summary', 'user_id' => $model->user->id]);
+                                                    return Html::a('<i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>', $url);
 
                                                 },
                                             'documents' => function ($url, $model, $key) {
 
-                                                    $url = Url::to(['site/documents', 'user_id' => $model->user->id]);
-                                                    return Html::a('<i class="fa fa-file-image-o" title="Загрузить документы" ></i>', $url);
+                                                    $url = Url::to(['student/documents', 'user_id' => $model->user->id]);
+                                                    return Html::a('<i class="fa fa-file-image-o" title="Upload documents" ></i>', $url);
 
                                                 },
                                             'payments' => function ($url, $model, $key) {
 
                                                     $url = Url::to(['payment/view-by', 'kcet_number' => $model->user->contact->kcet_number]);
-                                                    return Html::a('<i class="fa fa-money" aria-hidden="true" title="Оплата"></i>',  $url);
+                                                    if($model->status == 2) {
+                                                        return Html::a('<i class="fa fa-money" aria-hidden="true" title="Payments"></i>',  $url);
+                                                    } else {
+                                                        return null;
+                                                    }
+                                                },
+                                            'status' => function($url, $model, $key) {
+
+                                                    if($model->status !== 3){
+
+                                                        return "<a href='#' class='change-status' data-toggle='modal' data-target='.status-change-modal' data-contact=".$model->user->contact->id."><i class='fa fa-refresh' aria-hidden='true' title='Изменить статус'></i></a>";
+                                                    }
+
                                                 }
                                         ]
                                     ],

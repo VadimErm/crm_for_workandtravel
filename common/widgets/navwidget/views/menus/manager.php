@@ -7,8 +7,8 @@
     <li><a><i class="fa fa-users"></i> Applications <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             <li><a href="<?= \yii\helpers\Url::to(['student/add']) ?>">Invite applicant</a></li>
-            <li><a href="<?= \yii\helpers\Url::to(['student/applicants']) ?>">Applicants</a></li>
-            <li><a href="<?= \yii\helpers\Url::to(['student/participants']) ?>">Participants</a></li>
+            <li><a href="<?= \yii\helpers\Url::to(['student/students']) ?>">Students</a></li>
+
         </ul>
     </li>
     <li><a><i class="fa fa-list-ul"></i> Programs <span class="fa fa-chevron-down"></span></a>

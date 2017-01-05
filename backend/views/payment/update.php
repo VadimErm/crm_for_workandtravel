@@ -26,12 +26,10 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $form->field($model, 'payment')->textInput(['disabled' =>'disabled']) ?>
 
-
-
     <?= $form->field($model, 'status')->widget(Select2::className(), [
 
-        'data' => [1 => 'Оплачен', 2 => 'Удален', 3 => 'Ошибочный'],
-        'options' => ['placeholder' => 'Выберите статус'],
+        'data' => [1 => 'Paid', 2 => 'Deleted', 3 => 'Wrong'],
+        'options' => ['placeholder' => 'Choose status'],
         'hideSearch' => true
 
     ])->label(false)?>
@@ -43,13 +41,13 @@ $this->params['breadcrumbs'][] = 'Update';
     <?php ActiveForm::end(); ?>
 
     <div class="form-group">
-        <label>Безналичные
+        <label>Cashless
             <?php if($model->is_cash == false) : ?>
                 <input type="checkbox" name="Payment[is_cash]" class="js-switch js-check-change" data-switchery="true" form="w0" disabled>
             <?php else : ?>
                 <input type="checkbox" name="Payment[is_cash]" class="js-switch js-check-change" data-switchery="true" form="w0" checked disabled>
             <?php endif ?>
-            Наличные </label>
+            Cash </label>
     </div>
 
     <?= $this->render('payment_check', [

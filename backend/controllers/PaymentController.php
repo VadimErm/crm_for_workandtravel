@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Contact;
 use common\models\Contract;
 use Yii;
 use common\models\Payment;
@@ -60,6 +61,12 @@ class PaymentController extends BackendController
             $filter = ['kcet_number' => $kcet_number];
         }
 
+        if($contract = Contract::findOne(['kcet_number' => $kcet_number])) {
+                $contactStatus = $contract->contact->status;
+        } else {
+            throw new NotFoundHttpException();
+        }
+
         $dataProvider = new ActiveDataProvider([
             'query' => Payment::find()->andWhere($filter),
             'pagination' => [
@@ -70,6 +77,7 @@ class PaymentController extends BackendController
         return $this->render('index',[
             'kcet_number' => $kcet_number,
             'dataProvider' => $dataProvider,
+            'contactStatus' => $contactStatus
 
         ]);
 
@@ -92,8 +100,10 @@ class PaymentController extends BackendController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($kcet_number)
+    public function actionCreate($kcet_number, $reject = false)
     {
+        $view = $reject == false ? 'create' : 'reject';
+
         $model = new Payment();
         if($contract = Contract::findOne(['kcet_number' => $kcet_number])) {
             $user_id = $contract->contact->user->id;
@@ -104,16 +114,28 @@ class PaymentController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            return $this->redirect(['view-by-kcet', 'kcet_number' => $kcet_number]);
+            //var_dump($model);exit;
+
+            if($reject == true) {
+                $contact = $contract->contact;
+                $contact->status = Contact::REJECT;
+                $contact->save();
+            }
+            return $this->redirect(['view-by', 'kcet_number' => $kcet_number]);
 
         } else {
-            return $this->render('create', [
+            return $this->render($view, [
                 'kcet_number' => $kcet_number,
                 'model' => $model,
-                'user_id' => $user_id
+                'user_id' => $user_id,
+                'contract' => $contract
+
             ]);
         }
     }
+
+
+
 
     /**
      * Updates an existing Payment model.

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\ContactSearch;
+use common\models\Summary;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -10,11 +11,14 @@ use backend\models\ContactForm;
 use common\models\User;
 use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use common\models\Program;
 use common\models\Agreement;
 use yii\helpers\ArrayHelper;
 use common\models\Contact;
+use Yii;
+use yii\web\NotFoundHttpException;
 
 class StudentController extends BackendController
 {
@@ -26,19 +30,38 @@ class StudentController extends BackendController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['main_manager', 'manager'],
+                        'roles' => ['manager', 'main_manager']
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index'],
-                        'roles' => ['director']
+                        'actions' => ['index', 'students'],
+                        'roles' => ['director','main_manager', 'manager' ]
                     ],
                     [
                         'allow' => true,
                         'actions' => ['reset-password'],
-                    ]
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['questionary', 'documents', 'view-summary'],
+                        'roles' => ['student']
+                    ],
+
+
                 ]
-            ]
+            ],
+
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'index'  => ['get'],
+                    'questionary'   => ['get', 'post'],
+                    'view-summary' => ['get'],
+                    'update-summary' => ['get', 'post'],
+                    'change-status' => ['post']
+
+                ],
+            ],
         ];
     }
 
@@ -46,7 +69,7 @@ class StudentController extends BackendController
     {
         $role = \Yii::$app->user->getIdentity()->getRole();
 
-        $view = $role == 'director' ? 'index_for_manager' : 'index';
+        $view = $role == 'director' ? 'students_for_director' : 'index';
 
         return $this->render($view);
     }
@@ -133,29 +156,116 @@ class StudentController extends BackendController
         ]);
     }
 
-    public function actionApplicants()
+    public function actionStudents()
     {
+        $role = \Yii::$app->user->getIdentity()->getRole();
+
+        $view = $role == 'director' ? 'students_for_director' : 'students';
+
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
-
-       /* $dataProvider = new ActiveDataProvider([
-            'query' => Contact::find(),
-            'pagination' => [
-                'pageSize' => 10
-            ]
-
-        ]);
-        $contacts = Contact::find()->all();*/
-
-        return $this->render('students', [
+        return $this->render($view, [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+
         ]);
     }
 
-    public function actionParticipants()
+
+
+    public function actionViewSummary($user_id)
     {
-        return $this->render('participants', ['title' => 'Participants']);
+        $model = Summary::getSummary($user_id);
+
+        return $this->render('viewSummary', [
+            'model' =>$model,
+        ]);
+
+    }
+
+    public function actionUpdateSummary($user_id)
+    {
+        $model = Summary::getSummary($user_id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save(true, $user_id)) {
+
+
+            return $this->redirect(['update-summary', 'user_id' => $user_id]);
+
+        } else {
+
+            return $this->render('updateSummary', [
+                'model' => $model,
+            ]);
+        }
+
+
+    }
+
+    public function actionDocuments($user_id = null)
+    {
+        if ($user_id == null) {
+            $user_id = \Yii::$app->user->getId();
+        }
+
+        return $this->render('documents', [
+            'user_id' => $user_id
+        ]);
+    }
+
+    public function actionQuestionary()
+    {
+
+        $model = new Summary();
+        $role = \Yii::$app->user->getIdentity()->getRole();
+        $modelUser = User::findOne(Yii::$app->user->getId());
+
+
+        if ($model->load(Yii::$app->request->post()) && $model->save() ) {
+
+            $this->redirect(['view-summary', 'user_id' => $modelUser->id]);
+
+        }
+
+        $contact = $modelUser
+            ->getContact()
+            ->select('id')
+            ->asArray()
+            ->one();
+
+        if ($role == 'student') {
+            if(!empty($contact)) {
+
+                $this->redirect(['view-summary', 'user_id' => $modelUser->id]);
+
+            } else {
+                $model = new Summary();
+            }
+        }
+
+        return $this->render('questionary' , [
+            'model' => $model,
+        ]);
+
+    }
+
+    public function actionChangeStatus()
+    {
+        $contactId = Yii::$app->request->post('contact');
+
+        if (($model = Contact::findOne($contactId)) !== null) {
+
+            if($model->load(Yii::$app->request->post()) && $model->save()) {
+
+                $this->redirect('students');
+            }
+
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+
+
     }
 }

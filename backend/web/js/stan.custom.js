@@ -68,6 +68,42 @@ function togglePayment(checkbox) {
 togglePayment('.js-check-change');
 
 
+//Изменение статуса
+$('.change-status').on('click', function(e){
+        e.preventDefault();
+        var contactId = $(this).attr('data-contact');
+        $('#contact').val(contactId);
+
+
+});
+
+//Расщет платежа при отказе
+function rejectPayment(withholding, delivery) {
+
+    function count(deliveryVal, withholdingVal){
+        var payment = withholdingVal - deliveryVal;
+        return  payment.toFixed(2);
+    }
+    var paymentInput = $('#payment-payment');
+
+    $('#withholding').on('keyup', function() {
+
+        paymentInput.val(count(delivery.val(),withholding.val()));
+
+        if(paymentInput.val() < 0) {
+                    paymentInput[0].style.borderColor = 'red';
+                } else {
+                    paymentInput[0].style.borderColor ='';
+                }
+
+    });
+
+
+}
+
+rejectPayment($('#withholding'),$('#delivery') );
+
+
 
 
 function loadDefaultAgreement (form) {

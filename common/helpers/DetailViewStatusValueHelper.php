@@ -17,13 +17,16 @@ class DetailViewStatusValueHelper {
 
         switch($status){
             case 1:
-                return Html::tag('span', 'Оплачен',['class' => "label label-success"] );
+                return Html::tag('span', 'Paid',['class' => "label label-success"] );
                 break;
             case 2:
-                return Html::tag('span', 'Удален',['class' => "label label-default"] );
+                return Html::tag('span', 'Deleted',['class' => "label label-default"] );
                 break;
             case 3:
-                return Html::tag('span', 'Ошибочный',['class' => "label label-danger"] );
+                return Html::tag('span', 'Wrong',['class' => "label label-warning"] );
+                break;
+            case 4:
+                return Html::tag('span', 'Reject',['class' => "label label-danger"] );
                 break;
         }
     }

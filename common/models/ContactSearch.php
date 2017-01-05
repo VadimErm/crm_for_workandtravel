@@ -19,7 +19,7 @@ class ContactSearch extends Contact
     {
         return [
 
-            [['fullname'], 'safe'],
+            [['fullname', 'status'], 'safe'],
         ];
     }
 
@@ -41,14 +41,15 @@ class ContactSearch extends Contact
      */
     public function search($params)
     {
-        $query = Contact::find();
+
+         $query = Contact::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
              'pagination' => [
-                'pageSize' => 4
+                'pageSize' => 10
             ]
         ]);
 
@@ -62,7 +63,8 @@ class ContactSearch extends Contact
 
         // grid filtering conditions
 
-        $query->andFilterWhere(['like', 'fullname', $this->fullname]);
+        $query->andFilterWhere(['like', 'fullname', $this->fullname])
+                ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

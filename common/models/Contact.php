@@ -40,6 +40,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Contact extends \yii\db\ActiveRecord
 {
+    const APPLICANT = 1;
+    const PARTICIPANT = 2;
+    const REJECT = 3;
+
     public function behaviors()
     {
         return [
