@@ -39,8 +39,6 @@ class SiteController extends BackendController
         }
         $authManager = Yii::$app->authManager;
 
-
-
         $role = $authManager->getRolesByUser(Yii::$app->user->getId());
 
         return $this->render('index', ['role' => $role]);

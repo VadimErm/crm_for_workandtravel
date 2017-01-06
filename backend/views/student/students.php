@@ -157,13 +157,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'update' => function ($url, $model, $key) {
 
                                                     $url = Url::to(['student/update-summary', 'user_id' => $model->user->id]);
-                                                    return Html::a('<i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>', $url);
+                                                    if($model->status !== 3){
+                                                        return Html::a('<i class="fa fa-pencil" aria-hidden="true" title="Edit"></i>', $url);
+                                                    }
+
 
                                                 },
                                             'documents' => function ($url, $model, $key) {
 
                                                     $url = Url::to(['student/documents', 'user_id' => $model->user->id]);
-                                                    return Html::a('<i class="fa fa-file-image-o" title="Upload documents" ></i>', $url);
+                                                    return Html::a('<i class="fa fa-file-image-o" title="Documents" ></i>', $url);
 
                                                 },
                                             'payments' => function ($url, $model, $key) {

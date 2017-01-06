@@ -35,7 +35,7 @@ class AgreementController extends BackendController
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['main_manager', 'manager'],
+                        'roles' => ['content_manager'],
                     ],
 
                 ]

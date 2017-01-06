@@ -26,6 +26,8 @@ class m161027_085752_rbac_roles extends Migration
 
         $directorRole = $auth->createRole('director');
         $auth->add($directorRole);
+
+
     }
 
     public function down()

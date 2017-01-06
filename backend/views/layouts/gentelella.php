@@ -46,7 +46,7 @@ use yii\helpers\Html;
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2><?= \Yii::$app->user->getIdentity()->username ?></h2>
+                            <h2><?= ucfirst(\Yii::$app->user->getIdentity()->username) ?></h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -76,7 +76,7 @@ use yii\helpers\Html;
                                     <?php else : ?>
                                         <img src="/admin/images/man.svg" alt="...">
                                     <?php endif; ?>
-                                    <?= \Yii::$app->user->getIdentity()->username ?>
+                                    <?= ucfirst(\Yii::$app->user->getIdentity()->username) ?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
