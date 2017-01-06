@@ -36,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="x_content">
                 <p class="text-muted font-13 m-b-30">
-                    <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+                    <?php if($model->contract->contact->status !== 3) : ?>
+
+                        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+                    <?php endif; ?>
                     <?= Html::a('Back to payments', Url::to(['view-by', 'kcet_number' => $model->kcet_number]), ['class' => 'btn btn-primary']) ?>
                 </p>
 
@@ -85,9 +88,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'attribute' => 'payment_check',
 
-                                        'value' => !empty($model->payment_check) ? Html::tag('img', '',['src' => UrlHelper::fileGet($model->payment_check), 'width' => '500'])
-                                                                                  : '<span></span>',
-                                        'format' => 'raw'
+                                        'value' => $model->status !== 4  ? (!empty($model->payment_check) ? Html::tag('img', '',['src' => UrlHelper::fileGet($model->payment_check), 'width' => '500']) : '<span></span>')
+
+                                                                                  :Html::tag('img', '',['src' => UrlHelper::fileGet('reject_application', $model->contract->contact->user->id), 'width' => '500']),
+                                        'format' => 'raw',
+                                        'label' => $model->status !==4 ? 'Payment check' : 'Reject application'
 
                                     ]
                                 ],

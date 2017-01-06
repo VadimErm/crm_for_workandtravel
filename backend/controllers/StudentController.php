@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\helpers\UserStatusHelper;
 use common\models\ContactSearch;
 use common\models\Summary;
 use yii\base\InvalidParamException;
@@ -165,6 +166,7 @@ class StudentController extends BackendController
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
+
         return $this->render($view, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -264,7 +266,6 @@ class StudentController extends BackendController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-
 
 
     }

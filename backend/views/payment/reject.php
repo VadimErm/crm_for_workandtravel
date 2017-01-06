@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <input type="text" name="delivery" class="form-control" id="delivery" disabled='disabled' value=<?= \common\helpers\PaymentsHelper::getAmountPaid($contract->payments) ?>>
 
     </div>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'w2']); ?>
 
     <?= $form->field($model, 'payment')->textInput(['readonly' => 'readonly'])->label('Delivery payment') ?>
 
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['form' =>'w0', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['form' =>'w2', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::a('Cancel', Url::to(['student/students']), ['class' => 'btn btn-primary']) ?>
     </div>
 

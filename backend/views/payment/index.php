@@ -46,8 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::a('Create Payment', Url::to(['create', 'kcet_number' => $kcet_number]), ['class' => 'btn btn-success']) ?>
                     <?php } ?>
 
-
-
                     <?= Html::a('Back to students', Url::to(['student/students']), ['class' => 'btn btn-primary']) ?>
 
                         <?= Select2::widget(
@@ -118,9 +116,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'attribute' => 'status',
                                         'format' => 'raw',
-                                        'value' => function ($data) {
+                                        'value' => function ($model) {
 
-                                                switch($data->status){
+                                                switch($model->status){
                                                     case 1:
                                                         return Html::tag('span', 'Paid',['class' => "label label-success"] );
                                                         break;
@@ -148,13 +146,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'attribute' => 'payment_check',
                                         'format' => 'raw',
-                                        'value' => function($data) {
+                                        'value' => function($model) {
+                                                if($model->status !==4){
+                                                    if(!empty($model->payment_check)){
+                                                        return Html::tag('img', '',['src' => UrlHelper::fileGet($model->payment_check), 'height' => '100']);
+                                                    } else {
+                                                        return '<span></span>';
+                                                    }
+                                                } else {
+                                                   return Html::tag('img', '',['src' => UrlHelper::fileGet('reject_application', $model->contract->contact->user->id), 'height' => '100']);
+                                                }
 
-                                               if(!empty($data->payment_check)){
-                                                   return Html::tag('img', '',['src' => UrlHelper::fileGet($data->payment_check), 'height' => '100']);
-                                               } else {
-                                                   return '<span></span>';
-                                               }
 
 
                                             }

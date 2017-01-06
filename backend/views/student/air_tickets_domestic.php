@@ -3,6 +3,7 @@
  * @var $loaded boolean
  */
 use common\helpers\Url;
+use common\helpers\UserStatusHelper;
 
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -32,10 +33,12 @@ use common\helpers\Url;
                 <img src="<?= Url::fileGet('air_tickets_domestic', $user_id) ?>" alt="Air tickets (domestic airlines)" width="500" height="300">
             <?php else : ?>
                 <?php if($role === 'manager' || $role === 'main_manager') { ?>
-                    <form action="<?= Url::filePush() ?>" class="dropzone">
-                        <input type="hidden" name="air_tickets_domestic">
-                        <input type="hidden" name="user_id" value="<?=$user_id?>">
-                    </form>
+                    <?php if(!UserStatusHelper::isReject($user_id)) : ?>
+                        <form action="<?= Url::filePush() ?>" class="dropzone">
+                            <input type="hidden" name="air_tickets_domestic">
+                            <input type="hidden" name="user_id" value="<?=$user_id?>">
+                        </form>
+                    <?php endif; ?>
                 <?php } ?>
             <?php endif; ?>
         </div>

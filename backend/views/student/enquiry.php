@@ -4,6 +4,8 @@
  */
 
 use common\helpers\Url;
+use common\helpers\UserStatusHelper;
+
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel" style="height: auto;">
@@ -32,9 +34,11 @@ use common\helpers\Url;
                 <img src="<?= Url::fileGet('enquiry', $user_id) ?>" alt="Enquiry" width="500" height="300">
             <?php else : ?>
                 <?php if($role === 'student') { ?>
-                    <form action="<?= Url::filePush() ?>" class="dropzone">
-                        <input type="hidden" name="enquiry">
-                    </form>
+                    <?php if(!UserStatusHelper::isReject($user_id)) : ?>
+                        <form action="<?= Url::filePush() ?>" class="dropzone">
+                            <input type="hidden" name="enquiry">
+                        </form>
+                    <?php endif; ?>
                 <?php } ?>
 
             <?php endif; ?>

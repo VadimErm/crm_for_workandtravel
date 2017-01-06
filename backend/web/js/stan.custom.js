@@ -729,7 +729,7 @@ $(document).ready(function() {
 
     };
     //Валидация подуровней
-   /* $.each(validation_fields, function( index, value ) {
+    $.each(validation_fields, function( index, value ) {
         $('[name = "'+index+'"]').on("click", function () {
           fieldValidation(index, value.validator);
 
@@ -741,11 +741,19 @@ $(document).ready(function() {
         $.each(validation_fields, function( index, value ) {
             fieldValidation(index, value.validator);
         });
-    });*/
+    });
 
 });
+//Валидация суммы возврата при отказе
+$('#w2').on('submit', function(e) {
+
+    $(this).yiiActiveForm('find', 'payment-payment').validate = function(attribute, value, messages, deferred, $form) {
+        var compare = - ($('#delivery').val() - $('#withholding').val());
+        yii.validation.compare(value, messages, {compareValue: compare, type: 'number', operator: '==', message: 'The value does not match with the difference between Amount paid and Withholding' });
+    };
 
 
+});
 
 
 
@@ -903,7 +911,7 @@ var Stan = {
             $('.delete-travel').on('click', function () {
                 Stan.Travel.deleteField(this);
             });
-        }
+        },
     },
     Experience: {
         deleteField: function (element) {

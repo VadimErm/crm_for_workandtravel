@@ -3,6 +3,7 @@
  * @var $loaded boolean
  */
 use common\helpers\Url;
+use common\helpers\UserStatusHelper;
 
 ?>
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -32,9 +33,11 @@ use common\helpers\Url;
                 <img src="<?= Url::fileGet('passport', $user_id) ?>" alt="Photo 3.4x4.5" width="500" height="300">
             <?php else : ?>
                 <?php if($role === 'student') { ?>
-                    <form action="<?= Url::filePush() ?>" class="dropzone">
-                        <input type="hidden" name="passport">
-                    </form>
+                    <?php if(!UserStatusHelper::isReject($user_id)) : ?>
+                        <form action="<?= Url::filePush() ?>" class="dropzone">
+                            <input type="hidden" name="passport">
+                        </form>
+                    <?php endif; ?>
                 <?php } ?>
 
             <?php endif; ?>

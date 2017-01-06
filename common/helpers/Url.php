@@ -12,6 +12,11 @@ class Url extends \yii\helpers\Url
         return "/files/file/push?&access-token=" . \Yii::$app->user->identity->getAccessToken();
     }
 
+    /**
+     * @return string
+     * if two arguments - first arg: file type, second: user id;
+     * if one argument - file id
+     */
     public static function fileGet()
     {
         if(func_num_args() == 2 ){

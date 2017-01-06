@@ -46,7 +46,11 @@ use yii\helpers\Html;
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2><?= ucfirst(\Yii::$app->user->getIdentity()->username) ?></h2>
+                            <?php if(\Yii::$app->user->getIdentity()->getRole() !== 'student'): ?>
+                                <h2><?= ucfirst(\Yii::$app->user->getIdentity()->username) ?></h2>
+                            <?php else: ?>
+                                <h2><?= \Yii::$app->user->getIdentity()->username ?></h2>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -76,7 +80,11 @@ use yii\helpers\Html;
                                     <?php else : ?>
                                         <img src="/admin/images/man.svg" alt="...">
                                     <?php endif; ?>
-                                    <?= ucfirst(\Yii::$app->user->getIdentity()->username) ?>
+                                    <?php if(\Yii::$app->user->getIdentity()->getRole() !== 'student'): ?>
+                                        <?= ucfirst(\Yii::$app->user->getIdentity()->username) ?>
+                                    <?php else: ?>
+                                        <?= \Yii::$app->user->getIdentity()->username ?>
+                                    <?php endif; ?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
