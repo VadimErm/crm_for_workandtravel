@@ -1,11 +1,11 @@
-зрз<?php
+<?php
 
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `payments`.
+ * Handles the creation for table `tasks`.
  */
-class m161227_115824_create_payments_table extends Migration
+class m170117_100458_create_tasks_table extends Migration
 {
     /**
      * @inheritdoc
@@ -16,14 +16,13 @@ class m161227_115824_create_payments_table extends Migration
 
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-        $this->createTable('payments', [
+        $this->createTable('tasks', [
             'id' => $this->primaryKey(),
-            'kcet_number' => $this->string(20),
-            'payment' => $this->float(),
-            'is_cash' => $this->boolean(),
+            'title' => $this->string(60),
+            'content' => $this->text(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
-            'payment_check' => $this->integer(),
+
         ], $tableOptions);
     }
 
@@ -32,6 +31,6 @@ class m161227_115824_create_payments_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('payments');
+        $this->dropTable('tasks');
     }
 }

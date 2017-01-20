@@ -34,8 +34,10 @@ class SiteController extends BackendController
 
     public function actionIndex()
     {
+
         if(Yii::$app->user->isGuest){
-            $this->redirect(['site/login']);
+
+           return $this->redirect(['site/login']);
         }
         $authManager = Yii::$app->authManager;
 
@@ -55,7 +57,12 @@ class SiteController extends BackendController
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            //var_dump($model->login());exit;
+            //return $this->goHome();
+
             return $this->goBack();
+            //return $this->goHome();
+           //return $this->redirect('index');
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -67,6 +74,6 @@ class SiteController extends BackendController
     {
         Yii::$app->user->logout();
 
-        return $this->redirect(['site/login']);
+         return $this->redirect(['site/login']);
     }
 }

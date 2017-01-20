@@ -18,6 +18,21 @@
             <li><a href="<?= \yii\helpers\Url::to(['program/index']) ?>">All programs</a></li>
         </ul>
     </li>
+    <li>
+        <a><i class="fa fa-tasks"></i> Tasks <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <li>
+                <a href="<?= \yii\helpers\Url::to(['task/index']) ?>">
+                    For all
+                </a>
+            </li>
+            <li>
+                <a href="<?= \yii\helpers\Url::to(['task/particular']) ?>">
+                    For particular student
+                </a>
+            </li>
+        </ul>
+    </li>
     <li><a><i class="fa fa-info"></i> Resources <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             <li><a href="<?= \yii\helpers\Url::to(['program/add']) ?>">Add resource</a></li>

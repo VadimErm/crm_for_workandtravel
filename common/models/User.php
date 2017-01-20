@@ -94,6 +94,12 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Program::className(), ['id' =>'program_id']);
     }
 
+    public function getTasks()
+    {
+        return $this->hasMany(Task::className(), ['id' => 'task_id'])
+            ->viaTable('user_task', ['user_id' => 'id']);
+    }
+
     /**
      * @inheritdoc
      */
@@ -180,6 +186,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
+
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 

@@ -1,4 +1,6 @@
 <?php
+
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -12,6 +14,14 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log', 'backend\bootstrap\BackendBootstrap'],
     'modules' => [],
+    'on afterRequest' => function(){
+            $user_id = (Yii::$app->user->getIdentity(false) == null) ? null : Yii::$app->user->getIdentity(false)->id;
+            if($user_id !== null) {
+                $user = \common\models\User::findIdentity($user_id);
+                $user->log_time = time();
+                $user->save();
+            }
+        },
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -20,8 +30,12 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+
         ],
         'session' => [
+
+            // 'db' => 'mydb',  // the application component ID of the DB connection. Defaults to 'db'.
+
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
@@ -36,7 +50,9 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
-        ]
+        ],
+
     ],
+
     'params' => $params,
 ];

@@ -114,7 +114,6 @@ class PaymentController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            //var_dump($model);exit;
 
             if($reject == true) {
                 $contact = $contract->contact;
@@ -133,9 +132,6 @@ class PaymentController extends BackendController
             ]);
         }
     }
-
-
-
 
     /**
      * Updates an existing Payment model.

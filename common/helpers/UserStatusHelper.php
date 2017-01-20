@@ -11,7 +11,13 @@ class UserStatusHelper {
     public static function isReject($user_id)
     {
 
-        return User::findOne($user_id)->contact->status == 3 ? true : false;
+        $contact = User::findOne($user_id)->contact;
+        if(isset($contact)){
+            $contact->status == 3 ? true : false;
+        } else {
+            return false;
+        }
+
     }
 
 } 

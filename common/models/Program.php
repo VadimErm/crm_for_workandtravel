@@ -26,7 +26,7 @@ class Program extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 20],
+            [['title'], 'string', 'max' => 60],
             [['year'], 'integer', 'max' =>9999],
             [['price'], 'number']
         ];
