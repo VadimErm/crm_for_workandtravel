@@ -35,6 +35,7 @@ class FileController extends Controller
     }
 
     public function actionIndex($id, $type = 1)
+
     {
         $this->actionGet($id, $type);
     }
@@ -52,7 +53,9 @@ class FileController extends Controller
     }
 
     public function actionPush()
+
     {
+
         $type = key(\Yii::$app->request->post());
 
         if (empty(\Yii::$app->request->post()['user_id'])){
