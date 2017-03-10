@@ -88,13 +88,9 @@ use yii\helpers\Html;
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span>Настройки</span>
-                                        </a>
-                                    </li>
+
                                     <li><a href="<?= \yii\helpers\Url::to(['site/logout']) ?>"><i
-                                                class="fa fa-sign-out pull-right"></i> Выход</a></li>
+                                                class="fa fa-sign-out pull-right"></i>Logout</a></li>
                                 </ul>
                             </li>
 
