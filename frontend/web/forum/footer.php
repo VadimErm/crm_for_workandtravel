@@ -47,7 +47,7 @@ if ($forum_user['g_read_board'] == '1' && $forum_config['o_quickjump'] == '1')
 
 		var aElements = document.querySelectorAll("a");
 		for (var aIndex = 0; aIndex < aElements.length; aIndex++) {
-			if (aElements[aIndex].href.indexOf("http://kcet.rus-r.ru/forum/viewtopic.php?") != -1) {
+			if (aElements[aIndex].href.indexOf("/forum/viewtopic.php?") != -1) {
 				console.log("aIndex = " + aElements[aIndex].href);
 				var mainElement = aElements[aIndex].parentElement.parentElement.parentElement.parentElement.previousSibling;
 				console.log(mainElement.innerHTML);

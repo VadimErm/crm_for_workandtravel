@@ -8,7 +8,7 @@ $db_password = 'qwerty';
 $db_prefix = '';
 $p_connect = false;
 
-$base_url = 'http://kcet.rus-r.ru/forum';
+$base_url = '/forum';
 
 $cookie_name = 'forum_cookie_1ba570';
 $cookie_domain = '';

@@ -31,7 +31,7 @@
 			<h1>Kazakhstan Counсil <span>for Educational Travel</span></h1>
 			</div>
 		</div> -->
-		<img src="http://kcet.rus-r.ru/forum/img/banner01.png" alt="">
+		<img src="/forum/img/banner01.png" alt="">
 	</div>
 	<div id="brd-nav__secondary">
 		<ul>

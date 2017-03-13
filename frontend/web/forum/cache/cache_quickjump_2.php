@@ -4,7 +4,7 @@ if (!defined('FORUM')) exit;
 define('FORUM_QJ_LOADED', 1);
 $forum_id = isset($forum_id) ? $forum_id : 0;
 
-?><form id="qjump" method="get" accept-charset="utf-8" action="http://kcet.rus-r.ru/forum/viewforum.php">
+?><form id="qjump" method="get" accept-charset="utf-8" action="/forum/viewforum.php">
 	<div class="frm-fld frm-select">
 		<label for="qjump-select"><span><?php echo $lang_common['Jump to'] ?></span></label><br />
 		<span class="frm-input"><select id="qjump-select" name="id">
@@ -62,7 +62,7 @@ $forum_id = isset($forum_id) ? $forum_id : 0;
 
 $forum_javascript_quickjump_code = <<<EOL
 (function () {
-	var forum_quickjump_url = "http://kcet.rus-r.ru/forum/viewforum.php?id=$1";
+	var forum_quickjump_url = "/forum/viewforum.php?id=$1";
 	var sef_friendly_url_array = new Array(34);
 	sef_friendly_url_array[5] = "voprosy-novichkov";
 	sef_friendly_url_array[6] = "svobodnaya-tema";

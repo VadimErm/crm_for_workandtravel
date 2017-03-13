@@ -11,7 +11,7 @@ $forum_stats = array (
   ),
   'total_topics' => '1',
   'total_posts' => '1',
-  'cached' => 1486643784,
+  'cached' => 1489213600,
 );
 
 ?>

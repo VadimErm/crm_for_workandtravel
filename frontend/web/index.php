@@ -1,41 +1,60 @@
-<?php
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
-?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Kset</title>
-	<base href="/">
-	<!--werstka-->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="assets/bower_components/animate.css/animate.min.css">
-	<link rel="stylesheet" href="assets/bower_components/animsition/dist/css/animsition.min.css">
+  <meta charset="utf-8">
+  <title>KSET</title>
+  <base href="/">
+  <!--werstka-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="stylesheet" href="assets/bower_components/animate.css/animate.min.css">
 	<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/bower_components/waves/dist/waves.min.css">
 	<link rel="stylesheet" href="assets/js/jquery-ui/jquery-ui.min.css">
-	<link rel="stylesheet" href="assets/bower_components/pickadate/lib/themes/default.css">
-	<link rel="stylesheet" href="assets/bower_components/pickadate/lib/themes/default.date.css">
-	<link rel="stylesheet" href="assets/js/select2-4.0.3/dist/css/select2.min.css">
+	<title>Главная</title>
+  <link rel="stylesheet" href="assets/js/select2-4.0.3/dist/css/select2.min.css">
 	<link rel="stylesheet" href="assets/js/bxslider-4-master/dist/jquery.bxslider.min.css">
 	<link rel="stylesheet" href="assets/js/fancyBox-master/source/jquery.fancybox.css">
+	<link rel="stylesheet" href="assets/js/perfectScrollbar/css/perfect-scrollbar.min.css">
+	<link rel="stylesheet" href="assets/js/jquery.steps-1.1.0/jquery.steps.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/fonts.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
-  	<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link href="styles.d41d8cd98f00b204e9800998ecf8427e.bundle.css" rel="stylesheet"></head>
+  <!--scripts-->
+<!--jqueri in angular2-->	<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script type="text/javascript" src="assets/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/bower_components/fullpage.js/dist/jquery.fullpage.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
+
+
+	<!--yf-->
+<script type="text/javascript" src="assets/js/animatedModal.js/animatedModal.min.js"></script>
+<script type="text/javascript" src="jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="assets/bower_components/masonry/dist/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="assets/js/bxslider-4-master/dist/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="assets/js/fancyBox-master/source/jquery.fancybox.js"></script>
+<script type="text/javascript" src="assets/js/select2-4.0.3/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/ScrollMagic/scrollmagic/minified/ScrollMagic.min.js"></script>
+<script type="text/javascript" src="assets/js/ScrollMagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+<script type="text/javascript" src="assets/js/perfectScrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.steps-1.1.0/jquery.steps.min.js"></script>
+<script type="text/javascript" src="assets/js/parallax/deploy/jquery.parallax.min.js"></script>
+<script type="text/javascript" src="assets/js/common.js"></script>
+<!--scripts-->
+<link href="styles.d41d8cd98f00b204e980.bundle.css" rel="stylesheet"/></head>
 <body>
-	<app-root>
-		
-		<div class="preloader">
-		<div class="preloader__status"></div>
-		</div>
-		
-	</app-root>
-<script type="text/javascript" src="inline.d41d8cd98f00b204e980.bundle.js"></script><script type="text/javascript" src="styles.b2328beb0372c051d06d.bundle.js"></script><script type="text/javascript" src="scripts.158c9697ac6b496ea171.bundle.js"></script><script type="text/javascript" src="main.a943c16b3cee6b67d3ad.bundle.js"></script></body>
+  <app-root>
+    <div class="preloader">
+		  <div class="preloader__status animated pulse infinite"></div>
+	  </div>
+  </app-root>
+<script type="text/javascript" src="inline.ee3409302387d8c7ef3e.bundle.js"></script><script type="text/javascript" src="polyfills.c0b3b36f692368f8a5c2.bundle.js"></script><script type="text/javascript" src="vendor.1fe6e1a6f85904c7adb9.bundle.js"></script><script type="text/javascript" src="main.cb0001774f0c635e7f09.bundle.js"></script></body>
+
+
 </html>
+ 
+
+
