@@ -16,6 +16,12 @@ use yii\behaviors\TimestampBehavior;
  */
 class Task extends \yii\db\ActiveRecord
 {
+    //Тыпи тасков: для конкретного студента или для всех
+    CONST PARTICULAR = 1;
+    CONST ALL = 2;
+
+
+
     public function behaviors()
     {
         return [
@@ -37,9 +43,10 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
+            [['content', 'description'], 'string'],
+            [['created_at', 'updated_at', 'program_id'], 'integer'],
             [['title'], 'string', 'max' => 60],
+            [['status', 'destination'], 'safe']
         ];
     }
 
@@ -51,11 +58,22 @@ class Task extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'content' => 'Content',
+            'content' => 'Text',
+            'description' => 'Description',
+            'destination' => 'Destination',
+            'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getUpdatedDate()
+    {
+        return date('d-m-Y', $this->updated_at);
+    }
+
+
+
 
     public function getProgram()
     {

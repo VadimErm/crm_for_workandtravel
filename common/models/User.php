@@ -137,6 +137,18 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
     }
 
+    public static function getUsersByRole($role)
+    {
+        if(is_null(Yii::$app->authManager->getRole($role))){
+            return null;
+        }
+
+        return static::find()->where([
+            'id' => Yii::$app->authManager->getUserIdsByRole($role)
+        ])->all();
+
+    }
+
     /**
      * Finds out if password reset token is valid
      *
@@ -250,4 +262,6 @@ class User extends ActiveRecord implements IdentityInterface
         $event->identity->access_token = Yii::$app->security->generateRandomString();
         $event->identity->update();
     }
+
+
 }

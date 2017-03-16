@@ -8,6 +8,7 @@ use Yii;
 use common\models\Payment;
 use common\models\PaymentSearch;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,6 +30,16 @@ class PaymentController extends BackendController
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['manager', 'director'],
+                    ],
+
+                ]
+            ]
         ];
     }
 

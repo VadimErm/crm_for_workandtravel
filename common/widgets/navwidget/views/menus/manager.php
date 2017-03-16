@@ -22,7 +22,7 @@
         <a><i class="fa fa-tasks"></i> Tasks <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             <li>
-                <a href="<?= \yii\helpers\Url::to(['task/index']) ?>">
+                <a href="<?= \yii\helpers\Url::to(['task/all']) ?>">
                     For all
                 </a>
             </li>

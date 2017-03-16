@@ -6,7 +6,12 @@ use common\helpers\FileLoaderHelper;
 
 \backend\assets\SweetAlertAsset::register($this)
 ?>
-<?php $role = reset(\Yii::$app->authManager->getRolesByUser(\Yii::$app->user->getId()))->name;?>
+
+<?php
+$roleArr = \Yii::$app->authManager->getRolesByUser(\Yii::$app->user->getId());
+$role = reset($roleArr)->name;
+?>
+
 
 <div class="row">
     <input type="hidden" id="access-token" name="access-token"
@@ -14,22 +19,22 @@ use common\helpers\FileLoaderHelper;
     <?= $this->render('photo_3_5x4_5', [
         'loaded' => FileLoaderHelper::isExists('photo_3_5x4_5', $user_id),
         'user_id' => $user_id,
-        'role' => $role
+        'role' => $role,
     ]) ?>
     <?= $this->render('photo_10x15', [
         'loaded' => FileLoaderHelper::isExists('photo_10x15', $user_id),
         'user_id' => $user_id,
-        'role' => $role
+        'role' => $role,
     ]) ?>
     <?= $this->render('passport', [
         'loaded' => FileLoaderHelper::isExists('passport', $user_id),
         'user_id' => $user_id,
-        'role' => $role
+        'role' => $role,
     ]) ?>
     <?= $this->render('identification', [
         'loaded' => FileLoaderHelper::isExists('identification', $user_id),
         'user_id' => $user_id,
-        'role' => $role
+        'role' => $role,
     ]) ?>
     <?= $this->render('enquiry', [
         'loaded' => FileLoaderHelper::isExists('enquiry', $user_id),

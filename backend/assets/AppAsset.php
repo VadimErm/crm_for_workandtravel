@@ -38,7 +38,8 @@ class AppAsset extends AssetBundle
         'Flot/jquery.flot.pie.js',
         'Flot/jquery.flot.time.js',
         'Flot/jquery.flot.stack.js',
-        'Flot/jquery.flot.resize.js'
+        'Flot/jquery.flot.resize.js',
+        'masonry/dist/masonry.pkgd.js'
     ];
 
     

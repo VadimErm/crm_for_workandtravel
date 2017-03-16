@@ -137,3 +137,15 @@ a.desc:after {
 
     float: left;
 }
+
+.main_container .top_nav {
+    height: 57px !important;
+}
+/*.grid-item{
+    width: 320px;
+}*/
+.grid-sizer{
+    width: 33.3%;
+}
+
+
