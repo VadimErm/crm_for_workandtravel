@@ -1,6 +1,7 @@
 $(document).ready(function () {
-  $(".task-item").on('click', function (e) {
+  $(".grid-item > a").on('click', function (e) {
     e.preventDefault();
-    console.log(e.currentTarget);
+    var taskId = e.currentTarget.dataset.taskId
+    console.log(taskId);
   });
 });

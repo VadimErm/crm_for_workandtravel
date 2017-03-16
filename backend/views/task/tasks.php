@@ -61,8 +61,8 @@
     <?php foreach ($tasks as $task) : ?>
         <div class="grid-sizer"></div>
         <div class="animated flipInY grid-item col-xs-12 col-sm-6 col-md-6 col-lg-4">
-            <a href="#" >
-                <div class="task-item" data-task-id="<?= $task->id ?>">
+            <a href="#"  data-task-id="<?= $task->id ?>">
+                <div class="task-item" >
                     <div class="tile-stats row" style="border: 0; margin-bottom: 0;">
                         <div class="col-md-8 col-lg-8">
                             <h3><?= $task->title ?></h3>
