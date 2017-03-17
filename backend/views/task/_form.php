@@ -3,6 +3,7 @@
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\helpers\ActiveFormHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Task */
@@ -39,13 +40,23 @@ use yii\widgets\ActiveForm;
         'options' => ['placeholder' => 'Select a program ...'],
 
     ])?>
+    <?= ActiveFormHelper::textWithoutLabel($form, $task, 'attachment', [], 'hiddenInput') ?>
 
-
-
-    <div class="form-group">
-        <?= Html::submitButton($task->isNewRecord ? 'Create' : 'Update', ['class' => $task->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
 
     <?php ActiveForm::end(); ?>
+
+    <?= \common\widgets\file_loader_widget\FileLoaderWidget::widget([
+        'userId' => Yii::$app->user->identity->getId(),
+        'type' => 'attachment',
+        'fileId' => $task->attachment
+    ]); ?>
+
+    <div class="form-group">
+        <?= Html::submitButton($task->isNewRecord ? 'Create' : 'Update', ['form' =>'w0', 'class' => $task->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+
+
+
 
 </div>

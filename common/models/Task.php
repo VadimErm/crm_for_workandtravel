@@ -46,7 +46,7 @@ class Task extends \yii\db\ActiveRecord
             [['content', 'description'], 'string'],
             [['created_at', 'updated_at', 'program_id'], 'integer'],
             [['title'], 'string', 'max' => 60],
-            [['status', 'destination'], 'safe']
+            [['status', 'destination', 'attachment'], 'safe']
         ];
     }
 
@@ -84,5 +84,10 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])
             ->viaTable('user_task',['task_id' => 'id']);
+    }
+
+    public function getFile()
+    {
+        return $this->hasOne(File::className(), ['id' => 'attachment']);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\File;
 use common\models\Program;
 use common\models\Students;
 use common\models\User;
@@ -77,6 +78,8 @@ class TaskController extends BackendController
                 'pageSize' => 5
             ]
         ]);
+
+
         return $this->render('all', [
             'dataProvider' => $dataProvider,
         ]);
@@ -137,12 +140,13 @@ class TaskController extends BackendController
         }
 
         /*echo "<pre>";
-        var_dump($studentId);
+        var_dump(Yii::$app->request->post());
         echo "</pre>" ;
         exit;*/
 
 
         if ($task->load(Yii::$app->request->post()) &&  $task->save()) {
+
 
             if($destination == 'all') {
                 foreach ($students as $student){
@@ -240,6 +244,12 @@ class TaskController extends BackendController
 
         $task = $this->findModel($id);
         $destination = $task->destination;
+
+        if(!is_null($task->attachment)){
+            $file = File::findOne($task->attachment);
+            $file->delete();
+        }
+
 
 
         if($destination == Task::ALL){

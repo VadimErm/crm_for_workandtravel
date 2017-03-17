@@ -30,8 +30,9 @@ class File extends \yii\db\ActiveRecord
         'air_tickets_domestic' => 12,
         'isic' => 13,
         'bank_card' => 14,
-        'payment_check' => 15,
-        'reject_application' => 16
+        'payment_check' => 15, // чек оплаты
+        'reject_application' => 16, //заявление на отказ
+        'attachment' => 17 //прикрипленный файл к таску
 
     ];
     /**
@@ -64,6 +65,37 @@ class File extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'type' => 'Type',
         ];
+    }
+
+    public function delete()
+    {
+        if (!$this->isTransactional(self::OP_DELETE)) {
+
+            $res = $this->deleteInternal();
+            $del = unlink(Yii::getAlias($this->path));
+
+            if($res == false || $del == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        $transaction = static::getDb()->beginTransaction();
+        try {
+            $result = $this->deleteInternal();
+            $del = unlink(Yii::getAlias($this->path));
+            if ($result === false || $del == false) {
+                $transaction->rollBack();
+            } else {
+                $transaction->commit();
+            }
+            return $result;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
     }
 
     public function setType($type)
