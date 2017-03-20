@@ -90,12 +90,7 @@ class TaskController extends BackendController
     {
         $user = Yii::$app->user->identity;
 
-        $tasks = $user->getTasks()->where(['status' => Task::NEW_TASK]);
-        echo "<pre>";
-        var_dump($tasks);
-        echo "</pre>" ;
-        exit;
-
+        $tasks = $user->tasks;
 
         return $this->render('tasks', [
             'tasks' => $tasks
@@ -146,7 +141,10 @@ class TaskController extends BackendController
             $studentId =  Yii::$app->request->post()['Task']['users'];
         }
 
-
+        /*echo "<pre>";
+        var_dump(Yii::$app->request->post());
+        echo "</pre>" ;
+        exit;*/
 
 
         if ($task->load(Yii::$app->request->post()) &&  $task->save()) {
