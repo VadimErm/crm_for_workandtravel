@@ -22,20 +22,16 @@ AgreementAsset::register($this);
         <a><i class="fa fa-tasks"></i> Tasks <span class="label label-success">2</span><span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             <li>
-                <a href="<?= \yii\helpers\Url::to(['site/jobOffer']) ?>">
-                    Sign Job-Offer <span class="label label-success">New</span>
+                <a href="<?= \yii\helpers\Url::to(['task/new']) ?>">
+                    New
                 </a>
             </li>
             <li>
-                <a href="<?= \yii\helpers\Url::to(['site/jobOffer']) ?>">
-                    Complete orientation program <span class="label label-success">New</span>
+                <a href="<?= \yii\helpers\Url::to(['task/done']) ?>">
+                    Done
                 </a>
             </li>
-            <li>
-                <a href="<?= \yii\helpers\Url::to(['site/jobOffer']) ?>">
-                    Some task <span class="label label-default">Done</span>
-                </a>
-            </li>
+
         </ul>
     </li>
     <li>

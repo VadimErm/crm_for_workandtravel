@@ -100,6 +100,12 @@ class User extends ActiveRecord implements IdentityInterface
             ->viaTable('user_task', ['user_id' => 'id']);
     }
 
+    public function getNewTasks()
+    {
+        return $this->hasMany(Task::className(), ['id' => 'task_id'])
+            ->viaTable('user_task', ['user_id' => 'id'])->onCondition(['status' => 1]);
+    }
+
     /**
      * @inheritdoc
      */
@@ -135,6 +141,18 @@ class User extends ActiveRecord implements IdentityInterface
             'password_reset_token' => $token,
             'status' => self::STATUS_ACTIVE,
         ]);
+    }
+
+    public static function getUsersByRole($role)
+    {
+        if(is_null(Yii::$app->authManager->getRole($role))){
+            return null;
+        }
+
+        return static::find()->where([
+            'id' => Yii::$app->authManager->getUserIdsByRole($role)
+        ])->all();
+
     }
 
     /**
@@ -250,4 +268,6 @@ class User extends ActiveRecord implements IdentityInterface
         $event->identity->access_token = Yii::$app->security->generateRandomString();
         $event->identity->update();
     }
+
+
 }

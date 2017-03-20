@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\helpers\UserStatusHelper;
 use common\models\ContactSearch;
 use common\models\Summary;
+use common\models\UserTask;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -268,5 +269,24 @@ class StudentController extends BackendController
         }
 
 
+    }
+
+    public function actionStudentsTask($taskId)
+    {
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => UserTask::find()->where(['task_id' =>$taskId]),
+            'pagination' => [
+                'pageSize' => 5
+            ]
+        ]);
+       /* echo "<pre>";
+       var_dump($userTask[0]->user);
+       echo "</pre>" ;
+       exit;*/
+
+       return $this->render('student_task', [
+           'dataProvider' => $dataProvider
+       ]);
     }
 }

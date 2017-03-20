@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension SYSTEM "ext-1.0.dtd">
+
+<extension engine="1.0">
+	<id>fancy_toggle_cats</id>
+	<title>Fancy Category Hidder</title>
+	<version>1.0.13</version>
+	<description>Forum category collapse</description>
+	<author>dimka.linux@gmail.com</author>
+
+	<minversion>1.4</minversion>
+	<maxtestedon>1.4.2</maxtestedon>
+
+	<dependencies>
+		<dependency>pun_jquery</dependency>
+		<dependency>fancy_jquery_addons</dependency>
+    </dependencies>
+
+	<hooks>
+
+		<hook id="in_forum_loop_start"><![CDATA[
+$classToggled = false;
+$has_toggler = false;
+		]]></hook>
+
+		<hook id="in_qr_get_cats_and_forums"><![CDATA[
+			$fancy_toggle_cats_toggled = null;
+			if (isset($_COOKIE['fancy_toggle_cats'])) {
+				$fancy_toggle_cats_toggled = explode(':', $_COOKIE['fancy_toggle_cats'], 24);
+			}
+		]]></hook>
+
+		<hook id="in_pre_header_load"><![CDATA[
+
+if (file_exists($ext_info['path'].'/style/'.$forum_user['style'].'/style.css'))
+	$style = $ext_info['url'].'/style/'.$forum_user['style'].'/style.css';
+else
+	$style = $ext_info['url'].'/style/Oxygen/style.css';
+
+$forum_loader->add_css($style,array('type' => 'url'));
+$forum_loader->add_js($ext_info['url'].'/toggle.js', array('weight' => 85, 'async' => true));
+		]]></hook>
+
+		<hook id="in_forum_pre_cat_head"><![CDATA[
+
+if (is_array($fancy_toggle_cats_toggled) && in_array($forum_page['cat_count'], $fancy_toggle_cats_toggled))
+{
+	$classToggled = true;
+}
+	$has_toggler = true;
+	$tpl_temp = forum_trim(ob_get_contents());
+	$tpl_main = str_replace('<!-- forum_main -->', $tpl_temp.'<!-- forum_main -->', $tpl_main);
+	ob_end_clean();
+	ob_start();
+
+		]]></hook>
+
+		<hook id="in_row_pre_display"><![CDATA[
+if ($has_toggler)
+{
+	$tpl_temp = forum_trim(ob_get_contents());
+	if ($classToggled)
+	{
+		$tpl_temp = str_replace('<div class="main-head">', '<div class="main-head catToggled">', $tpl_temp);
+		$tpl_temp = str_replace('class="main-content main-category"', 'style="display: none;" class="main-content main-category"', $tpl_temp);
+	}
+	$tpl_temp = str_replace('<div class="main-head', '<div class="main-head has-toggler', $tpl_temp);
+	$tpl_main = str_replace('<!-- forum_main -->', $tpl_temp.'<!-- forum_main -->', $tpl_main);
+	ob_end_clean();
+	ob_start();
+	$classToggled = false;
+	$has_toggler = false;
+}
+
+		]]></hook>
+	</hooks>
+</extension>

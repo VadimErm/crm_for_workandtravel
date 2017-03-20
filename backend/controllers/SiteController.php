@@ -29,6 +29,7 @@ class SiteController extends BackendController
             ],
 
 
+
         ];
     }
 
@@ -39,9 +40,15 @@ class SiteController extends BackendController
 
            return $this->redirect(['site/login']);
         }
-        $authManager = Yii::$app->authManager;
 
-        $role = $authManager->getRolesByUser(Yii::$app->user->getId());
+
+        $user = Yii::$app->user->identity;
+        $role = $user->getRole();
+
+        /*echo '<pre>';
+        var_dump($user->getRole());
+        echo '</pre>';
+        exit;*/
 
         return $this->render('index', ['role' => $role]);
     }

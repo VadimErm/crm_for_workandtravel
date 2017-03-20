@@ -30,6 +30,8 @@ class CustomAsset extends AssetBundle
         'js/dropzone.js',
         'js/yii.activeForm.js',
         'js/stan.custom.js',
+        'js/masonry.js',
+        'js/task.js'
 
 
       //'js/dataTables.js'
