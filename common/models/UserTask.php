@@ -9,10 +9,12 @@ use Yii;
  *
  * @property integer $user_id
  * @property integer $task_id
- * @property integer $readed
+ * @property integer $status
  */
 class UserTask extends \yii\db\ActiveRecord
 {
+
+
     /**
      * @inheritdoc
      */
@@ -27,7 +29,7 @@ class UserTask extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'task_id', 'readed'], 'integer'],
+            [['user_id', 'task_id', 'status'], 'integer'],
         ];
     }
 
@@ -39,7 +41,7 @@ class UserTask extends \yii\db\ActiveRecord
         return [
             'user_id' => 'User ID',
             'task_id' => 'Task ID',
-            'readed' => 'Readed',
+            'Status' => 'Status',
         ];
     }
 

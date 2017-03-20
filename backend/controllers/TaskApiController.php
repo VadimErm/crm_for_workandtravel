@@ -59,4 +59,14 @@ class TaskApiController extends Controller implements ViewContextInterface
         }
     }
 
+    public function actionChangeStatus($status)
+    {
+        $user = \Yii::$app->user;
+
+
+
+
+
+    }
+
 }

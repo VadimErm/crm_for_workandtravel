@@ -19,7 +19,7 @@ class m170117_102332_create_user_task_table extends Migration
         $this->createTable('user_task', [
             'user_id' => $this->integer(),
             'task_id' => $this->integer(),
-            'readed' => $this->boolean(),
+            'status' => $this->integer(),
         ], $tableOptions);
     }
 

@@ -6,6 +6,7 @@ use common\models\File;
 use common\models\Program;
 use common\models\Students;
 use common\models\User;
+use common\models\UserTask;
 use Yii;
 use common\models\Task;
 use yii\data\ActiveDataProvider;
@@ -88,7 +89,13 @@ class TaskController extends BackendController
     public function actionNew()
     {
         $user = Yii::$app->user->identity;
-        $tasks = $user->tasks;
+
+        $tasks = $user->getTasks()->where(['status' => Task::NEW_TASK]);
+        echo "<pre>";
+        var_dump($tasks);
+        echo "</pre>" ;
+        exit;
+
 
         return $this->render('tasks', [
             'tasks' => $tasks
@@ -139,10 +146,7 @@ class TaskController extends BackendController
             $studentId =  Yii::$app->request->post()['Task']['users'];
         }
 
-        /*echo "<pre>";
-        var_dump(Yii::$app->request->post());
-        echo "</pre>" ;
-        exit;*/
+
 
 
         if ($task->load(Yii::$app->request->post()) &&  $task->save()) {
@@ -151,13 +155,14 @@ class TaskController extends BackendController
             if($destination == 'all') {
                 foreach ($students as $student){
                     if($student->program_id == $task->program_id){
-                        $task->link('users', $student);
+                        $task->link('users', $student, ['status' => Task::NEW_TASK]);
+
                     }
 
                 }
             } elseif ($destination == 'particular'){
                 $student = User::findOne($studentId);
-                $task->link('users', $student);
+                $task->link('users', $student, ['status' => Task::NEW_TASK]);
             }
 
 

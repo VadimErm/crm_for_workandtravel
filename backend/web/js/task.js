@@ -1,26 +1,33 @@
 $(document).ready(function () {
   $(".grid-item > a").on('click', function (e) {
     e.preventDefault();
-    var taskId = e.currentTarget.dataset.taskId
-    $.ajax({
-      url: '/admin/task-api/get-task?id=' + taskId,
-      method: 'GET',
-      success: function (response) {
-        console.log(response);
-        /*var taskModal = new Stan.Modal({
-          id: 'taskModal',
-          confirmHandler: function () {
-            this.hide();
-          },
-          html: '',
-        }).show();*/
+    var taskId = e.currentTarget.dataset.taskId;
+    if (!$("#taskModal-" + taskId).length) {
+      $.ajax({
+        url: '/admin/task-api/get-task?id=' + taskId,
+        method: 'GET',
+        success: function (response) {
 
-      }
+          var taskModal = new Stan.Modal({
+            id: 'taskModal-' + taskId,
+            confirmHandler: function () {
+              this.hide();
+            },
+            html: response,
+          }).show();
 
-    });
+        }
 
-    console.log(taskId);
+
+      });
+    } else {
+      $("#taskModal-" + taskId).modal('show');
+    }
+
+
   });
+
+
 });
 Dropzone.options.attachment = {
   init: function() {

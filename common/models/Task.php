@@ -20,6 +20,12 @@ class Task extends \yii\db\ActiveRecord
     CONST PARTICULAR = 1;
     CONST ALL = 2;
 
+    //Статус задания
+    CONST NEW_TASK = 1;
+    CONST READED = 2;
+    CONST DONE = 3;
+
+
 
 
     public function behaviors()
