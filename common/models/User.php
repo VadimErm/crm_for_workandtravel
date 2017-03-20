@@ -103,8 +103,19 @@ class User extends ActiveRecord implements IdentityInterface
     public function getNewTasks()
     {
         return $this->hasMany(Task::className(), ['id' => 'task_id'])
-            ->viaTable('user_task', ['user_id' => 'id'])->onCondition(['status' => 1]);
+            ->viaTable('user_task', ['user_id' => 'id'],
+                function($q){
+                    return $q->andWhere([ 'status' => Task::NEW_TASK])->orWhere(['status' => Task::READED]);
+                });
     }
+
+    public function getUserTasks()
+    {
+        return $this->hasMany(UserTask::className(), ['user_id' => 'id']);
+
+    }
+
+
 
     /**
      * @inheritdoc

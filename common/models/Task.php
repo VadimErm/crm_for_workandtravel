@@ -92,6 +92,12 @@ class Task extends \yii\db\ActiveRecord
             ->viaTable('user_task',['task_id' => 'id']);
     }
 
+    public function getUserTasks()
+    {
+        return $this->hasMany(UserTask::className(), ['task_id' => 'id']);
+
+    }
+
     public function getFile()
     {
         return $this->hasOne(File::className(), ['id' => 'attachment']);

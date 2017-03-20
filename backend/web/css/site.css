@@ -148,4 +148,18 @@ a.desc:after {
     width: 33.3%;
 }
 
+.new-task {
+    box-shadow: 3px 3px 6px green;
+    border: 1px solid rgba(46, 204, 113,1.0) !important;
+    background-color: rgba(46, 204, 113,1.0) !important;
+
+}
+.new-task h3, .new-task p, .new-task .task-date, .new-task .icon {
+    color:white !important;
+}
+.new-task .tile-stats {
+    background: transparent;
+
+}
+
 

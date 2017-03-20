@@ -86,12 +86,25 @@ class TaskController extends BackendController
         ]);
 
     }
-    public function actionNew()
+    public function actionNew($destination = null)
     {
         $user = Yii::$app->user->identity;
 
-        $tasks = $user->tasks;
 
+        if(!is_null($destination)){
+            $tasks = $user->getUserTasks()->where(['status' => 1])->orWhere(['status' => 2])->with(['task' =>
+            function ($query) use ($destination) {
+                $query->andWhere(['destination' => $destination]);
+             }])->all();
+        } else {
+            $tasks = $user->getUserTasks()->where(['status' => 1])->orWhere(['status' => 2])->with('task')->all();
+        }
+
+
+       /*echo "<pre>";
+         var_dump($tasks[0]->status);
+        echo  "</pre>";
+        exit;*/
         return $this->render('tasks', [
             'tasks' => $tasks
         ]);

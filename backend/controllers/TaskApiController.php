@@ -4,6 +4,7 @@
 namespace backend\controllers;
 
 use common\models\Task;
+use common\models\UserTask;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\web\Response;
@@ -45,11 +46,27 @@ class TaskApiController extends Controller implements ViewContextInterface
         return '@backend/views/task';
     }
 
-    public function actionGetTask($id)
+    public function actionReadTask($id)
     {
         $task = Task::findOne($id);
+        $user = \Yii::$app->user;
 
-        if(!is_null($task)){
+        $task = Task::find()->where(['id' => $id])->with(['userTasks' => function ($query) use ($user) {
+            $query->andWhere(['user_id' => $user->id]);
+        }])->one();
+        //return var_dump($task->userTasks);
+        // TODO доделать выборку из базы в замисимости от user_task.status
+        if($task->userTasks[0]->status == Task::NEW_TASK) {
+
+
+            $readed = Yii::$app->db->createCommand()
+                ->update('user_task', ['status' => 2], ['and', "user_id = $user->id", "task_id = $id"])
+                ->execute();
+        } else {
+            $readed = true;
+        }
+
+        if(!is_null($task) && $readed){
           return  $this->renderAjax('task_modal',
                 [
                     'task' =>$task
@@ -59,12 +76,17 @@ class TaskApiController extends Controller implements ViewContextInterface
         }
     }
 
-    public function actionChangeStatus($status)
+    public function actionChangeStatus($id, $status)
     {
         $user = \Yii::$app->user;
 
-
-
+        if(Yii::$app->db->createCommand()
+            ->update('user_task', ['status' => $status], ['and', "user_id = $user->id", "task_id = $id"])
+            ->execute()) {
+            return ['success'];
+        } else {
+            return ['error'];
+        }
 
 
     }

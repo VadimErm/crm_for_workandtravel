@@ -110,6 +110,7 @@ class StudentController extends BackendController
 
                 $passwordResetModel = new PasswordResetRequestForm();
 
+
                 if ($passwordResetModel->sendEmail($user)) {
 
                     \Yii::$app->session->setFlash('success', 'The passwordreset was successfully send to new student mail.');

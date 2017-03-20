@@ -2,9 +2,10 @@ $(document).ready(function () {
   $(".grid-item > a").on('click', function (e) {
     e.preventDefault();
     var taskId = e.currentTarget.dataset.taskId;
+    console.log(taskId);
     if (!$("#taskModal-" + taskId).length) {
       $.ajax({
-        url: '/admin/task-api/get-task?id=' + taskId,
+        url: '/admin/task-api/read-task?id=' + taskId,
         method: 'GET',
         success: function (response) {
 
