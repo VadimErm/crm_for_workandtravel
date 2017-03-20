@@ -109,6 +109,8 @@ class StudentController extends BackendController
                 $auth->assign($studentRole, $user->getId()); 
 
                 $passwordResetModel = new PasswordResetRequestForm();
+                $passwordResetModel->email = $user->email;
+
 
                 if ($passwordResetModel->sendEmail($user)) {
 

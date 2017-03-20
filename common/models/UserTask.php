@@ -50,4 +50,11 @@ class UserTask extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
 
     }
+
+    public function getTask()
+    {
+        return $this->hasOne(Task::className(), ['id' => 'task_id']);
+    }
+
+
 }

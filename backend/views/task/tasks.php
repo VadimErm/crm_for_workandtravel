@@ -42,25 +42,27 @@
 
 <div class="grid row">
     <?php foreach ($tasks as $task) : ?>
-        <div class="grid-sizer"></div>
-        <div class="animated flipInY grid-item col-xs-12 col-sm-6 col-md-6 col-lg-4">
-            <a href="#"  data-task-id="<?= $task->id ?>">
-                <div class="task-item" >
-                    <div class="tile-stats row" style="border: 0; margin-bottom: 0;">
-                        <div class="col-md-8 col-lg-8">
-                            <h3><?= $task->title ?></h3>
+        <?php if(!is_null($task->task)) : ?>
+            <div class="grid-sizer"></div>
+            <div class="animated flipInY grid-item col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <a href="#"  data-task-id="<?= $task->task->id ?>">
+                    <div class="task-item <?php if($task->status == \common\models\Task::NEW_TASK) { echo 'new-task'; } ?>" >
+                        <div class="tile-stats row" style="border: 0; margin-bottom: 0;">
+                            <div class="col-md-8 col-lg-8">
+                                <h3><?= $task->task->title ?></h3>
+                            </div>
+                            <div class="col-md-4 col-lg-4 ">
+                                <div class="icon pull-right" style="width: 45px; height: 45px;"><i class="fa fa-caret-square-o-right"></i></div>
+                            </div>
                         </div>
-                        <div class="col-md-4 col-lg-4 ">
-                            <div class="icon pull-right" style="width: 45px; height: 45px;"><i class="fa fa-caret-square-o-right"></i></div>
-                        </div>
+
+                        <div class="task-date"><?= $task->task->getUpdatedDate()?></div>
+                        <p class="description"><?= $task->task->description ?></p>
                     </div>
+                </a>
 
-                    <div class="task-date"><?= $task->getUpdatedDate()?></div>
-                    <p class="description"><?= $task->description ?></p>
-                </div>
-            </a>
-
-        </div>
+            </div>
+        <?php endif; ?>
     <?php endforeach; ?>
  </div>
 </div>
