@@ -32,7 +32,6 @@
 
 	<!--yf-->
 <script type="text/javascript" src="assets/js/animatedModal.js/animatedModal.min.js"></script>
-<script type="text/javascript" src="jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="assets/bower_components/masonry/dist/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="assets/js/bxslider-4-master/dist/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="assets/js/fancyBox-master/source/jquery.fancybox.js"></script>
@@ -44,14 +43,14 @@
 <script type="text/javascript" src="assets/js/parallax/deploy/jquery.parallax.min.js"></script>
 <script type="text/javascript" src="assets/js/common.js"></script>
 <!--scripts-->
-<link href="styles.d41d8cd98f00b204e980.bundle.css" rel="stylesheet"/></head>
+</head>
 <body>
   <app-root>
     <div class="preloader">
 		  <div class="preloader__status animated pulse infinite"></div>
 	  </div>
   </app-root>
-<script type="text/javascript" src="inline.ee3409302387d8c7ef3e.bundle.js"></script><script type="text/javascript" src="polyfills.c0b3b36f692368f8a5c2.bundle.js"></script><script type="text/javascript" src="vendor.1fe6e1a6f85904c7adb9.bundle.js"></script><script type="text/javascript" src="main.cb0001774f0c635e7f09.bundle.js"></script></body>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="scripts.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 
 
 </html>
