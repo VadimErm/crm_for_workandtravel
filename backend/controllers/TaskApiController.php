@@ -58,7 +58,6 @@ class TaskApiController extends Controller implements ViewContextInterface
         // TODO доделать выборку из базы в замисимости от user_task.status
         if($task->userTasks[0]->status == Task::NEW_TASK) {
 
-
             $readed = Yii::$app->db->createCommand()
                 ->update('user_task', ['status' => 2], ['and', "user_id = $user->id", "task_id = $id"])
                 ->execute();

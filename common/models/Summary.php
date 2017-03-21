@@ -92,7 +92,7 @@ class Summary extends Model
         return
         [
         
-          /* [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
+          [['fullname', 'kcet_number', 'kcet_date', 'firstname_ipass','lastname_ipass',
               'birth_date', 'birth_country', 'birth_region', 'birth_city','married',
               'email', 'skype', 'preferred_job', 'preferred_state'], 'required'],
 
@@ -111,7 +111,7 @@ class Summary extends Model
 
              ['social_security_number', 'match', 'pattern' => '/^[\d]{3}-[\d]{2}-[\d]{4}$/'],
 
-             [['work_search'], 'safe']*/
+             [['work_search'], 'safe']
 
         ];
     }
