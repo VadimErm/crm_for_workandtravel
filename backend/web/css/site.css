@@ -154,6 +154,11 @@ a.desc:after {
     background-color: rgba(46, 204, 113,1.0) !important;
 
 }
+.task-default{
+    -webkit-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.5);
+    box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.5);
+}
 .new-task h3, .new-task p, .new-task .task-date, .new-task .icon {
     color:white !important;
 }
@@ -161,5 +166,6 @@ a.desc:after {
     background: transparent;
 
 }
+
 
 

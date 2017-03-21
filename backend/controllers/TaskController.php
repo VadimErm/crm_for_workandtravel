@@ -86,25 +86,37 @@ class TaskController extends BackendController
         ]);
 
     }
-    public function actionNew($destination = null)
+    public function actionNew($destination = null, $status = null)
     {
         $user = Yii::$app->user->identity;
 
 
-        if(!is_null($destination)){
-            $tasks = $user->getUserTasks()->where(['status' => 1])->orWhere(['status' => 2])->with(['task' =>
-            function ($query) use ($destination) {
-                $query->andWhere(['destination' => $destination]);
-             }])->all();
-        } else {
-            $tasks = $user->getUserTasks()->where(['status' => 1])->orWhere(['status' => 2])->with('task')->all();
+        if(!is_null($destination) && $destination !== '0'){
+            if(!is_null($status) && $status !== '0'){
+                $tasks = $user->getUserTasks()->where(['status' => (int) $status])->with(['task' =>
+                    function ($query) use ($destination) {
+                        $query->andWhere(['destination' => $destination]);
+                    }])->all();
+
+            } else{
+                $tasks = $user->getUserTasks()->where(['status' => Task::NEW_TASK])->orWhere(['status' => Task::READED])->with(['task' =>
+                    function ($query) use ($destination) {
+                        $query->andWhere(['destination' => $destination]);
+                    }])->all();
+            }
+
+
+        } elseif(is_null($destination) || $destination == '0') {
+            if(!is_null($status) && $status !== '0'){
+                $tasks = $user->getUserTasks()->where(['status' => (int) $status])->with('task')->all();
+
+            } else{
+                $tasks = $user->getUserTasks()->where(['status' => Task::NEW_TASK])->orWhere(['status' => Task::READED])->with('task')->all();
+            }
+
         }
 
 
-       /*echo "<pre>";
-         var_dump($tasks[0]->status);
-        echo  "</pre>";
-        exit;*/
         return $this->render('tasks', [
             'tasks' => $tasks
         ]);
@@ -112,7 +124,30 @@ class TaskController extends BackendController
 
     }
 
-    public function actionDone(){
+    public function actionDone($destination = null)
+    {
+        $user = Yii::$app->user->identity;
+
+        if(!is_null($destination) && $destination !== '0'){
+
+            $tasks = $user->getUserTasks()->where(['status' => Task::DONE])->with(['task' =>
+                function ($query) use ($destination) {
+                    $query->andWhere(['destination' => $destination]);
+                }])->all();
+
+
+
+        } elseif(is_null($destination) || $destination == '0') {
+
+            $tasks = $user->getUserTasks()->where(['status' => Task::DONE])->with('task')->all();
+
+
+        }
+        $done = true;
+        return $this->render('tasks', [
+            'tasks' => $tasks,
+            'done' => $done
+        ]);
 
     }
 
@@ -154,12 +189,6 @@ class TaskController extends BackendController
             $studentId =  Yii::$app->request->post()['Task']['users'];
         }
 
-        /*echo "<pre>";
-        var_dump(Yii::$app->request->post());
-        echo "</pre>" ;
-        exit;*/
-
-
         if ($task->load(Yii::$app->request->post()) &&  $task->save()) {
 
 
@@ -199,10 +228,6 @@ class TaskController extends BackendController
         $task = $this->findModel($id);
         $destination = $task->destination;
 
-        /*echo "<pre>";
-            var_dump($task);
-            echo "</pre>" ;
-            exit;*/
         $programs = Program::find()->asArray()->all();
         $programsData = ArrayHelper::map($programs,'id', 'title');
         $students = User::getUsersByRole('student');
