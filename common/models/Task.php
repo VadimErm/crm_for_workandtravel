@@ -102,4 +102,42 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasOne(File::className(), ['id' => 'attachment']);
     }
+
+    public function sendMailForAll()
+    {
+
+        foreach ($this->userTasks as $userTask){
+
+            $send = Yii::$app->mailer->compose(
+                    ['html' => 'task_html', 'text' => 'task_text'],
+                    ['task' =>$this]
+                )
+                ->setFrom('admin@kcet.com')
+                ->setTo($userTask->user->email)
+                ->setSubject($this->title)
+                ->send();
+            if(!$send) {
+                return false;
+            }
+        }
+
+       /* echo "<pre>";
+        var_dump($recipients);
+        echo  "</pre>";
+        exit;*/
+        return  true;
+
+    }
+
+    public function sendMail()
+    {
+        return Yii::$app->mailer->compose(
+                ['html' => 'task_html', 'text' => 'task_text'],
+                ['task' =>$this]
+            )
+            ->setFrom('admin@kcet.com')
+            ->setTo($this->userTasks[0]->user->email)
+            ->setSubject($this->title)
+            ->send();
+    }
 }

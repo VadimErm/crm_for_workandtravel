@@ -200,9 +200,15 @@ class TaskController extends BackendController
                     }
 
                 }
+
+                $task->sendMailForAll();
+
             } elseif ($destination == 'particular'){
                 $student = User::findOne($studentId);
                 $task->link('users', $student, ['status' => Task::NEW_TASK]);
+                $task->sendMail();
+
+
             }
 
 
