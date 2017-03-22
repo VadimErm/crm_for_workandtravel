@@ -440,11 +440,14 @@ $(document).ready(function(){
 		slideMargin: 10,
 		minSlides: 3
 	});
-	$('.carousel').bxSlider({
-		mode: 'horizontal',
-		slideMargin: 10,
-		minSlides: 3
-	});
+	// $('.carousel').bxSlider({
+	// 	mode: 'horizontal',
+	// 	slideMargin: 10,
+	// 	minSlides: 3,
+	// 	onSliderLoad: function() { 
+	//     //$('.bx-wrapepr').attr('_ngcontent-xae-36','');
+	// 	console.log('hello'); }
+	// });
 	// Selectmenu
 	$(".selectmenu").selectmenu();
 	$( function() {

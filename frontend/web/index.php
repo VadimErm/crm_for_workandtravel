@@ -24,25 +24,9 @@
 	<link rel="stylesheet" href="assets/css/fonts.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
   <!--scripts-->
+
 <!--jqueri in angular2-->	<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="assets/bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/bower_components/fullpage.js/dist/jquery.fullpage.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
 
-
-	<!--yf-->
-<script type="text/javascript" src="assets/js/animatedModal.js/animatedModal.min.js"></script>
-<script type="text/javascript" src="assets/bower_components/masonry/dist/masonry.pkgd.min.js"></script>
-<script type="text/javascript" src="assets/js/bxslider-4-master/dist/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="assets/js/fancyBox-master/source/jquery.fancybox.js"></script>
-<script type="text/javascript" src="assets/js/select2-4.0.3/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="assets/js/ScrollMagic/scrollmagic/minified/ScrollMagic.min.js"></script>
-<script type="text/javascript" src="assets/js/ScrollMagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
-<script type="text/javascript" src="assets/js/perfectScrollbar/js/perfect-scrollbar.jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery.steps-1.1.0/jquery.steps.min.js"></script>
-<script type="text/javascript" src="assets/js/parallax/deploy/jquery.parallax.min.js"></script>
-<script type="text/javascript" src="assets/js/common.js"></script>
-<!--scripts-->
 </head>
 <body>
   <app-root>
