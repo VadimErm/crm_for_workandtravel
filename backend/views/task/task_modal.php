@@ -13,7 +13,9 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Done</button>
+                    <?php if($task->userTasks[0]->status !== \common\models\Task::DONE) : ?>
+                        <button type="button" class="btn btn-primary confirm">Done</button>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

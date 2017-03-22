@@ -45,10 +45,7 @@ class SiteController extends BackendController
         $user = Yii::$app->user->identity;
         $role = $user->getRole();
 
-        /*echo '<pre>';
-        var_dump($user->getRole());
-        echo '</pre>';
-        exit;*/
+
 
         return $this->render('index', ['role' => $role]);
     }

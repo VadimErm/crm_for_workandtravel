@@ -111,7 +111,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getUserTasks()
     {
-        return $this->hasMany(UserTask::className(), ['user_id' => 'id']);
+        return $this->hasMany(UserTask::className(), ['user_id' => 'id'])->orderBy(['status' =>SORT_ASC]);
 
     }
 

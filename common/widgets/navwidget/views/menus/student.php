@@ -19,7 +19,7 @@ AgreementAsset::register($this);
         </ul>
     </li>
     <li>
-        <a><i class="fa fa-tasks"></i> Tasks <span class="label label-success">2</span><span class="fa fa-chevron-down"></span></a>
+        <a><i class="fa fa-tasks"></i> Tasks <?= \common\widgets\new_tasks_count_widget\NewTasksCountWidget::widget(['user' =>Yii::$app->user->identity]) ?> <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             <li>
                 <a href="<?= \yii\helpers\Url::to(['task/new']) ?>">

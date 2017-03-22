@@ -48,19 +48,13 @@ class TaskApiController extends Controller implements ViewContextInterface
 
     public function actionReadTask($id)
     {
-        $task = Task::findOne($id);
-        $user = \Yii::$app->user;
 
-        $task = Task::find()->where(['id' => $id])->with(['userTasks' => function ($query) use ($user) {
-            $query->andWhere(['user_id' => $user->id]);
-        }])->one();
-        //return var_dump($task->userTasks);
-        // TODO доделать выборку из базы в замисимости от user_task.status
+        $task = $this->findTask($id);
+
         if($task->userTasks[0]->status == Task::NEW_TASK) {
 
-            $readed = Yii::$app->db->createCommand()
-                ->update('user_task', ['status' => 2], ['and', "user_id = $user->id", "task_id = $id"])
-                ->execute();
+            $readed = $this->changeStatus(Task::READED, $id);
+
         } else {
             $readed = true;
         }
@@ -75,18 +69,43 @@ class TaskApiController extends Controller implements ViewContextInterface
         }
     }
 
-    public function actionChangeStatus($id, $status)
+    public function actionDoneTask()
     {
-        $user = \Yii::$app->user;
-
-        if(Yii::$app->db->createCommand()
-            ->update('user_task', ['status' => $status], ['and', "user_id = $user->id", "task_id = $id"])
-            ->execute()) {
-            return ['success'];
+        $request = Yii::$app->request;
+        if($request->getIsPatch()){
+            $taskId = $request->getBodyParam('taskId');
+            if($this->changeStatus(Task::DONE, $taskId)){
+                return ['success'];
+            } else {
+                return ['error'];
+            }
         } else {
             return ['error'];
         }
 
+
+
+    }
+
+    protected function changeStatus($status, $id)
+    {
+        $user = \Yii::$app->user;
+        return Yii::$app->db->createCommand()
+            ->update('user_task', ['status' => $status], ['and', "user_id = $user->id", "task_id = $id"])
+            ->execute();
+    }
+
+    protected function findTask($id)
+    {
+        $user = \Yii::$app->user;
+
+        if (($task = Task::find()->where(['id' => $id])->with(['userTasks' => function ($query) use ($user) {
+                $query->andWhere(['user_id' => $user->id]);
+            }])->one()) !== null) {
+            return $task;
+        } else {
+            throw new NotFoundHttpException('The requested task does not exist.');
+        }
 
     }
 
