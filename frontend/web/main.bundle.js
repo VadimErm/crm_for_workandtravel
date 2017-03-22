@@ -2739,7 +2739,7 @@ module.exports = "<div class=\"vertical-navbar__logo\">\n  <a [routerLink]=\"['/
 /***/ 796:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"vertical-navbar__nav\">\n  <ul class=\"nav__list\">\n    <li class=\"nav__item\"><a [routerLink]=\"['/about']\">О компании</a></li>\n    <li class=\"nav__item\"><a [routerLink]=\"['/product']\">Прокты КСЕТ</a></li>\n    <li class=\"nav__item\"><a href=\".gtxt.biz/forum/index.php\">Друзья и попутчики</a></li>\n    <li class=\"nav__item\"><a href=\".gtxt.biz/forum/index.php\">Форум</a></li>\n    <li class=\"nav__item\"><a [routerLink]=\"['/frends']\">Партнеры и друзья</a></li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"vertical-navbar__nav\">\n  <ul class=\"nav__list\">\n    <li class=\"nav__item\"><a [routerLink]=\"['/about']\">О компании</a></li>\n    <li class=\"nav__item\"><a [routerLink]=\"['/product']\">Прокты КСЕТ</a></li>\n    <li class=\"nav__item\"><a href=\"/forum/index.php\">Друзья и попутчики</a></li>\n    <li class=\"nav__item\"><a href=\"/forum/index.php\">Форум</a></li>\n    <li class=\"nav__item\"><a [routerLink]=\"['/frends']\">Партнеры и друзья</a></li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
