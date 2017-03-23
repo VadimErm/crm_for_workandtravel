@@ -166,6 +166,10 @@ a.desc:after {
     background: transparent;
 
 }
+.new-task-row {
+    background-color :rgba(38,185,154,.88);
+    color: white;
+}
 
 
 

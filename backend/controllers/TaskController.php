@@ -61,7 +61,7 @@ class TaskController extends BackendController
     public function actionParticular()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Task::find()->where(['destination' => Task::PARTICULAR]),
+            'query' => Task::find()->where(['destination' => Task::PARTICULAR])->orderBy(['updated_at' => SORT_DESC]),
             'pagination' => [
                 'pageSize' => 5
             ]
@@ -74,9 +74,9 @@ class TaskController extends BackendController
     public function actionAll()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Task::find()->where(['destination' => Task::ALL]),
+            'query' => Task::find()->where(['destination' => Task::ALL])->orderBy(['updated_at' => SORT_DESC]),
             'pagination' => [
-                'pageSize' => 5
+                'pageSize' => 15
             ]
         ]);
 
@@ -172,9 +172,17 @@ class TaskController extends BackendController
     {
 
         $task = new Task();
-        if($destination =='particular'){
+        $session = Yii::$app->session;
+        $mail = false;
+
+        if(isset(Yii::$app->request->post()['Task']['mail'][0]) && Yii::$app->request->post()['Task']['mail'][0] == 1 ){
+            $mail = true;
+
+        }
+
+        if($destination =='1'){
             $task->destination = Task::PARTICULAR;
-        } elseif ($destination == 'all'){
+        } elseif ($destination == '2'){
             $task->destination = Task::ALL;
         }
 
@@ -189,10 +197,11 @@ class TaskController extends BackendController
             $studentId =  Yii::$app->request->post()['Task']['users'];
         }
 
+
+
         if ($task->load(Yii::$app->request->post()) &&  $task->save()) {
 
-
-            if($destination == 'all') {
+            if($destination == Task::ALL) {
                 foreach ($students as $student){
                     if($student->program_id == $task->program_id){
                         $task->link('users', $student, ['status' => Task::NEW_TASK]);
@@ -200,19 +209,34 @@ class TaskController extends BackendController
                     }
 
                 }
+                if ($mail){
+                    if($task->sendMailForAll()){
+                        $session->setFlash('success', "Success! The task $task->title was created and send on email.");
+                    }
+                } else {
+                    $session->setFlash('success', " Success! The task $task->title was created.");
+                }
 
-                $task->sendMailForAll();
+                return $this->redirect(['all']);
 
-            } elseif ($destination == 'particular'){
+            } elseif ($destination == Task::PARTICULAR){
+
                 $student = User::findOne($studentId);
                 $task->link('users', $student, ['status' => Task::NEW_TASK]);
-                $task->sendMail();
 
+                if ($mail){
+                    if($task->sendMail()){
+                        $session->setFlash('success', "Success! The task $task->title was created and send on email.");
+                    }
+                } else {
+                    $session->setFlash('success', " Success! The task $task->title was created.");
+                }
 
+                return $this->redirect(['particular']);
             }
 
 
-            return $this->redirect(['view', 'id' => $task->id]);
+
         } else {
             return $this->render('create', [
                 'task' => $task,
@@ -234,6 +258,14 @@ class TaskController extends BackendController
         $task = $this->findModel($id);
         $destination = $task->destination;
 
+        $session = Yii::$app->session;
+        $mail = false;
+
+        if(isset(Yii::$app->request->post()['Task']['mail'][0]) && Yii::$app->request->post()['Task']['mail'][0] == 1 ){
+            $mail = true;
+
+        }
+
         $programs = Program::find()->asArray()->all();
         $programsData = ArrayHelper::map($programs,'id', 'title');
         $students = User::getUsersByRole('student');
@@ -252,6 +284,18 @@ class TaskController extends BackendController
                 $student = User::findOne($studentId);
                 $task->link('users', $student);
 
+                if ($mail){
+                    if($task->sendMail()){
+                        $session->setFlash('success', "Success! The task $task->title was updated and send on email.");
+                    }
+                } else {
+                    $session->setFlash('success', " Success! The task $task->title was updated.");
+                }
+
+                return $this->redirect(['particular']);
+
+
+
             } elseif ($destination == Task::ALL){
 
                 $task->unlinkAll('users', true);
@@ -261,11 +305,21 @@ class TaskController extends BackendController
                     }
 
                 }
+                if ($mail){
+                    if($task->sendMailForAll()){
+                        $session->setFlash('success', "Success! The task $task->title was updated and send on email.");
+                    }
+                } else {
+                    $session->setFlash('success', " Success! The task $task->title was updated.");
+                }
+
+                return $this->redirect(['all']);
+
 
             }
 
 
-            return $this->redirect(['view', 'id' => $task->id]);
+
         } else {
             return $this->render('update', [
                 'task' => $task,
@@ -308,6 +362,34 @@ class TaskController extends BackendController
         $task->delete();
 
         return $this->redirect([$view[$destination]]);
+    }
+
+    public function actionSendEmailForAll($id)
+    {
+        $task = $this->findModel($id);
+        $session = Yii::$app->session;
+
+        if($task->sendMailForAll()){
+            $session->setFlash('success', "Success! The task $task->title was sent on email.");
+        } else {
+            $session->setFlash('fail', "Fail! The task $task->title wasn't sent.");
+        }
+
+        return $this->redirect(['all']);
+    }
+
+    public function actionSendEmail($id)
+    {
+        $task = $this->findModel($id);
+        $session = Yii::$app->session;
+
+        if($task->sendMail()){
+            $session->setFlash('success', "Success! The task $task->title was sent on email.");
+        } else {
+            $session->setFlash('fail', "Fail! The task $task->title wasn't sent.");
+        }
+
+        return $this->redirect(['particular']);
     }
 
 

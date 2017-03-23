@@ -10,6 +10,8 @@ use yii\helpers\Url;
 $this->title = 'Tasks for all students';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <div class="task-index">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -42,10 +44,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                         <p>
-                            <?= Html::a('Create Task', ['create', 'destination' => 'all'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('Create Task', ['create', 'destination' => '2'], ['class' => 'btn btn-success']) ?>
                         </p>
+                        <?php if(Yii::$app->session->hasFlash('success')):?>
+                            <div class="alert alert-success" role="alert" id="task-alert"><?= Yii::$app->session->getFlash('success'); ?></div>
+                        <?php elseif(Yii::$app->session->hasFlash('fail')): ?>
+                            <div class="alert alert-danger" role="alert" id="task-alert"><?= Yii::$app->session->getFlash('fail'); ?></div>
+                        <?php endif; ?>
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
+
                             'columns' => [
                                 ['class' => 'yii\grid\SerialColumn'],
                                 [
@@ -70,7 +78,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'format' => ['datetime', 'php:d-m-Y']
                                 ],
 
-                                ['class' => 'yii\grid\ActionColumn'],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'template' => '{view} {update} {delete} {sendemail}',
+                                    'buttons' =>
+                                    [
+                                            'sendemail' => function($url, $model, $key)
+                                            {
+                                                $url = Url::to(['task/send-email-for-all', 'id' => $model->id]);
+
+                                                return Html::a('<i class="fa fa-envelope-open-o" aria-hidden="true" title="Send email"></i>', $url);
+
+
+                                            }
+
+                                    ]
+                                ],
                             ],
                         ]); ?>
                     </div>

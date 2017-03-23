@@ -26,7 +26,7 @@ class Task extends \yii\db\ActiveRecord
     CONST DONE = 3;
 
 
-
+    public $mail;
 
     public function behaviors()
     {
@@ -98,7 +98,7 @@ class Task extends \yii\db\ActiveRecord
 
     }
 
-    public function getFile()
+    public function getAttachment()
     {
         return $this->hasOne(File::className(), ['id' => 'attachment']);
     }
@@ -106,38 +106,48 @@ class Task extends \yii\db\ActiveRecord
     public function sendMailForAll()
     {
 
+        $attachment = $this->getAttachment()->one();
+
+        $mail = Yii::$app->mailer->compose(
+            ['html' => 'task_html', 'text' => 'task_text'],
+            ['task' =>$this]
+        )->setFrom('admin@kcet.com')->setSubject($this->title);
+
+        if(isset($attachment)){
+            $mail->attach(Yii::getAlias($attachment->path));
+        }
+
         foreach ($this->userTasks as $userTask){
 
-            $send = Yii::$app->mailer->compose(
-                    ['html' => 'task_html', 'text' => 'task_text'],
-                    ['task' =>$this]
-                )
-                ->setFrom('admin@kcet.com')
-                ->setTo($userTask->user->email)
-                ->setSubject($this->title)
-                ->send();
+            $send =  $mail->setTo($userTask->user->email)->send();
+
             if(!$send) {
                 return false;
             }
         }
 
-       /* echo "<pre>";
-        var_dump($recipients);
-        echo  "</pre>";
-        exit;*/
         return  true;
 
     }
 
     public function sendMail()
     {
-        return Yii::$app->mailer->compose(
+       $attachment = $this->getAttachment()->one();
+
+       $mail =  Yii::$app->mailer->compose(
                 ['html' => 'task_html', 'text' => 'task_text'],
                 ['task' =>$this]
             )
             ->setFrom('admin@kcet.com')
             ->setTo($this->userTasks[0]->user->email)
-            ->setSubject($this->title)
-            ->send();
+            ->setSubject($this->title);
+
+        if(isset($attachment)){
+            $mail->attach(Yii::getAlias($attachment->path));
+        }
+
+        return $mail->send();
     }
+
+
 }

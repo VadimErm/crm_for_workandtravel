@@ -45,7 +45,7 @@ $(document).ready(function () {
     }
 
   });
-
+  // Фильтры по назначению и статусов тасков
   $(".filter-destination").on('change', function (e) {
       var value = $(this).val();
       if (window.location.href.indexOf("done") !== -1){
@@ -63,10 +63,20 @@ $(document).ready(function () {
 
   });
 
-
-
+  fadeOutAlert();
 
 });
+
+function fadeOutAlert(){
+
+  if($('#task-alert').length !==0){
+    setTimeout(function () {
+      $('#task-alert').fadeOut(3000);
+    }, 2000);
+
+  }
+}
+
 
 function setDone(taskId) {
 
@@ -112,5 +122,8 @@ Dropzone.options.attachment = {
 
 
     });
-  }
+  },
+  //uploadMultiple: true,
+  //maxFiles: 10,
+
 };

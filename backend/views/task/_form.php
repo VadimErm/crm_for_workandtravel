@@ -20,7 +20,7 @@ use common\helpers\ActiveFormHelper;
 
     <?= $form->field($task, 'description')->textarea(['rows' =>3]) ?>
 
-    <?php if($destination == 'particular') : ?>
+    <?php if($destination == \common\models\Task::PARTICULAR) : ?>
     <?= $form->field($task, 'users')->widget(Select2::className(), [
         'data' => $students,
 
@@ -40,6 +40,10 @@ use common\helpers\ActiveFormHelper;
         'options' => ['placeholder' => 'Select a program ...'],
 
     ])?>
+    <?= $form->field($task, 'mail')->checkboxList([
+        1 => 'Send task on email',
+
+    ]); ?>
     <?= ActiveFormHelper::textWithoutLabel($form, $task, 'attachment', [], 'hiddenInput') ?>
 
 
