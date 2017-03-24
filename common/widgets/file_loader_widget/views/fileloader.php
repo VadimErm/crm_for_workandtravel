@@ -26,7 +26,10 @@ use common\helpers\Url;
         </div>
         <div class="x_content"   style="">
             <?php if ($loaded) { ?>
-                <img src="<?= Url::fileGet($fileId) ?>" alt="<?= $type ?>" width="500" height="300">
+                <div class="uploaded-file">
+                    <img src="<?= Url::fileGet($fileId) ?>" alt="<?= $type ?>" height="300">
+                </div>
+
             <?php } else { ?>
                 <form action="<?= Url::filePush() ?>" id="<?= $type ?>" class="dropzone"  style="">
                     <input type="hidden" name="<?= $type ?>">

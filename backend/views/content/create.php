@@ -25,9 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'content')->widget(TinyMce::className(), [
             'options' => ['rows' => 6],
-            'language' => 'ru',
+            'language' => 'en_GB',
             'clientOptions' => [
-                'valid_elements' => '*[*]',
+                'extended_valid_elements' => 'span',
+                'style_formats' => ['title' => 'Aditional Blocks', 'items' => [[ 'title' => 'add <span>', 'inline' => 'span' ]]],
+                'style_formats_merge' => true,
+               // 'valid_elements' => '*[*]',
                 'forced_root_block' => "",
                 'plugins' => [
                     "advlist autolink lists link charmap print preview anchor",
