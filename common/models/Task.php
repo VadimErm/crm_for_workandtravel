@@ -27,6 +27,7 @@ class Task extends \yii\db\ActiveRecord
 
 
     public $mail;
+    public $user;
 
     public function behaviors()
     {
@@ -49,9 +50,13 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'description'], 'string'],
+
             [['created_at', 'updated_at', 'program_id'], 'integer'],
-            [['title'], 'string', 'max' => 60],
+            [['title', 'content', 'program_id', 'description'],  'required'],
+            ['user', 'required', 'when' => function($model){
+                return $model->destination == 1;
+            }],
+            [['title', 'content', 'description'], 'string'],
             [['status', 'destination', 'attachment'], 'safe']
         ];
     }

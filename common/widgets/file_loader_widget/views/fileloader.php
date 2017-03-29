@@ -27,7 +27,10 @@ use common\helpers\Url;
         <div class="x_content"   style="">
             <?php if ($loaded) { ?>
                 <div class="uploaded-file">
-                    <img src="<?= Url::fileGet($fileId) ?>" alt="<?= $type ?>" height="300">
+                    <?php if($edit): ?>
+                        <a href="javascript:void(0)" class="delete-file"><i class="fa fa-times"></i></a>
+                    <?php endif; ?>
+                    <img src="<?= Url::fileGet($fileId) ?>" alt="<?= $type ?>" width="600">
                 </div>
 
             <?php } else { ?>

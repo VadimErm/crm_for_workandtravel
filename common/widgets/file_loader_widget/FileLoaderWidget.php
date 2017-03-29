@@ -11,6 +11,7 @@ class FileLoaderWidget extends Widget
     public $userId;
     public $type;
     public $fileId;
+    public $edit;
 
     public function run()
     {
@@ -18,7 +19,8 @@ class FileLoaderWidget extends Widget
             'loaded' => $this->isExists($this->fileId),
             'fileId' => $this->fileId,
             'userId' => $this->userId,
-            'type' => $this->type
+            'type' => $this->type,
+            'edit' => ($this->edit) ? true: false,
         ]);
     }
 

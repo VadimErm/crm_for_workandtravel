@@ -192,9 +192,9 @@ class TaskController extends BackendController
         $students = User::getUsersByRole('student');
         $studentsName = Students::getStudentsNames();
 
-        if(isset(Yii::$app->request->post()['Task']['users'])){
+        if(isset(Yii::$app->request->post()['Task']['user'])){
 
-            $studentId =  Yii::$app->request->post()['Task']['users'];
+            $studentId =  Yii::$app->request->post()['Task']['user'];
         }
 
 
@@ -271,9 +271,9 @@ class TaskController extends BackendController
         $students = User::getUsersByRole('student');
         $studentsName = Students::getStudentsNames();
 
-        if(isset(Yii::$app->request->post()['Task']['users'])){
+        if(isset(Yii::$app->request->post()['Task']['user'])){
 
-            $studentId =  Yii::$app->request->post()['Task']['users'];
+            $studentId =  Yii::$app->request->post()['Task']['user'];
         }
 
         if ($task->load(Yii::$app->request->post()) && $task->save()) {
@@ -345,10 +345,10 @@ class TaskController extends BackendController
 
         $task = $this->findModel($id);
         $destination = $task->destination;
+       // var_dump($task->attachment);exit;
 
         if(!is_null($task->attachment)){
-            $file = File::findOne($task->attachment);
-            $file->delete();
+          Yii::$app->fileLoader->removeFile($task->attachment);
         }
 
 

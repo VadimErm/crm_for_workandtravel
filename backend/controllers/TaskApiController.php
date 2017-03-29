@@ -87,6 +87,29 @@ class TaskApiController extends Controller implements ViewContextInterface
 
     }
 
+    public function actionDeleteAttachment()
+    {
+        $request = Yii::$app->request;
+        $userId = Yii::$app->user->getId();
+        if($request->getIsPatch()){
+            $taskId = $request->getBodyParam('taskId');
+        }
+
+        $task = $this->findTask($taskId);
+        $attachment = $task->attachment;
+        $task->attachment = null;
+        $task->save();
+
+        if(\Yii::$app->fileLoader->removeFile($attachment)){
+            return ['status' => 'success', 'userId' =>$userId];
+        } else {
+            return ['fail'];
+        }
+
+
+
+    }
+
     protected function changeStatus($status, $id)
     {
         $user = \Yii::$app->user;

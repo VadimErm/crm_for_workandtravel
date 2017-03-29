@@ -65,6 +65,13 @@ $(document).ready(function () {
 
   fadeOutAlert();
 
+  $('.delete-file').on('click', function (e) {
+      var taskId = $("#task-form").attr('data-task-id');
+      console.log(taskId);
+      deleteAttachment(taskId);
+
+  });
+
 });
 
 function fadeOutAlert(){
@@ -101,6 +108,49 @@ function setDone(taskId) {
 
 }
 
+function deleteAttachment(taskId) {
+  $.ajax({
+    url:'/admin/task-api/delete-attachment',
+    data: {'taskId': taskId},
+    type: 'PATCH',
+    contentType : 'application/json',
+    xhr: function() {
+      return window.XMLHttpRequest == null || new window.XMLHttpRequest().addEventListener == null
+        ? new window.ActiveXObject("Microsoft.XMLHTTP")
+        : $.ajaxSettings.xhr();
+    },
+    success: function (response) {
+      console.log(response);
+      if(response.status == 'success') {
+
+        var accessToken = $('#access-token').val();
+        var fileUploadForm = "<form action='/files/file/push?&access-token=" + accessToken + "' id='attachment' class='dropzone'>" +
+          "<input type='hidden' name='attachment'>" +
+          "<input type='hidden' name='user_id' value=" + response.userId + ">" +
+          "</form>";
+
+
+        $('.uploaded-file').remove();
+        $('#task-form .x_content').append(fileUploadForm);
+        $("#attachment").dropzone();
+
+        return ['success'];
+
+      } else {
+
+        $('#task-form .x_content').append("<div class='fail-edit'>File removing failed</div>");
+        return ['fail'];
+
+      }
+    },
+    error: function () {
+      return ['error'];
+    }
+
+
+  });
+
+}
 
 function countMinus(id)
 {
@@ -123,7 +173,6 @@ Dropzone.options.attachment = {
 
     });
   },
-  //uploadMultiple: true,
-  //maxFiles: 10,
+
 
 };

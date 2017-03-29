@@ -2,11 +2,13 @@
 
 namespace files\controllers;
 
+use common\models\File;
 use files\components\FileLoader;
 use yii\base\Module;
 use yii\filters\auth\QueryParamAuth;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
+use yii\web\UploadedFile;
 
 class FileController extends Controller
 {
@@ -65,7 +67,7 @@ class FileController extends Controller
         }
 
 
-            if ($id = $this->_fileLoader->pushFile($type, $user_id)) {
+            if ($id = \Yii::$app->fileLoader->pushFile($type, $user_id)) {
                 return ['status' => 'success', 'id' => $id];
             }
 
@@ -73,6 +75,29 @@ class FileController extends Controller
         return ['status' => 'fail'];
 
 
+    }
+
+    public function actionUpload($type, $user_id = null)
+    {
+
+        if (isset($_FILES['file'])) {
+            $file = UploadedFile::getInstanceByName('file');
+
+            $path = '@files/data/' . md5(time()) . substr($file->name, -4, 4);
+
+            $fileModel = new File();
+
+            if ($file->saveAs(\Yii::getAlias($path))) {
+
+                $fileModel->path = $path;
+                $fileModel->setType($type);
+                $fileModel->user_id = $user_id;
+
+                echo \yii\helpers\Json::encode($file);
+            }
+        }
+
+        return false;
     }
 
     public function actionRemove($id)

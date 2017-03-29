@@ -170,6 +170,16 @@ a.desc:after {
     background-color :rgba(38,185,154,.88);
     color: white;
 }
+.uploaded-file {
+    position: relative;
+    width: 600px;
+}
 
-
+.delete-file .fa-times{
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 30px;
+    color: #c5c7cb;
+}
 
