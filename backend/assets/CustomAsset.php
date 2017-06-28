@@ -27,7 +27,7 @@ class CustomAsset extends AssetBundle
         'js/maps/jquery-jvectormap-us-aea-en.js',
         'js/maps/gdp-data.js',
 
-        'js/dropzone.js',
+        //'js/dropzone.js',
         'js/yii.activeForm.js',
         'js/stan.custom.js',
         'js/masonry.js',

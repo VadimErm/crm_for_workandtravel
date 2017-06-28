@@ -93,7 +93,17 @@ class FileController extends Controller
                 $fileModel->setType($type);
                 $fileModel->user_id = $user_id;
 
-                echo \yii\helpers\Json::encode($file);
+                if($fileModel->save()){
+                    $id = $fileModel->getPrimaryKey();
+                } else{
+                    return ['status' =>'fail'];
+                }
+                $fileModel->save();
+
+                //echo \yii\helpers\Json::encode($file);
+
+
+                return ['status' => 'success', 'id' => $id];
             }
         }
 

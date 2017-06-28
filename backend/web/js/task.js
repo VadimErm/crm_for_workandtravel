@@ -163,11 +163,12 @@ function countMinus(id)
     }
 
 }
-Dropzone.options.attachment = {
+Dropzone.options.myDropzone = {
   init: function() {
     this.on("success", function(file) {
       var resp = JSON.parse(file.xhr.response);
       var fileId = resp.id;
+      console.log(fileId);
       $("#task-attachment").val(fileId);
 
 

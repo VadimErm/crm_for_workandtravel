@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "314b4d7c48d781513fcb7449eaa6244a",
-    "content-hash": "7d68888f58c9ee435db4b883a9dfe598",
+    "content-hash": "386c054f534175a55e28df1dcf7af99c",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -65,7 +64,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2016-11-10 11:32:46"
+            "time": "2016-11-10T11:32:46+00:00"
         },
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -125,7 +124,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2015-03-28 21:53:43"
+            "time": "2015-03-28T21:53:43+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -373,7 +372,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14 20:40:20"
+            "time": "2016-09-14T20:40:20+00:00"
         },
         {
             "name": "ckeditor/ckeditor",
@@ -414,7 +413,7 @@
                 "text",
                 "wysiwyg"
             ],
-            "time": "2017-01-12 17:36:48"
+            "time": "2017-01-12T17:36:48+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -458,7 +457,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2016-07-16 12:58:58"
+            "time": "2016-07-16T12:58:58+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -520,7 +519,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2016-11-23 15:39:02"
+            "time": "2016-11-23T15:39:02+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -569,7 +568,7 @@
                 }
             ],
             "description": "Locale functions required by libphonenumber-for-php",
-            "time": "2016-10-24 20:49:55"
+            "time": "2016-10-24T20:49:55+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -620,7 +619,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04 09:25:29"
+            "time": "2016-09-04T09:25:29+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -676,6 +675,48 @@
             "time": "2016-12-30 03:26:33"
         },
         {
+            "name": "perminder-klair/yii2-dropzone",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/perminder-klair/yii2-dropzone.git",
+                "reference": "41e8145d940cc9955011138a9f16ad80e9831423"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/perminder-klair/yii2-dropzone/zipball/41e8145d940cc9955011138a9f16ad80e9831423",
+                "reference": "41e8145d940cc9955011138a9f16ad80e9831423",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kato\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Parminder Klair",
+                    "email": "perminder.klair@gmail.com"
+                }
+            ],
+            "description": "DropzoneJs Extention for Yii2",
+            "keywords": [
+                "dropzone",
+                "extension",
+                "upload",
+                "yii2"
+            ],
+            "time": "2015-11-09T11:28:44+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.5",
             "source": {
@@ -727,7 +768,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-12-29 10:02:40"
+            "time": "2016-12-29T10:02:40+00:00"
         },
         {
             "name": "tinymce/tinymce",
@@ -773,7 +814,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2017-01-04 13:58:37"
+            "time": "2017-01-04T13:58:37+00:00"
         },
         {
             "name": "udokmeci/yii2-phone-validator",
@@ -819,7 +860,7 @@
                 "phone number validator",
                 "yii2"
             ],
-            "time": "2016-06-14 06:07:38"
+            "time": "2016-06-14T06:07:38+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -913,7 +954,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-10-20 12:02:50"
+            "time": "2016-10-20T12:02:50+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -963,7 +1004,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-03-17 03:29:28"
+            "time": "2016-03-17T03:29:28+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1013,7 +1054,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-12-20 13:26:02"
+            "time": "2016-12-20T13:26:02+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -1063,7 +1104,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-09-09 11:48:11"
+            "time": "2016-09-09T11:48:11+00:00"
         }
     ],
     "packages-dev": [
@@ -1140,7 +1181,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29 12:21:54"
+            "time": "2016-04-29T12:21:54+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -1178,7 +1219,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07 12:29:16"
+            "time": "2016-04-07T12:29:16+00:00"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -1224,7 +1265,7 @@
                 "yii2"
             ],
             "abandoned": "codeception/codeception",
-            "time": "2016-03-17 03:41:26"
+            "time": "2016-03-17T03:41:26+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -1271,7 +1312,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2016-11-24 09:42:29"
+            "time": "2016-11-24T09:42:29+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -1318,7 +1359,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-03-01 06:22:44"
+            "time": "2015-03-01T06:22:44+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -1371,13 +1412,14 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-03-18 14:09:46"
+            "time": "2016-03-18T14:09:46+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-select2": 20
+        "kartik-v/yii2-widget-select2": 20,
+        "perminder-klair/yii2-dropzone": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

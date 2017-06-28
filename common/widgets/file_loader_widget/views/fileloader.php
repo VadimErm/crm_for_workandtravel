@@ -34,10 +34,21 @@ use common\helpers\Url;
                 </div>
 
             <?php } else { ?>
-                <form action="<?= Url::filePush() ?>" id="<?= $type ?>" class="dropzone"  style="">
+                <!--<form action="<?= Url::filePush() ?>" id="<?= $type ?>" class="dropzone"  style="">
                     <input type="hidden" name="<?= $type ?>">
                     <input type="hidden" name="user_id" value="<?=$userId?>">
-                </form>
+                </form>-->
+               <?= \kato\DropZone::widget([
+                    'options' => [
+                        'url' =>'/files/file/upload?type='.$type.'&user_id='.$userId.'&access-token='.Yii::$app->user->identity->getAccessToken(),
+                        'maxFilesize' => '2',
+                    ],
+                        'clientEvents' => [
+                        'complete' => "function(file){console.log(file)}",
+                        'removedfile' => "function(file){alert(file.name + ' is removed')}"
+                    ],
+                ]);
+                ?>
             <?php } ?>
         </div>
     </div>

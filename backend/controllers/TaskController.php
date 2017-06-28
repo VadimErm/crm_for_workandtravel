@@ -201,6 +201,11 @@ class TaskController extends BackendController
 
         if ($task->load(Yii::$app->request->post()) &&  $task->save()) {
 
+           /* echo "<pre>";
+            var_dump($task);
+            echo "</pre>";
+            exit;*/
+
             if($destination == Task::ALL) {
                 foreach ($students as $student){
                     if($student->program_id == $task->program_id){
